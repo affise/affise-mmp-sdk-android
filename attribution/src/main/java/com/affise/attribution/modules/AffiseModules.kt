@@ -11,10 +11,11 @@ enum class AffiseModules(val module: String) {
     Status("Status"),
     Subscription("Subscription"),
     RuStore("RuStore"),
+    TikTok("TikTok"),
     Huawei("Huawei"),
     Meta("Meta");
 
-    internal val className: String = "${AffiseModules.MODULE_PREFIX}.${this.module.lowercase()}.${this.module}Module"
+    internal val className: String = "${MODULE_PREFIX}.${this.module.lowercase()}.${this.module}Module"
 
     companion object {
         @JvmStatic
@@ -22,9 +23,9 @@ enum class AffiseModules(val module: String) {
             name ?:  return null
             return values().firstOrNull { it.module.contains(name, true) }
         }
-
-        private const val MODULE_PREFIX = "com.affise.attribution.module"
     }
 }
+
+private const val MODULE_PREFIX = "com.affise.attribution.module"
 
 fun String.toAffiseModules(): AffiseModules? = AffiseModules.from(this)

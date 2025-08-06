@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.62] - 2025-08-06
+
+### Added
+
+- New module `TikTok`.
+- Api `Affise.Module.TikTok.sendEvent`.
+
 ## [1.6.61] - 2025-07-29
 
 ### Fixed
@@ -272,35 +279,37 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app.
 
-[1.6.60]: https://github.com/affise/sdk-android/compare/v1.6.59...v1.6.60
-[1.6.59]: https://github.com/affise/sdk-android/compare/v1.6.58...v1.6.59
-[1.6.58]: https://github.com/affise/sdk-android/compare/v1.6.57...v1.6.58
-[1.6.57]: https://github.com/affise/sdk-android/compare/v1.6.56...v1.6.57
-[1.6.56]: https://github.com/affise/sdk-android/compare/v1.6.55...v1.6.56
-[1.6.55]: https://github.com/affise/sdk-android/compare/v1.6.54...v1.6.55
-[1.6.54]: https://github.com/affise/sdk-android/compare/v1.6.53...v1.6.54
-[1.6.53]: https://github.com/affise/sdk-android/compare/v1.6.52...v1.6.53
-[1.6.52]: https://github.com/affise/sdk-android/compare/v1.6.51...v1.6.52
-[1.6.51]: https://github.com/affise/sdk-android/compare/v1.6.50...v1.6.51
-[1.6.50]: https://github.com/affise/sdk-android/compare/v1.6.49...v1.6.50
-[1.6.49]: https://github.com/affise/sdk-android/compare/v1.6.48...v1.6.49
-[1.6.48]: https://github.com/affise/sdk-android/compare/v1.6.47...v1.6.48
-[1.6.47]: https://github.com/affise/sdk-android/compare/v1.6.46...v1.6.47
-[1.6.46]: https://github.com/affise/sdk-android/compare/v1.6.45...v1.6.46
-[1.6.45]: https://github.com/affise/sdk-android/compare/v1.6.44...v1.6.45
-[1.6.44]: https://github.com/affise/sdk-android/compare/v1.6.43...v1.6.44
-[1.6.43]: https://github.com/affise/sdk-android/compare/v1.6.42...v1.6.43
-[1.6.42]: https://github.com/affise/sdk-android/compare/v1.6.41...v1.6.42
-[1.6.41]: https://github.com/affise/sdk-android/compare/v1.6.40...v1.6.41
-[1.6.40]: https://github.com/affise/sdk-android/compare/v1.6.39...v1.6.40
-[1.6.39]: https://github.com/affise/sdk-android/compare/v1.6.38...v1.6.39
-[1.6.38]: https://github.com/affise/sdk-android/compare/v1.6.37...v1.6.38
-[1.6.37]: https://github.com/affise/sdk-android/compare/v1.6.36...v1.6.37
-[1.6.36]: https://github.com/affise/sdk-android/compare/v1.6.35...v1.6.36
-[1.6.35]: https://github.com/affise/sdk-android/compare/v1.6.34...v1.6.35
-[1.6.34]: https://github.com/affise/sdk-android/compare/v1.6.33...v1.6.34
-[1.6.33]: https://github.com/affise/sdk-android/compare/v1.6.32...v1.6.33
-[1.6.32]: https://github.com/affise/sdk-android/compare/v1.6.31...v1.6.32
-[1.6.31]: https://github.com/affise/sdk-android/compare/v1.6.30...v1.6.31
-[1.6.30]: https://github.com/affise/sdk-android/compare/v1.6.29...v1.6.30
-[1.6.29]: https://github.com/affise/sdk-android/compare/v1.6.28...v1.6.29
+[1.6.62]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.61...v1.6.62
+[1.6.61]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.60...v1.6.61
+[1.6.60]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.59...v1.6.60
+[1.6.59]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.58...v1.6.59
+[1.6.58]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.57...v1.6.58
+[1.6.57]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.56...v1.6.57
+[1.6.56]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.55...v1.6.56
+[1.6.55]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.54...v1.6.55
+[1.6.54]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.53...v1.6.54
+[1.6.53]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.52...v1.6.53
+[1.6.52]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.51...v1.6.52
+[1.6.51]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.50...v1.6.51
+[1.6.50]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.49...v1.6.50
+[1.6.49]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.48...v1.6.49
+[1.6.48]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.47...v1.6.48
+[1.6.47]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.46...v1.6.47
+[1.6.46]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.45...v1.6.46
+[1.6.45]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.44...v1.6.45
+[1.6.44]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.43...v1.6.44
+[1.6.43]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.42...v1.6.43
+[1.6.42]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.41...v1.6.42
+[1.6.41]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.40...v1.6.41
+[1.6.40]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.39...v1.6.40
+[1.6.39]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.38...v1.6.39
+[1.6.38]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.37...v1.6.38
+[1.6.37]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.36...v1.6.37
+[1.6.36]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.35...v1.6.36
+[1.6.35]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.34...v1.6.35
+[1.6.34]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.33...v1.6.34
+[1.6.33]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.32...v1.6.33
+[1.6.32]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.31...v1.6.32
+[1.6.31]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.30...v1.6.31
+[1.6.30]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.29...v1.6.30
+[1.6.29]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.28...v1.6.29

@@ -26,7 +26,7 @@ class UserCustomEvent(
     /**
      * For internal use only
      */
-    fun internalAddRawParameters(parameters: Map<String, Any>): Event {
+    fun internalAddRawParameters(parameters: Map<String, Any?>?): Event {
         addRawParameters(parameters)
         return this
     }

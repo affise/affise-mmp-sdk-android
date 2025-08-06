@@ -44,6 +44,7 @@ internal object DataName {
     const val NUMBER_OF_UNITS = "numberOfUnits"
     const val PRODUCT_DETAILS = "productDetails"
 
+    const val EVENT_ID = "eventId"
     const val EVENT_NAME = "eventName"
     const val EVENT_VALUES = "eventValues"
     const val PUSH_TOKEN = "push_token"

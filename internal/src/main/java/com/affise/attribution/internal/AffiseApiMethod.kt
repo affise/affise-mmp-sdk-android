@@ -54,6 +54,8 @@ enum class AffiseApiMethod(val method: String) {
     // Subscription Module
     MODULE_SUBS_FETCH_PRODUCTS_CALLBACK("module_subs_fetch_products_callback"),
     MODULE_SUBS_PURCHASE_CALLBACK("module_subs_purchase_callback"),
+    // TikTok Module
+    MODULE_TIKTOK_EVENT("module_tiktok_event"),
     ////////////////////////////////////////
     // modules
     ////////////////////////////////////////

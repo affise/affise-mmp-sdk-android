@@ -163,8 +163,10 @@ abstract class Event: PredefinedParameter {
         return predefinedCustom
     }
 
-    protected fun addRawParameters(parameters: Map<String, Any>) {
+    protected fun addRawParameters(parameters: Map<String, Any?>?) {
+        parameters ?: return
         for ((key, value) in parameters) {
+            if (value == null) continue
             predefinedParameters["${Predefined.PREFIX}$key"] = value
         }
     }

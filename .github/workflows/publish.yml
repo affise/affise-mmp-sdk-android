@@ -56,6 +56,7 @@ jobs:
           ./gradlew :module-subscription:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
           ./gradlew :module-rustore:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
           ./gradlew :module-huawei:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+          ./gradlew :module-tiktok:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
           ./gradlew :internal:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
 
       - name: Version Tag
@@ -218,6 +219,18 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: module-appsflyer/build/outputs/aar/module-appsflyer-release.aar
           asset_name: module-appsflyer-${{ steps.version_tag.outputs.VERSION }}.aar
+          asset_content_type: application/aar
+
+      # Release Upload Module TikTok
+      - name: Upload Release Module TikTok AAR 📦
+        id: upload-module-tiktok-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: module-tiktok/build/outputs/aar/module-tiktok-release.aar
+          asset_name: module-tiktok-${{ steps.version_tag.outputs.VERSION }}.aar
           asset_content_type: application/aar
 
 #      # Release Upload Internal library

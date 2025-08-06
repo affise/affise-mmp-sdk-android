@@ -12,6 +12,7 @@ interface AffiseAttributionModuleApi {
     /**
      * Manual module start
      */
+    @Deprecated("Will be removed")
     fun moduleStart(module: AffiseModules): Boolean
 
     /**

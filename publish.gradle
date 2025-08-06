@@ -46,13 +46,13 @@ afterEvaluate {
                     licenses {
                         license {
                             name = "MIT license"
-                            url = "https://github.com/affise/sdk-android/blob/main/LICENSE"
+                            url = "https://github.com/affise/affise-mmp-sdk-android/blob/main/LICENSE"
                         }
                     }
                     scm {
-                        connection = "scm:git:git://github.com:affise/sdk-android.git"
-                        developerConnection = "scm:git:ssh://github.com:affise/sdk-android.git"
-                        url = "https://github.com/affise/sdk-android"
+                        connection = "scm:git:git://github.com:affise/affise-mmp-sdk-android.git"
+                        developerConnection = "scm:git:ssh://github.com:affise/affise-mmp-sdk-android.git"
+                        url = "https://github.com/affise/affise-mmp-sdk-android"
                     }
                     developers {
                         developer {

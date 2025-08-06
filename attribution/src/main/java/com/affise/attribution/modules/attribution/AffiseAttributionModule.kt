@@ -17,11 +17,14 @@ import com.affise.attribution.modules.subscription.AffiseProductsResult
 import com.affise.attribution.modules.subscription.AffisePurchasedInfo
 import com.affise.attribution.modules.subscription.AffiseResultCallback
 import com.affise.attribution.modules.subscription.AffiseSubscription
+import com.affise.attribution.modules.tiktok.AffiseModuleTikTokApi
+import com.affise.attribution.modules.tiktok.AffiseTikTok
 
 class AffiseAttributionModule(
     @JvmField val AppsFlyer: AffiseModuleAppsFlyerApi = AffiseAppsFlyer(),
     @JvmField val Link: AffiseModuleLinkApi = AffiseLink(),
-    @JvmField val Subscription: AffiseModuleSubscriptionApi = AffiseSubscription()
+    @JvmField val Subscription: AffiseModuleSubscriptionApi = AffiseSubscription(),
+    @JvmField val TikTok: AffiseModuleTikTokApi = AffiseTikTok(),
 ): AffiseAttributionModuleApi {
 
     private val api: AffiseApi?
@@ -37,6 +40,7 @@ class AffiseAttributionModule(
     /**
      * Manual module start
      */
+    @Deprecated("Will be removed")
     override fun moduleStart(module: AffiseModules): Boolean {
         return api?.moduleManager?.manualStart(module) ?: false
     }

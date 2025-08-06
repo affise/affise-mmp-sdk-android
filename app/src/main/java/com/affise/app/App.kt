@@ -20,7 +20,7 @@ class App : Application() {
 
         FirebaseApp.initializeApp(this)
 
-        // Initialize https://github.com/affise/sdk-android#initialize
+        // Initialize https://github.com/affise/affise-mmp-sdk-android#initialize
         Affise
             .settings(
                 affiseAppId = Prefs.string(AFFISE_APP_ID_KEY, DEMO_APP_ID),
@@ -34,26 +34,26 @@ class App : Application() {
             .setDomain(Prefs.string(DOMAIN_KEY, DEMO_DOMAIN))
             .start(this) // Start Affise SDK
 
-        // Get module status https://github.com/affise/sdk-android#get-module-state
+        // Get module status https://github.com/affise/affise-mmp-sdk-android#get-module-state
 //        Affise.getStatus(AffiseModules.Status) {
 //            println("Status: $it")
 //        }
 
-        // Get referrer parameter https://github.com/affise/sdk-android#get-referrer-parameter
+        // Get referrer parameter https://github.com/affise/affise-mmp-sdk-android#get-referrer-parameter
 //        Affise.getReferrerValue(ReferrerKey.AD_ID) {
 //            println("Referrer AD_ID: $it")
 //        }
 
-        // Get referrer https://github.com/affise/sdk-android#get-referrer
+        // Get referrer https://github.com/affise/affise-mmp-sdk-android#get-referrer
 //        Affise.getReferrer {
 //            println("Referrer: $it")
 //        }
 
-        // Get providers https://github.com/affise/sdk-android#get-providers
+        // Get providers https://github.com/affise/affise-mmp-sdk-android#get-providers
 //        val providers = Affise.getProviders().entries.associate { it.key.provider to it.value }
 //        println("Providers: ${JSONObject(providers).toString(4)}")
 
-        // Debug: Validate credentials https://github.com/affise/sdk-android#validate-credentials
+        // Debug: Validate credentials https://github.com/affise/affise-mmp-sdk-android#validate-credentials
 //        Affise.Debug.validate {
 //            println("Affise: validate = $it")
 //        }
@@ -74,8 +74,7 @@ class App : Application() {
     companion object {
         const val DEMO_APP_ID = "129"
         const val DEMO_SECRET_KEY = "93a40b54-6f12-443f-a250-ebf67c5ee4d2"
-//        const val DEMO_DOMAIN = "https://tracking.affattr.com"
-        const val DEMO_DOMAIN = "https://webhook.site/c4050874-99bb-425b-9e08-12487e1c0baa" // TODO dev
+        const val DEMO_DOMAIN = "https://tracking.affattr.com"
 
         const val AFFISE_APP_ID_KEY = "AFFISE_APP_ID_KEY"
         const val SECRET_ID_KEY = "SECRET_ID_KEY"

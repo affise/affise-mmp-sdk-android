@@ -15,7 +15,7 @@ private fun toValue(element: Any?) = when (element) {
     else -> element
 }
 
-fun jsonToMap(data: String?): Map<String, Any?> {
+fun jsonStringToMap(data: String?): Map<String, Any?> {
     if (data.isNullOrEmpty()) return emptyMap()
     val json = try {
         JSONObject(data)

@@ -59,6 +59,7 @@ dependencies {
     implementation(project("::module-subscription"))
     implementation(project("::module-meta"))
     implementation(project("::module-appsflyer"))
+//    implementation(project("::module-tiktok"))
 //    implementation(project("::module-rustore"))
 //    implementation(project("::module-huawei"))
 

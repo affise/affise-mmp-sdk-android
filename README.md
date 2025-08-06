@@ -15,7 +15,8 @@
 | `com.affise:module-subscription` | [![module-subscription](https://img.shields.io/maven-central/v/com.affise/module-subscription?label=latest)](https://mvnrepository.com/artifact/com.affise/module-subscription) |
 | `com.affise:module-rustore`      | [![module-rustore](https://img.shields.io/maven-central/v/com.affise/module-rustore?label=latest)](https://mvnrepository.com/artifact/com.affise/module-rustore)                |
 | `com.affise:module-huawei`       | [![module-huawei](https://img.shields.io/maven-central/v/com.affise/module-huawei?label=latest)](https://mvnrepository.com/artifact/com.affise/module-huawei)                   |
-| `com.affise:module-meta`         | [![module-meta](https://img.shields.io/maven-central/v/com.affise/module-meta?label=latest)](https://mvnrepository.com/artifact/com.affise/module-meta)                   |
+| `com.affise:module-meta`         | [![module-meta](https://img.shields.io/maven-central/v/com.affise/module-meta?label=latest)](https://mvnrepository.com/artifact/com.affise/module-meta)                         |
+| `com.affise:module-tiktok`       | [![module-tiktok](https://img.shields.io/maven-central/v/com.affise/module-tiktok?label=latest)](https://mvnrepository.com/artifact/com.affise/module-tiktok)                   |
 
 - [Affise Attribution Android Library](#affise-attribution-android-library)
 - [Description](#description)
@@ -36,6 +37,7 @@
       - [Module Status](#module-status)
       - [Module Subscription](#module-subscription)
         - [AffiseProductType](#affiseproducttype)
+      - [Module TikTok](#module-tiktok)
     - [Requirements](#requirements)
 - [Features](#features)
   - [ProviderType identifiers collection](#providertype-identifiers-collection)
@@ -115,7 +117,7 @@ referrer.
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.6.61"
+val affise_version = "1.6.62"
 
 dependencies {
   // Add Affise library 
@@ -131,6 +133,8 @@ dependencies {
   // implementation("com.affise:module-appsflyer:$affise_version")
   // implementation("com.affise:module-rustore:$affise_version")
   // implementation("com.affise:module-huawei:$affise_version")
+//   implementation("com.affise:module-meta:$affise_version")
+//   implementation("com.affise:module-tiktok:$affise_version")
   // Add install referrer
   implementation("com.android.installreferrer:installreferrer:2.2")
 }
@@ -139,7 +143,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.6.61'
+final affise_version = '1.6.62'
 
 dependencies {
     // Add Affise library 
@@ -155,6 +159,8 @@ dependencies {
     // implementation "com.affise:module-appsflyer:$affise_version"
     // implementation "com.affise:module-rustore:$affise_version"
     // implementation "com.affise:module-huawei:$affise_version"
+    // implementation "com.affise:module-meta:$affise_version"
+    // implementation "com.affise:module-tiktok:$affise_version"
     // Add install referrer
     implementation 'com.android.installreferrer:installreferrer:2.2'
 }
@@ -162,9 +168,9 @@ dependencies {
 
 ### Integrate as file dependency
 
-Download latest Affise SDK (`attribution-1.6.61.aar`)
-from [releases page](https://github.com/affise/sdk-android/releases) and place this binary to gradle application
-module lib directory `app/libs/attribution-1.6.61.aar`
+Download latest Affise SDK (`attribution-1.6.62.aar`)
+from [releases page](https://github.com/affise/affise-mmp-sdk-android/releases) and place this binary to gradle application
+module lib directory `app/libs/attribution-1.6.62.aar`
 
 Add library as gradle file dependency to application module build script
 Add install referrer library
@@ -172,12 +178,12 @@ Add install referrer library
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.6.61"
+val affise_version = "1.6.62"
 
 dependencies {
     // ...
     // Add Affise library 
-    implementation(files("libs/attribution-1.6.61.aar"))
+    implementation(files("libs/attribution-1.6.62.aar"))
     // Add Affise modules 
     implementation(files("libs/module-advertising-$affise_version.aar"))
     implementation(files("libs/module-androidid-$affise_version.aar"))
@@ -189,6 +195,8 @@ dependencies {
     // implementation(files("libs/module-appsflyer-$affise_version.aar"))
     // implementation(files("libs/module-rustore-$affise_version.aar"))
     // implementation(files("libs/module-huawei-$affise_version.aar"))
+    // implementation(files("libs/module-meta-$affise_version.aar"))
+    // implementation(files("libs/module-tiktok-$affise_version.aar"))
     // Add install referrer
     implementation("com.android.installreferrer:installreferrer:2.2")
 }
@@ -197,7 +205,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.6.61'
+final affise_version = '1.6.62'
 
 dependencies {
   // ...  
@@ -214,6 +222,8 @@ dependencies {
   // implementation files("libs/module-appsflyer-${affise_version}.aar")
   // implementation files("libs/module-rustore-${affise_version}.aar")
   // implementation files("libs/module-huawei-${affise_version}.aar")
+  // implementation files("libs/module-meta-${affise_version}.aar")
+  // implementation files("libs/module-tiktok-${affise_version}.aar")
   // Add install referrer
   implementation 'com.android.installreferrer:installreferrer:2.2'
 }
@@ -329,6 +339,7 @@ class App : Application() {
 | `RuStore`      | [![module-rustore](https://img.shields.io/maven-central/v/com.affise/module-rustore?label=latest)](https://mvnrepository.com/artifact/com.affise/module-rustore)                | `Auto` |
 | `Huawei`       | [![module-huawei](https://img.shields.io/maven-central/v/com.affise/module-huawei?label=latest)](https://mvnrepository.com/artifact/com.affise/module-huawei)                   | `Auto` |
 | `Meta`         | [![module-meta](https://img.shields.io/maven-central/v/com.affise/module-meta?label=latest)](https://mvnrepository.com/artifact/com.affise/module-meta)                         | `Auto` |
+| `TikTok`       | [![module-tiktok](https://img.shields.io/maven-central/v/com.affise/module-tiktok?label=latest)](https://mvnrepository.com/artifact/com.affise/module-tiktok)                   | `Auto` |
 
 If module start type is `Manual`, then call:
 
@@ -515,6 +526,44 @@ Affise.Module.Subscription.hasModule()
 - `NON_CONSUMABLE`
 - `RENEWABLE_SUBSCRIPTION`
 - `NON_RENEWABLE_SUBSCRIPTION`
+
+
+#### Module TikTok
+
+Required `com.github.tiktok:tiktok-business-android-sdk:1.5.0`
+
+Send TikTok event data to Affise [TikTok Docs](https://business-api.tiktok.com/gateway/docs/index?identify_key=c0138ffadd90a955c1f0670a56fe348d1d40680b3c89461e09f78ed26785164b&language=ENGLISH&doc_id=1739585434183746#item-link-3.2.2%20Content%20parameters%20for%20standard%20events)
+
+```kotlin
+//TikTok event data
+val addToCartEvent = TTAddToCartEvent.newBuilder("TikTok event id")
+    .setDescription("product1")//Description of the item or page.
+    .setCurrency(TTContentsEventConstants.Currency.JPY)//The ISO 4217 currency code.
+    .setValue(123.4)//Value of the order or items sold.
+    .setContents(
+        TTContentParams.newBuilder()//Relevant products in an event with product information.
+            .setContentId("item1")//Unique ID of the product or content.
+            .setContentCategory("game")//Category of the page or product.
+            .setBrand("tt")//Brand name of the product item.
+            .setPrice(123.4f)//The price of the item.
+            .setQuantity(1)//The number of items.
+            .setContentName("item1 test")
+            .build()
+    )//Name of the page or product.
+    .setContentType("IAP")//The type of content in the event.
+    .build()
+
+TikTokBusinessSdk.trackTTEvent(addToCartEvent)
+
+// Send TikTok data to Affise
+Affise.Module.TikTok.sendEvent(addToCartEvent)
+```
+
+Is Module present:
+
+```kotlin
+Affise.Module.TikTok.hasModule()
+```
 
 ### Requirements
 
@@ -1028,14 +1077,7 @@ class FirebaseCloudMessagingService : FirebaseMessagingService() {
 Affise automatically track reinstall events by using silent-push technology, 
 to make this feature work, pass push token when it is recreated by user and on you application starts up
 
-```kotlin
-class FirebaseCloudMessagingService : FirebaseMessagingService() {
-  override fun onNewToken(token: String) {
-    // New token generated
-    Affise.addPushToken(token)
-  }
-}
-```
+See example [Push token tracking](#push-token-tracking)
 
 ## APK preinstall tracking
 
@@ -1442,6 +1484,14 @@ In examples above `ReferrerKey.CLICK_ID` is used, but many others is available:
 - `SUB_5`
 
 ## Get module state
+
+> **Warning**
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+>
+> Required [Module Status](#module-status)
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
 Get state of the module:
 

@@ -17,7 +17,7 @@ import com.affise.attribution.internal.data.DataMapper
 import com.affise.attribution.internal.data.DataName
 import com.affise.attribution.internal.ext.getMap
 import com.affise.attribution.internal.ext.getString
-import com.affise.attribution.internal.utils.jsonToMap
+import com.affise.attribution.internal.utils.jsonStringToMap
 import com.affise.attribution.internal.utils.toJSONObject
 import com.affise.attribution.modules.toAffiseModules
 import com.affise.attribution.referrer.toReferrerKey
@@ -44,7 +44,7 @@ class AffiseApiWrapper(
     fun setCallback(callback: OnAffiseCallback? = null) {
         this.callback = { name, data ->
             val result = callback?.handleCallback(name.method, JSONObject(data).toString())
-            jsonToMap(result)
+            jsonStringToMap(result)
         }
     }
 
@@ -191,6 +191,10 @@ class AffiseApiWrapper(
 
             AffiseApiMethod.MODULE_SUBS_PURCHASE_CALLBACK ->
                 callModuleSubsPurchaseCallback(api, map, result)
+
+            // TikTok Module
+            AffiseApiMethod.MODULE_TIKTOK_EVENT ->
+                callModuleTikTokEvent(api, map, result)
             ////////////////////////////////////////
             // modules
             ////////////////////////////////////////
@@ -812,6 +816,27 @@ class AffiseApiWrapper(
             )
             callback?.invoke(api, data)
         }
+        result.success(null)
+    }
+
+    // TikTok Module
+    private fun callModuleTikTokEvent(
+        api: AffiseApiMethod,
+        map: Map<String, *>,
+        result: InternalResult
+    ) {
+        val data = map.opt<Map<*, *>>(api)
+
+        if (data == null) {
+            result.error("api [${api.method}]: no valid data")
+            return
+        }
+
+        val eventId = data.getString(DataName.EVENT_ID)
+        val eventName = data.getString(DataName.EVENT_NAME)
+        val properties: JSONObject? = data.getMap(DataName.EVENT_VALUES)?.toJSONObject()
+
+        Affise.Module.TikTok.sendEvent(eventName, properties, eventId)
         result.success(null)
     }
     ////////////////////////////////////////
