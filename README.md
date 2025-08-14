@@ -117,7 +117,7 @@ referrer.
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.6.62"
+val affise_version = "1.6.63"
 
 dependencies {
   // Add Affise library 
@@ -143,7 +143,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.6.62'
+final affise_version = '1.6.63'
 
 dependencies {
     // Add Affise library 
@@ -168,9 +168,9 @@ dependencies {
 
 ### Integrate as file dependency
 
-Download latest Affise SDK (`attribution-1.6.62.aar`)
+Download latest Affise SDK (`attribution-1.6.63.aar`)
 from [releases page](https://github.com/affise/affise-mmp-sdk-android/releases) and place this binary to gradle application
-module lib directory `app/libs/attribution-1.6.62.aar`
+module lib directory `app/libs/attribution-1.6.63.aar`
 
 Add library as gradle file dependency to application module build script
 Add install referrer library
@@ -178,12 +178,12 @@ Add install referrer library
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.6.62"
+val affise_version = "1.6.63"
 
 dependencies {
     // ...
     // Add Affise library 
-    implementation(files("libs/attribution-1.6.62.aar"))
+    implementation(files("libs/attribution-1.6.63.aar"))
     // Add Affise modules 
     implementation(files("libs/module-advertising-$affise_version.aar"))
     implementation(files("libs/module-androidid-$affise_version.aar"))
@@ -205,7 +205,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.6.62'
+final affise_version = '1.6.63'
 
 dependencies {
   // ...  
@@ -530,33 +530,34 @@ Affise.Module.Subscription.hasModule()
 
 #### Module TikTok
 
-Required `com.github.tiktok:tiktok-business-android-sdk:1.5.0`
+Required `com.github.tiktok:tiktok-business-android-sdk:latest.release`
 
 Send TikTok event data to Affise [TikTok Docs](https://business-api.tiktok.com/gateway/docs/index?identify_key=c0138ffadd90a955c1f0670a56fe348d1d40680b3c89461e09f78ed26785164b&language=ENGLISH&doc_id=1739585434183746#item-link-3.2.2%20Content%20parameters%20for%20standard%20events)
 
 ```kotlin
 //TikTok event data
-val addToCartEvent = TTAddToCartEvent.newBuilder("TikTok event id")
-    .setDescription("product1")//Description of the item or page.
-    .setCurrency(TTContentsEventConstants.Currency.JPY)//The ISO 4217 currency code.
-    .setValue(123.4)//Value of the order or items sold.
-    .setContents(
-        TTContentParams.newBuilder()//Relevant products in an event with product information.
-            .setContentId("item1")//Unique ID of the product or content.
-            .setContentCategory("game")//Category of the page or product.
-            .setBrand("tt")//Brand name of the product item.
-            .setPrice(123.4f)//The price of the item.
-            .setQuantity(1)//The number of items.
-            .setContentName("item1 test")
-            .build()
-    )//Name of the page or product.
-    .setContentType("IAP")//The type of content in the event.
-    .build()
+val event = TTAddToCartEvent.newBuilder("TikTok event id")
+  .setDescription("product1")//Description of the item or page.
+  .setCurrency(TTContentsEventConstants.Currency.JPY)//The ISO 4217 currency code.
+  .setValue(123.4)//Value of the order or items sold.
+  .setContents(
+    TTContentParams.newBuilder()//Relevant products in an event with product information.
+      .setContentId("item1")//Unique ID of the product or content.
+      .setContentCategory("game")//Category of the page or product.
+      .setBrand("tt")//Brand name of the product item.
+      .setPrice(123.4f)//The price of the item.
+      .setQuantity(1)//The number of items.
+      .setContentName("item1 test")
+      .build()
+  )//Name of the page or product.
+  .setContentType("IAP")//The type of content in the event.
+  .build()
 
-TikTokBusinessSdk.trackTTEvent(addToCartEvent)
+// Send TikTok event
+TikTokBusinessSdk.trackTTEvent(event)
 
 // Send TikTok data to Affise
-Affise.Module.TikTok.sendEvent(addToCartEvent)
+Affise.Module.TikTok.sendEvent(event.eventName, event.properties, event.eventId)
 ```
 
 Is Module present:
