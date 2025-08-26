@@ -8,16 +8,23 @@ internal fun JSONObject.toMap(): Map<String, Any?> =
 
 internal fun JSONArray.toList(): List<Any?> = (0 until length()).map { index -> toValue(get(index)) }
 
-private fun toValue(element: Any?) = try {
-    when (element) {
-        JSONObject.NULL -> null
-        is JSONObject -> element.toMap()
-        is JSONArray -> element.toList()
-        is com.tiktok.appevents.contents.TTContentsEventConstants.Currency -> element.name
-        else -> element
+private const val tikTokCurrencyClass = "com.tiktok.appevents.contents.TTContentsEventConstants\$Currency"
+
+private fun toValue(element: Any?): Any? {
+    return try {
+        if (element?.javaClass?.name == tikTokCurrencyClass) {
+            val ordinal = (element as? Enum<*>)?.ordinal
+            return TikTokCurrency.fromOrdinal(ordinal)?.name
+        }
+        when (element) {
+            JSONObject.NULL -> null
+            is JSONObject -> element.toMap()
+            is JSONArray -> element.toList()
+            else -> element
+        }
+    } catch (_: Exception) {
+        "$element"
     }
-} catch (_: Exception) {
-    "$element"
 }
 
 

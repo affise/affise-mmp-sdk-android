@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.6.64] - 2025-08-26
+
+### Fixed
+
+- Fix module `TikTok` for crossplatform
+
 ## [1.6.63] - 2025-08-14
 
 ### Fixed
@@ -285,6 +291,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app.
 
+[1.6.64]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.63...v1.6.64
 [1.6.63]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.62...v1.6.63
 [1.6.62]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.61...v1.6.62
 [1.6.61]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.60...v1.6.61

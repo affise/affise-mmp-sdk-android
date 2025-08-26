@@ -34,8 +34,6 @@ dependencies {
     //Affise library
     api(project("::attribution"))
 
-    compileOnly "com.github.tiktok:tiktok-business-android-sdk:$tiktokVersion"
-
     testImplementation "com.google.truth:truth:$testTruth"
     testImplementation "io.mockk:mockk:$testMockk"
     testImplementation "junit:junit:$testJunit"
