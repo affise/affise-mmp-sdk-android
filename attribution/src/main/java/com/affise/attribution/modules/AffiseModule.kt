@@ -18,8 +18,6 @@ abstract class AffiseModule {
     var baseProviders: List<Provider>? = null
         private set
 
-    open val isManual: Boolean = false
-
     fun dependencies(
         application: Application,
         logsManager: LogsManager,

@@ -44,7 +44,6 @@ enum class AffiseApiMethod(val method: String) {
     ////////////////////////////////////////
     // modules
     ////////////////////////////////////////
-    MODULE_START("module_start"),
     GET_MODULES_INSTALLED("get_modules_installed"),
     GET_STATUS_CALLBACK("get_status_callback"),
     // AppsFlyer Module

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.affise.attribution.Affise
+import com.affise.attribution.modules.AffiseModules
 import com.affise.attribution.settings.AffiseConfig
 import com.google.firebase.FirebaseApp
 
@@ -32,6 +33,9 @@ class App : Application() {
             // Custom domain example
             // Url trailing slash is irrelevant
             .setDomain(Prefs.string(DOMAIN_KEY, DEMO_DOMAIN))
+            .setDisableModules(listOf(
+                AffiseModules.Advertising
+            ))
             .start(this) // Start Affise SDK
 
         // Get module status https://github.com/affise/affise-mmp-sdk-android#get-module-state

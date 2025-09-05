@@ -312,18 +312,6 @@ object Affise {
     }
 
     /**
-     * Manual module start
-     */
-    @Deprecated(
-        message = "Method moved to Affise.Module",
-        replaceWith = ReplaceWith("Affise.Module.moduleStart(module)")
-    )
-    @JvmStatic
-    fun moduleStart(module: AffiseModules): Boolean {
-        return Module.moduleStart(module)
-    }
-
-    /**
      * Get installed modules
      */
     @Deprecated(

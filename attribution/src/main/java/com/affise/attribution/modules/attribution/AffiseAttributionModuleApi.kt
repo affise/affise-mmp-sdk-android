@@ -10,12 +10,6 @@ interface AffiseAttributionModuleApi {
     fun getStatus(module: AffiseModules, onComplete: OnKeyValueCallback)
 
     /**
-     * Manual module start
-     */
-    @Deprecated("Will be removed")
-    fun moduleStart(module: AffiseModules): Boolean
-
-    /**
      * Get installed modules
      */
     fun getModulesInstalled(): List<AffiseModules>

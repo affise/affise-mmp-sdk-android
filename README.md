@@ -29,6 +29,8 @@
       - [Before application is published](#before-application-is-published)
       - [Domain](#domain)
     - [Modules](#modules)
+      - [Installed active modules](#installed-active-modules)
+      - [Manual exclude modules](#manual-exclude-modules)
       - [Module Advertising](#module-advertising)
       - [Module AppsFlyer](#module-appsflyer)
       - [Module Huawei](#module-huawei)
@@ -117,7 +119,7 @@ referrer.
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.6.64"
+val affise_version = "1.6.65"
 
 dependencies {
   // Add Affise library 
@@ -143,7 +145,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.6.64'
+final affise_version = '1.6.65'
 
 dependencies {
     // Add Affise library 
@@ -168,9 +170,9 @@ dependencies {
 
 ### Integrate as file dependency
 
-Download latest Affise SDK (`attribution-1.6.64.aar`)
+Download latest Affise SDK (`attribution-1.6.65.aar`)
 from [releases page](https://github.com/affise/affise-mmp-sdk-android/releases) and place this binary to gradle application
-module lib directory `app/libs/attribution-1.6.64.aar`
+module lib directory `app/libs/attribution-1.6.65.aar`
 
 Add library as gradle file dependency to application module build script
 Add install referrer library
@@ -178,12 +180,12 @@ Add install referrer library
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.6.64"
+val affise_version = "1.6.65"
 
 dependencies {
     // ...
     // Add Affise library 
-    implementation(files("libs/attribution-1.6.64.aar"))
+    implementation(files("libs/attribution-1.6.65.aar"))
     // Add Affise modules 
     implementation(files("libs/module-advertising-$affise_version.aar"))
     implementation(files("libs/module-androidid-$affise_version.aar"))
@@ -205,7 +207,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.6.64'
+final affise_version = '1.6.65'
 
 dependencies {
   // ...  
@@ -286,7 +288,7 @@ Affise
 
 #### Before application is published
 
-> **Warning**
+> [!CAUTION]
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
@@ -318,7 +320,7 @@ class App : Application() {
 
 ### Modules
 
-> **Warning**
+> [!CAUTION]
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 > 
@@ -326,26 +328,22 @@ class App : Application() {
 > 
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
-| Module         | Version                                                                                                                                                                         | Start  |
-|:---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------:|
-| `Advertising`  | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising)    | `Auto` |
-| `AndroidId`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://mvnrepository.com/artifact/com.affise/module-androidid)          | `Auto` |
-| `AppsFlyer`    | [![module-appsflyer ](https://img.shields.io/maven-central/v/com.affise/module-appsflyer?label=latest)](https://mvnrepository.com/artifact/com.affise/module-appsflyer)         | `Auto` |
-| `Link`         | [![module-link](https://img.shields.io/maven-central/v/com.affise/module-link?label=latest)](https://mvnrepository.com/artifact/com.affise/module-link)                         | `Auto` |
-| `Network`      | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)                | `Auto` |
-| `Phone`        | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                      | `Auto` |
-| `Status`       | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                   | `Auto` |
-| `Subscription` | [![module-subscription](https://img.shields.io/maven-central/v/com.affise/module-subscription?label=latest)](https://mvnrepository.com/artifact/com.affise/module-subscription) | `Auto` |
-| `RuStore`      | [![module-rustore](https://img.shields.io/maven-central/v/com.affise/module-rustore?label=latest)](https://mvnrepository.com/artifact/com.affise/module-rustore)                | `Auto` |
-| `Huawei`       | [![module-huawei](https://img.shields.io/maven-central/v/com.affise/module-huawei?label=latest)](https://mvnrepository.com/artifact/com.affise/module-huawei)                   | `Auto` |
-| `Meta`         | [![module-meta](https://img.shields.io/maven-central/v/com.affise/module-meta?label=latest)](https://mvnrepository.com/artifact/com.affise/module-meta)                         | `Auto` |
-| `TikTok`       | [![module-tiktok](https://img.shields.io/maven-central/v/com.affise/module-tiktok?label=latest)](https://mvnrepository.com/artifact/com.affise/module-tiktok)                   | `Auto` |
+| Module         | Version                                                                                                                                                                         |
+|:---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Advertising`  | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising)    |
+| `AndroidId`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://mvnrepository.com/artifact/com.affise/module-androidid)          |
+| `AppsFlyer`    | [![module-appsflyer ](https://img.shields.io/maven-central/v/com.affise/module-appsflyer?label=latest)](https://mvnrepository.com/artifact/com.affise/module-appsflyer)         |
+| `Link`         | [![module-link](https://img.shields.io/maven-central/v/com.affise/module-link?label=latest)](https://mvnrepository.com/artifact/com.affise/module-link)                         |
+| `Network`      | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)                |
+| `Phone`        | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                      |
+| `Status`       | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                   |
+| `Subscription` | [![module-subscription](https://img.shields.io/maven-central/v/com.affise/module-subscription?label=latest)](https://mvnrepository.com/artifact/com.affise/module-subscription) |
+| `RuStore`      | [![module-rustore](https://img.shields.io/maven-central/v/com.affise/module-rustore?label=latest)](https://mvnrepository.com/artifact/com.affise/module-rustore)                |
+| `Huawei`       | [![module-huawei](https://img.shields.io/maven-central/v/com.affise/module-huawei?label=latest)](https://mvnrepository.com/artifact/com.affise/module-huawei)                   |
+| `Meta`         | [![module-meta](https://img.shields.io/maven-central/v/com.affise/module-meta?label=latest)](https://mvnrepository.com/artifact/com.affise/module-meta)                         |
+| `TikTok`       | [![module-tiktok](https://img.shields.io/maven-central/v/com.affise/module-tiktok?label=latest)](https://mvnrepository.com/artifact/com.affise/module-tiktok)                   |
 
-If module start type is `Manual`, then call:
-
-```kotlin
-Affise.Module.moduleStart(AffiseModules.Advertising)
-```
+#### Installed active modules
 
 Get list of installed modules:
 
@@ -353,9 +351,26 @@ Get list of installed modules:
 Affise.Module.getModulesInstalled()
 ```
 
+#### Manual exclude modules
+
+To manually stop modules from starting use `Affise.settings.setDisableModules`:
+
+```kotlin
+Affise
+  .settings(
+    affiseAppId = "Your appId",
+    secretKey = "Your SDK secretKey",
+  )
+  .setDisableModules(listOf(
+    AffiseModules.Advertising,
+    AffiseModules.Subscription,
+  ))
+  .start(this) // Start Affise SDK
+```
+
 #### Module Advertising
 
-> **Warning**
+> [!CAUTION]
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
@@ -396,7 +411,7 @@ Affise.Module.AppsFlyer.hasModule()
 
 #### Module Huawei
 
-> **Warning**
+> [!CAUTION]
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
@@ -1037,7 +1052,7 @@ but if there is no network connection or device is disabled, events are kept loc
 
 ## Advertising Identifier (google) tracking
 
-> **Note**
+> [!NOTE]
 >
 > Requires [Affise Advertising Module](#modules)
 
@@ -1045,7 +1060,7 @@ Advertising Identifier (google) tracking is supported automatically, no actions 
 
 ## Open Advertising Identifier (huawei) tracking
 
-> **Note**
+> [!NOTE]
 >
 > Requires [Affise Huawei Module](#modules)
 
@@ -1089,7 +1104,7 @@ To use this feature, create file with name `partner_key` in your app assets dire
 
 ### Deeplinks
 
-> **Warning**
+> [!CAUTION]
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
@@ -1168,7 +1183,7 @@ adb shell am start -a android.intent.action.VIEW -d "YOUR_SCHEME://YOUR_DOMAIN/s
 
 ### AppLinks
 
-> **Warning**
+> [!CAUTION]
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
@@ -1225,7 +1240,7 @@ Example: `https://mydomain.com`
   5. Once Android Studio generates the file, click **Save file** to download it.
   6. Upload the `assetlinks.json` file to your site, with read access for everyone, at `https://yoursite/.well-known/assetlinks.json`.
 
-  > **Important**
+  > [!IMPORTANT]
   >
   > The system verifies the Digital Asset Links file via the encrypted HTTPS protocol. Make sure that the **assetlinks.json** file is accessible over an HTTPS connection, regardless of whether your app's intent filter includes **https**.
 
@@ -1288,7 +1303,7 @@ adb shell am start -a android.intent.action.VIEW -d "https://YOUR_DOMAIN/somepat
 
 ### Get deferred deeplink
 
-> **Note**
+> [!NOTE]
 >
 > Requires [Affise Status Module](#modules)
 
@@ -1302,7 +1317,7 @@ Affise.getDeferredDeeplink { deferredDeeplink ->
 
 ### Get deferred deeplink value
 
-> **Note**
+> [!NOTE]
 >
 > Requires [Affise Status Module](#modules)
 
@@ -1486,7 +1501,7 @@ In examples above `ReferrerKey.CLICK_ID` is used, but many others is available:
 
 ## Get module state
 
-> **Warning**
+> [!CAUTION]
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
@@ -1524,7 +1539,7 @@ Affise.getRandomUserId()
 
 ## Get random device Id
 
-> **Note**
+> [!NOTE]
 >
 > Use [Affise AndroidId Module](#modules) to make `device id` more persistent on application reinstall
 
@@ -1827,7 +1842,7 @@ fun onAdRevenuePaid(impressionData: AdMostImpressionData) {
 
 ## Validate credentials
 
-> **Warning**
+> [!CAUTION]
 > 
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 > 

@@ -1,7 +1,7 @@
 package com.affise.attribution.internal.ext
 
 import com.affise.attribution.events.autoCatchingClick.AutoCatchingType
-import com.affise.attribution.events.autoCatchingClick.toAutoCatchingType
+import com.affise.attribution.modules.AffiseModules
 import com.affise.attribution.settings.AffiseConfig
 import com.affise.attribution.settings.AffiseSettings
 
@@ -16,14 +16,18 @@ internal object Field {
     const val ENABLED_METRICS = "enabledMetrics"
     const val DOMAIN = "domain"
     const val CONFIG_STRINGS = "configStrings"
+    const val DISABLE_MODULES = "disableModules"
 }
 
 internal fun Map<*, *>.getString(key: String): String? = this[key]?.toString()
 internal fun Map<*, *>.getBoolean(key: String): Boolean? = this.getString(key)?.toBoolean()
 internal fun Map<*, *>.getList(key: String): List<*>? = this[key] as? List<*>
 internal fun Map<*, *>.getMap(key: String): Map<*,*>? = this[key] as? Map<*,*>
-internal fun List<*>.toAutoCatchingType(): List<AutoCatchingType> = this.mapNotNull {
-    it?.toString()?.toAutoCatchingType()
+//internal fun List<*>.toAutoCatchingType(): List<AutoCatchingType> = this.mapNotNull {
+//    AutoCatchingType.from(it?.toString())
+//}
+internal fun List<*>.toAffiseModules(): List<AffiseModules> = this.mapNotNull {
+    AffiseModules.from(it?.toString())
 }
 
 internal fun Map<*, *>.isValid(): Boolean {
@@ -60,6 +64,9 @@ internal fun AffiseSettings.addSettings(map: Map<*, *>): AffiseSettings = this.a
                 settings.setConfigValue(configKey, value)
             }
         }
+    }
+    map.getList(Field.DISABLE_MODULES)?.toAffiseModules()?.let {
+        settings.setDisableModules(it)
     }
 //    map.getList(Field.AUTO_CATCHING_CLICK_EVENTS)?.toAutoCatchingType()?.let {
 //        settings.setAutoCatchingClickEvents(it)

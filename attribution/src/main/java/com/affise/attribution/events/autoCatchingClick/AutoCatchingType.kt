@@ -16,5 +16,3 @@ enum class AutoCatchingType(private val type: String) {
         }
     }
 }
-
-fun String.toAutoCatchingType(): AutoCatchingType? = AutoCatchingType.from(this)

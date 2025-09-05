@@ -38,14 +38,6 @@ class AffiseAttributionModule(
     }
 
     /**
-     * Manual module start
-     */
-    @Deprecated("Will be removed")
-    override fun moduleStart(module: AffiseModules): Boolean {
-        return api?.moduleManager?.manualStart(module) ?: false
-    }
-
-    /**
      * Get installed modules
      */
     override fun getModulesInstalled(): List<AffiseModules> {

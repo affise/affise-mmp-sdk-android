@@ -1,6 +1,7 @@
 package com.affise.attribution.init
 
 import com.affise.attribution.events.autoCatchingClick.AutoCatchingType
+import com.affise.attribution.modules.AffiseModules
 import com.affise.attribution.network.CloudConfig
 import com.affise.attribution.settings.AffiseConfig
 import com.affise.attribution.settings.OnInitErrorHandler
@@ -21,7 +22,8 @@ data class AffiseInitProperties @JvmOverloads constructor(
     val domain: String? = CloudConfig.defaultDomain,
     val onInitSuccessHandler: OnInitSuccessHandler? = null,
     val onInitErrorHandler: OnInitErrorHandler? = null,
-    val configValues: Map<AffiseConfig, Any> = emptyMap()
+    val configValues: Map<AffiseConfig, Any> = emptyMap(),
+    val disableModules: List<AffiseModules> = emptyList()
 ) {
 
     init {

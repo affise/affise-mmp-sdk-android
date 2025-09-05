@@ -15,8 +15,6 @@ enum class AffiseModules(val module: String) {
     Huawei("Huawei"),
     Meta("Meta");
 
-    internal val className: String = "${MODULE_PREFIX}.${this.module.lowercase()}.${this.module}Module"
-
     companion object {
         @JvmStatic
         fun from(name: String?): AffiseModules? {
@@ -26,6 +24,7 @@ enum class AffiseModules(val module: String) {
     }
 }
 
-private const val MODULE_PREFIX = "com.affise.attribution.module"
+internal val AffiseModules.className: String
+    get() = "${MODULE_PREFIX}.${this.module.lowercase()}.${this.module}Module"
 
-fun String.toAffiseModules(): AffiseModules? = AffiseModules.from(this)
+private const val MODULE_PREFIX = "com.affise.attribution.module"

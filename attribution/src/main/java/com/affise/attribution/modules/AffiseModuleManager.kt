@@ -2,6 +2,7 @@ package com.affise.attribution.modules
 
 import android.app.Application
 import com.affise.attribution.BuildConfig
+import com.affise.attribution.init.AffiseInitProperties
 import com.affise.attribution.logs.LogsManager
 import com.affise.attribution.modules.exceptions.AffiseModuleError
 import com.affise.attribution.parameters.factory.PostBackModelFactory
@@ -11,9 +12,11 @@ class AffiseModuleManager(
     private val application: Application,
     private val logsManager: LogsManager,
     private val postBackModelFactory: PostBackModelFactory,
+    initProperties: AffiseInitProperties,
 ) {
 
     private var modules: MutableMap<AffiseModules, AffiseModule> = mutableMapOf()
+    private var disabledModules: List<AffiseModules> = initProperties.disableModules
 
     fun init(dependencies: List<Any>) {
         initAffiseModules { module ->
@@ -24,19 +27,8 @@ class AffiseModuleManager(
                 postBackModelFactory.getProviders()
             )
 
-            if (!module.isManual) {
-                moduleStart(module)
-            }
+            moduleStart(module)
         }
-    }
-
-    fun manualStart(module: AffiseModules) : Boolean {
-        getModule(module)?.let {
-            if (!it.isManual) return false
-            moduleStart(it)
-            return true
-        }
-        return false
     }
 
     fun status(module: AffiseModules, onComplete: OnKeyValueCallback) {
@@ -63,13 +55,15 @@ class AffiseModuleManager(
     fun hasModule(module: AffiseModules): Boolean = getModule(module) != null
 
     private fun initAffiseModules(callback: (AffiseModule) -> Unit) {
-        AffiseModules.values().forEach { name ->
-            getClassInstance(name.className)?.let { module ->
+        for (moduleName in AffiseModules.values()) {
+            if (disabledModules.contains(moduleName)) continue
+
+            getClassInstance(moduleName.className)?.let { module ->
                 if (module.version == BuildConfig.AFFISE_VERSION) {
-                    modules[name] = module
+                    modules[moduleName] = module
                     callback(module)
                 } else {
-                    AffiseModuleError.Version(name, module).printStackTrace()
+                    AffiseModuleError.Version(moduleName, module).printStackTrace()
                 }
             }
         }

@@ -17,9 +17,9 @@ import com.affise.attribution.internal.data.DataMapper
 import com.affise.attribution.internal.data.DataName
 import com.affise.attribution.internal.ext.getMap
 import com.affise.attribution.internal.ext.getString
+import com.affise.attribution.internal.ext.toAffiseModules
 import com.affise.attribution.internal.utils.jsonStringToMap
 import com.affise.attribution.internal.utils.toJSONObject
-import com.affise.attribution.modules.toAffiseModules
 import com.affise.attribution.referrer.toReferrerKey
 import com.affise.attribution.settings.PushTokenService
 import org.json.JSONObject
@@ -168,9 +168,6 @@ class AffiseApiWrapper(
             ////////////////////////////////////////
             // modules
             ////////////////////////////////////////
-            AffiseApiMethod.MODULE_START ->
-                callModuleStart(api, map, result)
-
             AffiseApiMethod.GET_MODULES_INSTALLED ->
                 callGetModulesInstalled(api, map, result)
 
@@ -667,20 +664,6 @@ class AffiseApiWrapper(
     ////////////////////////////////////////
     // Modules
     ////////////////////////////////////////
-
-    private fun callModuleStart(
-        api: AffiseApiMethod,
-        map: Map<String, *>,
-        result: InternalResult
-    ) {
-        val module = map.opt<String>(api)?.toAffiseModules()
-        if (module == null) {
-            result.error("api [${api.method}]: no valid AffiseModules")
-        } else {
-            result.success(Affise.Module.moduleStart(module))
-        }
-    }
-
     private fun callGetModulesInstalled(
         api: AffiseApiMethod,
         map: Map<String, *>,

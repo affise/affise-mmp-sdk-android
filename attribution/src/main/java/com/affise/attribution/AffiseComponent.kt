@@ -504,9 +504,10 @@ internal class AffiseComponent(
 
     override val moduleManager: AffiseModuleManager by lazy {
         AffiseModuleManager(
-            app,
-            logsManager,
-            postBackModelFactory
+            application = app,
+            logsManager = logsManager,
+            postBackModelFactory = postBackModelFactory,
+            initProperties = initProperties,
         )
     }
 

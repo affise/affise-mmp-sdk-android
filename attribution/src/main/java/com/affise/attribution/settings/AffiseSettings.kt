@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.affise.attribution.Affise
 import com.affise.attribution.init.AffiseInitProperties
+import com.affise.attribution.modules.AffiseModules
 
 /**
  * Affise SDK settings
@@ -24,6 +25,7 @@ class AffiseSettings internal constructor(
     private var onInitSuccessHandler: OnInitSuccessHandler? = null
     private var onInitErrorHandler: OnInitErrorHandler? = null
     private var configValues: MutableMap<AffiseConfig, Any> = mutableMapOf()
+    private var disableModules: List<AffiseModules> = emptyList()
 
 //    private var autoCatchingClickEvents: List<AutoCatchingType>? = null
 //    private var enabledMetrics: Boolean = false
@@ -95,6 +97,10 @@ class AffiseSettings internal constructor(
         }
     }
 
+    fun setDisableModules(disableModules: List<AffiseModules>): AffiseSettings = this.apply {
+        this.disableModules = disableModules
+    }
+
     /**
      * Set [autoCatchingClickEvents] list of AutoCatchingType
      */
@@ -121,7 +127,8 @@ class AffiseSettings internal constructor(
         domain = domain,
         onInitSuccessHandler = onInitSuccessHandler,
         onInitErrorHandler = onInitErrorHandler,
-        configValues = configValues
+        configValues = configValues,
+        disableModules = disableModules,
     )
 
     /**
