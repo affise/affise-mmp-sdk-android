@@ -6,6 +6,7 @@ import com.affise.attribution.debug.validate.DebugValidateUseCase
 import com.affise.attribution.deeplink.DeeplinkManagerImpl
 import com.affise.attribution.events.EventsManager
 import com.affise.attribution.events.StoreEventUseCase
+import com.affise.attribution.init.AffiseInitProperties
 import com.affise.attribution.init.InitPropertiesStorage
 import com.affise.attribution.init.SetPropertiesWhenAppInitializedUseCase
 import com.affise.attribution.internal.StoreInternalEventUseCase
@@ -28,6 +29,7 @@ import com.affise.attribution.webBridge.WebBridgeManager
  * Library api contract
  */
 internal interface AffiseApi {
+    val initProperties: AffiseInitProperties
     val setPropertiesWhenInitUseCase: SetPropertiesWhenAppInitializedUseCase
     val firstAppOpenUseCase: FirstAppOpenUseCase
     val sessionManager: SessionManager

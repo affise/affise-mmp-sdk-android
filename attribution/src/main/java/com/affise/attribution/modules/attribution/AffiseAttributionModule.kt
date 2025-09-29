@@ -41,7 +41,7 @@ class AffiseAttributionModule(
      * Get installed modules
      */
     override fun getModulesInstalled(): List<AffiseModules> {
-        return api?.moduleManager?.getModules() ?: emptyList()
+        return api?.moduleManager?.getModulesNames() ?: emptyList()
     }
 
     /**

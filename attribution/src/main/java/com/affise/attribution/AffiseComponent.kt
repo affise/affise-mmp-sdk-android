@@ -49,7 +49,7 @@ import com.affise.attribution.webBridge.WebBridgeManager
 
 internal class AffiseComponent(
     private val app: Application,
-    initProperties: AffiseInitProperties,
+    override val initProperties: AffiseInitProperties,
 ) : AffiseApi {
 
     /**

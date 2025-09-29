@@ -6,6 +6,7 @@ import android.webkit.WebView
 import com.affise.attribution.debug.AffiseDebug
 import com.affise.attribution.debug.AffiseDebugApi
 import com.affise.attribution.deeplink.OnDeeplinkCallback
+import com.affise.attribution.errors.AffiseError
 import com.affise.attribution.events.Event
 import com.affise.attribution.events.OnSendFailedCallback
 import com.affise.attribution.events.OnSendSuccessCallback
@@ -61,7 +62,8 @@ object Affise {
             //Create AffiseComponent
             api = AffiseComponent(app, initProperties)
         } else {
-            Log.w(this.javaClass.simpleName,"Affise SDK is already initialized")
+            api?.initProperties?.onInitErrorHandler?.handle(AffiseError.AlreadyInitialized())
+            Log.w(this.javaClass.simpleName,AffiseError.MESSAGE_ALREADY_INITIALIZED)
         }
     }
 

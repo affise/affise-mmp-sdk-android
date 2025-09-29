@@ -36,6 +36,14 @@ class App : Application() {
             .setDisableModules(listOf(
                 AffiseModules.Advertising
             ))
+            .setOnInitSuccess {
+                // Initialize success callback https://github.com/affise/affise-mmp-sdk-android#initialization-callbacks
+                println("Affise: init success")
+            }
+            .setOnInitError {
+                // Initialize error callback https://github.com/affise/affise-mmp-sdk-android#initialization-callbacks
+                println("Affise: init error ${it.localizedMessage}")
+            }
             .start(this) // Start Affise SDK
 
         // Get module status https://github.com/affise/affise-mmp-sdk-android#get-module-state

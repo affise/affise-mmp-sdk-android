@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.6.66] - 2025-09-29
+
+### Added
+
+- Error `SDK is already initialized` to `Affise.settings.setOnInitError`
+
 ## [1.6.65] - 2025-09-05
 
 ### Added
@@ -301,6 +307,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.6.66]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.65...v1.6.66
 [1.6.65]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.64...v1.6.65
 [1.6.64]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.63...v1.6.64
 [1.6.63]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.62...v1.6.63

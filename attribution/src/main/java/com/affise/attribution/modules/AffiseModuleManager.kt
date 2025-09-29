@@ -31,11 +31,11 @@ class AffiseModuleManager(
         }
     }
 
-    fun status(module: AffiseModules, onComplete: OnKeyValueCallback) {
-        getModule(module)?.status(onComplete) ?: onComplete.handle(listOf(AffiseKeyValue(module.name, "not found")))
+    fun status(moduleName: AffiseModules, onComplete: OnKeyValueCallback) {
+        getModule(moduleName)?.status(onComplete) ?: onComplete.handle(listOf(AffiseKeyValue(moduleName.name, "not found")))
     }
 
-    fun getModules(): List<AffiseModules> {
+    fun getModulesNames(): List<AffiseModules> {
         return modules.map { it.key }
     }
 
@@ -50,9 +50,15 @@ class AffiseModuleManager(
         postBackModelFactory.addProviders(module.providers())
     }
 
-    fun getModule(module: AffiseModules): AffiseModule? = modules[module]
+    fun updateProviders(moduleName: AffiseModules) {
+        getModule(moduleName)?.let {
+            postBackModelFactory.addProviders(it.providers())
+        }
+    }
 
-    fun hasModule(module: AffiseModules): Boolean = getModule(module) != null
+    fun getModule(moduleName: AffiseModules): AffiseModule? = modules[moduleName]
+
+    fun hasModule(moduleName: AffiseModules): Boolean = getModule(moduleName) != null
 
     private fun initAffiseModules(callback: (AffiseModule) -> Unit) {
         for (moduleName in AffiseModules.values()) {
@@ -69,8 +75,8 @@ class AffiseModuleManager(
         }
     }
 
-    fun <API:AffiseModuleApi> api(module: AffiseModules): API? {
+    fun <API:AffiseModuleApi> api(moduleName: AffiseModules): API? {
         @Suppress("UNCHECKED_CAST")
-        return getModule(module) as? API
+        return getModule(moduleName) as? API
     }
 }
