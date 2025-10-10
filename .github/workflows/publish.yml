@@ -13,16 +13,16 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '11'
 
       - name: Cache Gradle and wrapper
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
@@ -34,8 +34,27 @@ jobs:
       - name: Grant Permission for Gradlew to Execute
         run: chmod +x gradlew
 
+      # Build
+      - name: Build AAR 📦
+        run: |
+          ./gradlew :attribution:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-advertising:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-androidid:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-appsflyer:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-link:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-meta:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-network:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-phone:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-status:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-subscription:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-rustore:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-huawei:assembleRelease --no-daemon --no-parallel
+          ./gradlew :module-tiktok:assembleRelease --no-daemon --no-parallel
+          ./gradlew :internal:assembleRelease --no-daemon --no-parallel
+
       # Publish
-      - name: Nexus Publish
+      - name: Publish Attribution
+        if: ${{ !cancelled() }}
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
@@ -43,21 +62,150 @@ jobs:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
           SNAPSHOT: ${{ secrets.SNAPSHOT }}
-        run: |
-          ./gradlew :attribution:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-advertising:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-androidid:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-appsflyer:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-link:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-meta:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-network:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-phone:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-status:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-subscription:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-rustore:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-huawei:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :module-tiktok:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
-          ./gradlew :internal:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+        run: ./gradlew :attribution:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+
+      - name: Publish Module Advertising
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-advertising:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+  
+      - name: Publish Module Androidid
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-androidid:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+  
+      - name: Publish Module AppsFlyer
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-appsflyer:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+  
+      - name: Publish Module Link
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-link:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+  
+      - name: Publish Module Meta
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-meta:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+  
+      - name: Publish Module Network
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-network:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+  
+      - name: Publish Module Phone
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-phone:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+  
+      - name: Publish Module Status
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-status:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+  
+      - name: Publish Module Subscription
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-subscription:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+  
+      - name: Publish Module RuStore
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-rustore:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+
+      - name: Publish Module Huawei
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-huawei:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+
+      - name: Publish Module TikTok
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :module-tiktok:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
+
+      - name: Publish Internal
+        if: ${{ !cancelled() }}
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SNAPSHOT: ${{ secrets.SNAPSHOT }}
+        run: ./gradlew :internal:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
 
       - name: Version Tag
         id: version_tag
@@ -79,6 +227,7 @@ jobs:
 
       # Release Upload Attribution library
       - name: Upload Release Attribution AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-attribution-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -91,6 +240,7 @@ jobs:
 
       # Release Upload Module Advertising
       - name: Upload Release Module Advertising AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-advertising-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -103,6 +253,7 @@ jobs:
 
       # Release Upload Module AndroidId
       - name: Upload Release Module AndroidId AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-androidid-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -115,6 +266,7 @@ jobs:
 
       # Release Upload Module Link
       - name: Upload Release Module Link AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-link-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -127,6 +279,7 @@ jobs:
 
       # Release Upload Module Network
       - name: Upload Release Module Network AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-network-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -139,6 +292,7 @@ jobs:
 
       # Release Upload Module Phone
       - name: Upload Release Module Phone AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-phone-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -151,6 +305,7 @@ jobs:
 
       # Release Upload Module Status
       - name: Upload Release Module Status AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-status-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -163,6 +318,7 @@ jobs:
 
       # Release Upload Module Subscription
       - name: Upload Release Module Subscription AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-subscription-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -175,6 +331,7 @@ jobs:
 
       # Release Upload Module RuStore
       - name: Upload Release Module RuStore AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-rustore-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -187,6 +344,7 @@ jobs:
 
       # Release Upload Module Huawei
       - name: Upload Release Module Huawei AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-huawei-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -199,6 +357,7 @@ jobs:
 
       # Release Upload Module Meta
       - name: Upload Release Module Meta AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-meta-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -211,6 +370,7 @@ jobs:
 
       # Release Upload Module AppsFlyer
       - name: Upload Release Module AppsFlyer AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-appsflyer-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -223,6 +383,7 @@ jobs:
 
       # Release Upload Module TikTok
       - name: Upload Release Module TikTok AAR 📦
+        if: ${{ !cancelled() }}
         id: upload-module-tiktok-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -235,6 +396,7 @@ jobs:
 
 #      # Release Upload Internal library
 #      - name: Upload Release Internal AAR 📦
+#        if: ${{ !cancelled() }}
 #        id: upload-internal-asset
 #        uses: actions/upload-release-asset@v1
 #        env:
@@ -248,8 +410,7 @@ jobs:
       # Demo App
       - name: Build Demo App
         if: ${{ !cancelled() }}
-        run: |
-          ./gradlew :app:assembleDebug --no-daemon --no-parallel
+        run: ./gradlew :app:assembleDebug --no-daemon --no-parallel
 
       # Release Upload Demo App
       - name: Upload Demo App 📦
