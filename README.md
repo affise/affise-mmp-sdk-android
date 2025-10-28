@@ -42,6 +42,8 @@
         - [AffiseProductType](#affiseproducttype)
       - [Module TikTok](#module-tiktok)
     - [Requirements](#requirements)
+    - [Persistent data](#persistent-data)
+    - [Reinstall tracking](#reinstall-tracking)
 - [Features](#features)
   - [ProviderType identifiers collection](#providertype-identifiers-collection)
     - [Attribution](#attribution)
@@ -66,7 +68,7 @@
   - [Open Advertising Identifier (huawei) tracking](#open-advertising-identifier-huawei-tracking)
   - [Install referrer tracking](#install-referrer-tracking)
   - [Push token tracking](#push-token-tracking)
-  - [Reinstall Uninstall tracking](#reinstall-uninstall-tracking)
+  - [Uninstall tracking](#uninstall-tracking)
   - [APK preinstall tracking](#apk-preinstall-tracking)
   - [Links](#links)
     - [Deeplinks](#deeplinks)
@@ -80,9 +82,9 @@
   - [Get referrer](#get-referrer)
   - [Get referrer parameter](#get-referrer-parameter)
   - [Referrer keys](#referrer-keys)
-  - [Get module state](#get-module-state)
+  - [Get module status](#get-module-status)
   - [Get random user Id](#get-random-user-id)
-  - [Get random device Id](#get-random-device-id)
+  - [Get Affice device Id](#get-affice-device-id)
   - [Get providers](#get-providers)
   - [Is first run](#is-first-run)
   - [WebView tracking](#webview-tracking)
@@ -601,6 +603,62 @@ For a minimal working functionality your app needs to declare internet permissio
 </manifest>
 ```
 
+### Persistent data
+
+Some methods require to return **same data** on application reinstall
+
+It is achieved by using [Affise AndroidId Module](#modules)
+
+Such SDK methods are:
+
+- [Get Affice device Id](#get-affice-device-id)
+
+To simulate multiple device install for testing purpose you can use one of two options:
+
+1. Disable module dependencies:
+
+```groovy
+// Disable module dependency
+// implementation("com.affise:module-androidid:$affise_version")
+```
+
+2. Disable module programmatically:
+
+```kotlin
+Affise
+  .settings(
+    affiseAppId = "Your appId",
+    secretKey = "Your SDK secretKey",
+  )
+  .setDisableModules(listOf(
+    AffiseModules.AndroidId, // Disable module programmatically
+  ))
+  .start(this)
+```
+
+### Reinstall tracking
+
+> [!NOTE]
+>
+> Read more about [Persistent data](#persistent-data)
+
+There are two working mode for [Affice device Id](#get-affice-device-id):
+
+1. Return persistent value on each reinstall
+2. Return new value on each reinstall
+
+First mode require enabling [Affise AndroidId Module](#modules)
+
+```groovy
+// Enable module dependency
+implementation("com.affise:module-androidid:$affise_version")
+```
+
+Even after deleting application [Affice device Id](#get-affice-device-id) will be preserved and will restore on next installation
+
+Second mode is convenient for testing.
+By removing dependency or [disabling module programmatically](#manual-exclude-modules), a new [Affice device Id](#get-affice-device-id) will be generated for each **new** installation.
+
 # Features
 
 ## ProviderType identifiers collection
@@ -1096,7 +1154,7 @@ class FirebaseCloudMessagingService : FirebaseMessagingService() {
 }
 ```
 
-## Reinstall Uninstall tracking
+## Uninstall tracking
 
 Affise automatically track reinstall events by using silent-push technology, 
 to make this feature work, pass push token when it is recreated by user and on you application starts up
@@ -1507,7 +1565,7 @@ In examples above `ReferrerKey.CLICK_ID` is used, but many others is available:
 - `SUB_4`
 - `SUB_5`
 
-## Get module state
+## Get module status
 
 > [!CAUTION]
 >
@@ -1545,11 +1603,15 @@ For kotlin:
 Affise.getRandomUserId()
 ```
 
-## Get random device Id
+## Get Affice device Id
 
 > [!NOTE]
 >
 > Use [Affise AndroidId Module](#modules) to make `device id` more persistent on application reinstall
+
+> [!NOTE]
+>
+> Read more about [Persistent data](#persistent-data) and [Reinstall tracking](#reinstall-tracking)
 
 Use the next public method of SDK
 
