@@ -1,0 +1,68 @@
+name: 🗃️ Android Affise Issue
+description: File a Detailed Issue.
+title: "[Issue]: "
+labels: 
+  - bug
+projects:
+  - affise/affise-mmp-sdk-android
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        `Thanks for taking the time to fill out this Issue`
+
+  - type: input
+    id: version-tag
+    attributes:
+      label: Version
+      description: Tell us Affise Android library version
+      placeholder: Library Version
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue-what-happened
+    attributes:
+      label: What happened?
+      description: |
+        - What did happen?
+        - What did you expect to happen?
+        - Give as much detail
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue-logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output.
+      placeholder: Logs
+      render: shell
+
+  - type: textarea
+    id: issue-code-kotlin
+    attributes:
+      label: Kotlin code which cause a issue
+      description: If your code is in Kotlin. Please copy and paste any relevant Code.
+      placeholder: Kotlin Code
+      render: kotlin
+
+  - type: textarea
+    id: issue-code-java
+    attributes:
+      label: Java code which cause a issue
+      description: If your code is in Java. Please copy and paste any relevant Code.
+      placeholder: Java Code
+      render: java
+
+  - type: checkboxes
+    id: issue-check
+    attributes:
+      label: I have
+      options:
+        - label: Read [Documentation](https://github.com/affise/affise-mmp-sdk-android/blob/main/README.md)
+          required: true
+    validations:
+      required: true
