@@ -15,7 +15,7 @@ body:
   - type: input
     id: version-tag
     attributes:
-      label: Version
+      label: Library Version
       description: Tell us Affise Android library version
       placeholder: Library Version
     validations:

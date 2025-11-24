@@ -36,7 +36,7 @@ internal class CloudRepositoryImpl(
                 //Check attempts
                 if (--attempts == 0) {
                     //Add throwable
-                    throw CloudException(url, NetworkException(response.code, response.body ?: ""), ATTEMPTS_TO_SEND, true)
+                    throw CloudException(url, NetworkException(response.code), ATTEMPTS_TO_SEND, true)
                 }
             }
         }

@@ -8,4 +8,4 @@ import java.io.IOException
  * @property status the request response status
  * @property message the request response message
  */
-class NetworkException(val status: Int, message: String) : IOException(message)
+class NetworkException(val status: Int, message: String? = null) : IOException(message ?: "")

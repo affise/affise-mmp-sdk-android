@@ -101,7 +101,7 @@ internal class LogsManagerImpl(
         //Check throwable
         when (cloudException.throwable) {
             is NetworkException -> {
-                data = cloudException.throwable.message ?: ""
+                data = "AffiseError.network(status=${cloudException.throwable.status}, message=${cloudException.throwable.message ?: ""})"
                 code = cloudException.throwable.status
             }
             is SocketTimeoutException -> {
