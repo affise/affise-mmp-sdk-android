@@ -1,11 +1,18 @@
 # Changelog
 
+## [1.6.68] - 2025-12-05
+
+### Fixed
+
+- Fix `Affise.getReferrerUrl`
+- Fix `Affise.getReferrerUrlValue`
+
 ## [1.6.67] - 2025-11-24
 
 ### Fixed
 
 - Fix `AffiseError` parsing
-- 
+
 ## [1.6.66] - 2025-09-29
 
 ### Added
@@ -313,6 +320,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.6.68]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.67...v1.6.68
 [1.6.67]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.66...v1.6.67
 [1.6.66]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.65...v1.6.66
 [1.6.65]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.64...v1.6.65

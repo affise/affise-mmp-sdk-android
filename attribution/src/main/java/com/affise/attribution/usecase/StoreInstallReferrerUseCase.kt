@@ -38,15 +38,17 @@ class StoreInstallReferrerUseCase(
         }
 
         startInstallReferrerRetrieve {
+            handleReferrerCallback()
+
             onFinished?.invoke()
             onReferrerSetupFinished?.invoke()
         }
     }
 
-    private fun startInstallReferrerRetrieve(onFinished: (() -> Unit)?) {
+    private fun startInstallReferrerRetrieve(callback: (() -> Unit)?) {
         storeModule
-            ?.startInstallReferrerRetrieve(onFinished)
-            ?: onFinished?.invoke()
+            ?.startInstallReferrerRetrieve(callback)
+            ?: callback?.invoke()
     }
 
     /**
@@ -97,12 +99,15 @@ class StoreInstallReferrerUseCase(
 
     @Synchronized
     private fun handleReferrerCallback() {
-        val referrer = getReferrer()
+        val referrer = getPartnerKeyOrReferrer()
+
+        if (referrer.isNullOrEmpty()) return
+
         val iterator = callbacks.entries.iterator()
         while (iterator.hasNext()) {
             val item = iterator.next()
             val result = if (item.value != null) {
-                referrer?.getReferrerValue(item.value)
+                referrer.getReferrerValue(item.value)
             } else {
                 referrer
             }
@@ -111,7 +116,7 @@ class StoreInstallReferrerUseCase(
         }
     }
 
-    fun getReferrer(): String? {
+    fun getPartnerKeyOrReferrer(): String? {
         //Check referrer in partner_key
         val partnerKey = app.getPartnerKey()
 

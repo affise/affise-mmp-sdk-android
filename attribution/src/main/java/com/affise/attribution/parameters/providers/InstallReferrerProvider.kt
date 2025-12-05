@@ -20,6 +20,6 @@ class InstallReferrerProvider(
     override val key: ProviderType = ProviderType.REFERRER
 
     override fun provide(): String? {
-        return storeInstallReferrerUseCase.getReferrer()
+        return storeInstallReferrerUseCase.getPartnerKeyOrReferrer()
     }
 }
