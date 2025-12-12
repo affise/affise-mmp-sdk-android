@@ -105,7 +105,7 @@ class FirstAppOpenUseCase(
     fun getAffiseDeviseId() = preferences
         .getString(
             AFF_DEVICE_ID,
-            AffiseError.ERROR_READING_FROM_PREFERENCES
+            AffiseError.ALL_TWO
         )
 
     /**
@@ -115,7 +115,7 @@ class FirstAppOpenUseCase(
     fun getAffiseAltDeviseId() = preferences
         .getString(
             AFF_ALT_DEVICE_ID,
-            AffiseError.ERROR_READING_FROM_PREFERENCES
+            AffiseError.ALL_TWO
         )
 
     /**
@@ -125,7 +125,7 @@ class FirstAppOpenUseCase(
     fun getRandomUserId() = preferences
         .getString(
             ProviderType.RANDOM_USER_ID.provider,
-            AffiseError.ERROR_READING_FROM_PREFERENCES
+            AffiseError.ALL_TWO
         )
 
     companion object {

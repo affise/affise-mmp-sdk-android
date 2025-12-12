@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.70] - 2025-12-12
+
+### Changed
+
+- Api `Affise.getRandomUserId` returns `11111111-1111-1111-1111-111111111111` if SDK not initialized
+- Api `Affise.getRandomDeviceId` returns `11111111-1111-1111-1111-111111111111` if SDK not initialized
+
 ## [1.6.69] - 2025-12-12
 
 ### Changed
@@ -327,6 +334,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.6.70]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.69...v1.6.70
 [1.6.69]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.68...v1.6.69
 [1.6.68]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.67...v1.6.68
 [1.6.67]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.66...v1.6.67

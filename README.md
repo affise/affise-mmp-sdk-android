@@ -122,7 +122,7 @@ referrer.
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.6.69"
+val affise_version = "1.6.70"
 
 dependencies {
   // Add Affise library 
@@ -148,7 +148,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.6.69'
+final affise_version = '1.6.70'
 
 dependencies {
     // Add Affise library 
@@ -173,9 +173,9 @@ dependencies {
 
 ### Integrate as file dependency
 
-Download latest Affise SDK (`attribution-1.6.69.aar`)
+Download latest Affise SDK (`attribution-1.6.70.aar`)
 from [releases page](https://github.com/affise/affise-mmp-sdk-android/releases) and place this binary to gradle application
-module lib directory `app/libs/attribution-1.6.69.aar`
+module lib directory `app/libs/attribution-1.6.70.aar`
 
 Add library as gradle file dependency to application module build script
 Add install referrer library
@@ -183,12 +183,12 @@ Add install referrer library
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.6.69"
+val affise_version = "1.6.70"
 
 dependencies {
     // ...
     // Add Affise library 
-    implementation(files("libs/attribution-1.6.69.aar"))
+    implementation(files("libs/attribution-1.6.70.aar"))
     // Add Affise modules 
     implementation(files("libs/module-advertising-$affise_version.aar"))
     implementation(files("libs/module-androidid-$affise_version.aar"))
@@ -210,7 +210,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.6.69'
+final affise_version = '1.6.70'
 
 dependencies {
   // ...  
@@ -1607,7 +1607,7 @@ Affise.getRandomUserId()
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
-> Returns `AffiseError.NOT_INITIALIZED` if **Affise SDK not initialized**
+> Returns `11111111-1111-1111-1111-111111111111` if **Affise SDK not initialized**
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
@@ -1633,7 +1633,7 @@ Affise.getRandomDeviceId()
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 >
-> Returns `AffiseError.NOT_INITIALIZED` if **Affise SDK not initialized**
+> Returns `11111111-1111-1111-1111-111111111111` if **Affise SDK not initialized**
 >
 > 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 

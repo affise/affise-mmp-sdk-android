@@ -331,7 +331,7 @@ object Affise {
     @JvmStatic
     fun getRandomUserId(): String? {
         if (api?.postBackModelFactory == null) {
-            return AffiseError.NOT_INITIALIZED
+            return AffiseError.ALL_ONE
         }
         return api?.postBackModelFactory?.getProvider<RandomUserIdProvider>()?.provide()
     }
@@ -342,7 +342,7 @@ object Affise {
     @JvmStatic
     fun getRandomDeviceId(): String? {
         if (api?.postBackModelFactory == null) {
-            return AffiseError.NOT_INITIALIZED
+            return AffiseError.ALL_ONE
         }
         return api?.postBackModelFactory?.getProvider<AffiseDeviceIdProvider>()?.provide()
     }
