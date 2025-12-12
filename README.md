@@ -122,7 +122,7 @@ referrer.
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.6.68"
+val affise_version = "1.6.69"
 
 dependencies {
   // Add Affise library 
@@ -148,7 +148,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.6.68'
+final affise_version = '1.6.69'
 
 dependencies {
     // Add Affise library 
@@ -173,9 +173,9 @@ dependencies {
 
 ### Integrate as file dependency
 
-Download latest Affise SDK (`attribution-1.6.68.aar`)
+Download latest Affise SDK (`attribution-1.6.69.aar`)
 from [releases page](https://github.com/affise/affise-mmp-sdk-android/releases) and place this binary to gradle application
-module lib directory `app/libs/attribution-1.6.68.aar`
+module lib directory `app/libs/attribution-1.6.69.aar`
 
 Add library as gradle file dependency to application module build script
 Add install referrer library
@@ -183,12 +183,12 @@ Add install referrer library
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.6.68"
+val affise_version = "1.6.69"
 
 dependencies {
     // ...
     // Add Affise library 
-    implementation(files("libs/attribution-1.6.68.aar"))
+    implementation(files("libs/attribution-1.6.69.aar"))
     // Add Affise modules 
     implementation(files("libs/module-advertising-$affise_version.aar"))
     implementation(files("libs/module-androidid-$affise_version.aar"))
@@ -210,7 +210,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.6.68'
+final affise_version = '1.6.69'
 
 dependencies {
   // ...  
@@ -1603,6 +1603,14 @@ For kotlin:
 Affise.getRandomUserId()
 ```
 
+> [!CAUTION]
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+>
+> Returns `AffiseError.NOT_INITIALIZED` if **Affise SDK not initialized**
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+
 ## Get Affice device Id
 
 > [!NOTE]
@@ -1621,6 +1629,14 @@ For kotlin:
 Affise.getRandomDeviceId()
 ```
 
+> [!CAUTION]
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+>
+> Returns `AffiseError.NOT_INITIALIZED` if **Affise SDK not initialized**
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+
 ## Get providers
 
 Returns providers map with [ProviderType](#providertype-identifiers-collection) as key
@@ -1630,6 +1646,14 @@ val providers: Map<ProviderType, Any?> = Affise.getProviders()
 val key = ProviderType.AFFISE_APP_TOKEN
 val value = providers[key]
 ```
+
+> [!CAUTION]
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+>
+> Returns **Empty Map** if **Affise SDK not initialized**
+>
+> 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
 ## Is first run
 

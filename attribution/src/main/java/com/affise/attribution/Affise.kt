@@ -63,7 +63,7 @@ object Affise {
             api = AffiseComponent(app, initProperties)
         } else {
             api?.initProperties?.onInitErrorHandler?.handle(AffiseError.AlreadyInitialized())
-            Log.w(this.javaClass.simpleName,AffiseError.MESSAGE_ALREADY_INITIALIZED)
+            Log.w(this.javaClass.simpleName,AffiseError.ALREADY_INITIALIZED)
         }
     }
 
@@ -330,6 +330,9 @@ object Affise {
      */
     @JvmStatic
     fun getRandomUserId(): String? {
+        if (api?.postBackModelFactory == null) {
+            return AffiseError.NOT_INITIALIZED
+        }
         return api?.postBackModelFactory?.getProvider<RandomUserIdProvider>()?.provide()
     }
 
@@ -338,6 +341,9 @@ object Affise {
      */
     @JvmStatic
     fun getRandomDeviceId(): String? {
+        if (api?.postBackModelFactory == null) {
+            return AffiseError.NOT_INITIALIZED
+        }
         return api?.postBackModelFactory?.getProvider<AffiseDeviceIdProvider>()?.provide()
     }
 

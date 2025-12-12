@@ -70,7 +70,9 @@ internal class AdvertisingIdManagerImpl(
      */
     private fun getGoogleAdvertisingId(): String? {
         //Get Google Advertising ID
-        return advertisingIdInfo?.id
+        val advertisingId = advertisingIdInfo?.id
+        if (advertisingId.isNullOrBlank()) return null
+        return advertisingId
     }
 
     private fun checkGoogleAdPersonalization(): Boolean {

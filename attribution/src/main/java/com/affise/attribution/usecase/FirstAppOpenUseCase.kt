@@ -1,6 +1,7 @@
 package com.affise.attribution.usecase
 
 import android.content.SharedPreferences
+import com.affise.attribution.errors.AffiseError
 import com.affise.attribution.parameters.ProviderType
 import com.affise.attribution.session.CurrentActiveActivityCountProvider
 import com.affise.attribution.utils.*
@@ -101,19 +102,31 @@ class FirstAppOpenUseCase(
      * Get devise id
      * @return devise id
      */
-    fun getAffiseDeviseId() = preferences.getString(AFF_DEVICE_ID, "")
+    fun getAffiseDeviseId() = preferences
+        .getString(
+            AFF_DEVICE_ID,
+            AffiseError.ERROR_READING_FROM_PREFERENCES
+        )
 
     /**
      * Get alt devise id
      * @return alt devise id
      */
-    fun getAffiseAltDeviseId() = preferences.getString(AFF_ALT_DEVICE_ID, "")
+    fun getAffiseAltDeviseId() = preferences
+        .getString(
+            AFF_ALT_DEVICE_ID,
+            AffiseError.ERROR_READING_FROM_PREFERENCES
+        )
 
     /**
      * Get random user id
      * @return random user id
      */
-    fun getRandomUserId() = preferences.getString(ProviderType.RANDOM_USER_ID.provider, "")
+    fun getRandomUserId() = preferences
+        .getString(
+            ProviderType.RANDOM_USER_ID.provider,
+            AffiseError.ERROR_READING_FROM_PREFERENCES
+        )
 
     companion object {
         private const val FIRST_OPENED = "FIRST_OPENED"

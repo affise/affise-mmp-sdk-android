@@ -32,7 +32,7 @@ internal fun SharedPreferences.saveLong(key:String, value:Long, count:Int = SAVE
 }
 
 internal fun SharedPreferences.checkSaveString(key:String, func:()->String) {
-    if (getString(key, null).isNullOrEmpty()) {
+    if (getString(key, null).isNullOrBlank()) {
         saveString(key, func())
     }
 }

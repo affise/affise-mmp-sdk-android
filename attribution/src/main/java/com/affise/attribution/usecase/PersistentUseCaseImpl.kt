@@ -33,7 +33,7 @@ internal class PersistentUseCaseImpl : PersistentUseCase {
         val androidId = moduleAndroidId?.getAndroidId()
             ?.lowercase()
             ?.toFakeUUID()
-        androidId ?: return null
+        if (androidId.isNullOrBlank()) return null
         if (!androidId.isValidUUID()) return null
         return androidId
     }
@@ -42,7 +42,7 @@ internal class PersistentUseCaseImpl : PersistentUseCase {
         val moduleAdvertising: AdvertisingApi? = getModule(AffiseModules.Advertising)
         val advertisingId = moduleAdvertising?.getAdvertisingId()
             ?.lowercase()
-        advertisingId ?: return null
+        if (advertisingId.isNullOrBlank()) return null
         if (!advertisingId.isValidUUID()) return null
         return advertisingId
     }

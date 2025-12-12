@@ -11,9 +11,11 @@ class AndroidIdUseCaseImpl(
     @SuppressLint("HardwareIds")
     override fun getAndroidId(): String? {
         app ?: return null
-        return Settings.Secure.getString(
+        val androidId = Settings.Secure.getString(
             app.contentResolver,
             Settings.Secure.ANDROID_ID
         )
+        if (androidId.isNullOrBlank()) return null
+        return androidId
     }
 }
