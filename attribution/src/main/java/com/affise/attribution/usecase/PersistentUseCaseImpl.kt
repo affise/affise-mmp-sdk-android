@@ -18,7 +18,7 @@ internal class PersistentUseCaseImpl : PersistentUseCase {
     }
 
     override fun getAffDeviceId(): String? {
-        if (affDeviceId != null) return affDeviceId
+        if (!affDeviceId.isNullOrBlank()) return affDeviceId
         affDeviceId =  uuidFromAndroidId() ?: uuidFromAdvertisingId()
         return affDeviceId
     }

@@ -2,7 +2,7 @@ package com.affise.attribution.parameters.providers
 
 import com.affise.attribution.parameters.ProviderType
 import com.affise.attribution.parameters.base.StringPropertyProvider
-import com.affise.attribution.usecase.FirstAppOpenUseCase
+import com.affise.attribution.usecase.AppUUIDs
 
 /**
  * Provider for parameter [ProviderType.RANDOM_USER_ID]
@@ -10,7 +10,7 @@ import com.affise.attribution.usecase.FirstAppOpenUseCase
  * @property useCase to retrieve random user id
  */
 class RandomUserIdProvider(
-    private val useCase: FirstAppOpenUseCase
+    private val useCase: AppUUIDs
 ) : StringPropertyProvider() {
 
     override val order: Float = 49.0f

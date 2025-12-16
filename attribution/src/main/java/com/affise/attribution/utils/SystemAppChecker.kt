@@ -5,7 +5,9 @@ import android.app.Application
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 
-class SystemAppChecker(private val app: Application) {
+class SystemAppChecker(
+    private val app: Application
+) {
 
     /**
      * Check app if it system app
@@ -50,8 +52,8 @@ class SystemAppChecker(private val app: Application) {
     @SuppressLint("PrivateApi")
     fun getSystemProperty(key: String) = try {
         Class.forName("android.os.SystemProperties")
-            ?.getDeclaredMethod("get", String::class.java)
-            ?.invoke(null, key)
+            .getDeclaredMethod("get", String::class.java)
+            .invoke(null, key)
             ?.toString()
     } catch (throwable: Throwable) {
         null

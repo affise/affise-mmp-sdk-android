@@ -1,18 +1,34 @@
 # Changelog
 
+## [1.6.71] - 2025-12-16
+
+### Added
+
+- Api `Affise.getRandomUserId` added new algorithm for id generation
+- Api `Affise.getRandomDeviceId` added new algorithm for id generation
+- Error value for `AffiseError.UUID_NO_VALID_METHOD` is `22222222-2222-2222-2222-222222222222`
+- Error value for `AffiseError.UUID_NOT_INITIALIZED` is `11111111-1111-1111-1111-111111111111`
+
+### Changed
+
+- Update Api `Affise.getRandomUserId` return `AffiseError.UUID_NOT_INITIALIZED` if SDK not initialized
+- Update Api `Affise.getRandomUserId` return `AffiseError.UUID_NO_VALID_METHOD` if no valid methods to retrieve id
+- Update Api `Affise.getRandomDeviceId` return `AffiseError.UUID_NOT_INITIALIZED` if SDK not initialized
+- Update Api `Affise.getRandomDeviceId` return `AffiseError.UUID_NO_VALID_METHOD` if no valid methods to retrieve id
+
 ## [1.6.70] - 2025-12-12
 
 ### Changed
 
-- Api `Affise.getRandomUserId` returns `11111111-1111-1111-1111-111111111111` if SDK not initialized
-- Api `Affise.getRandomDeviceId` returns `11111111-1111-1111-1111-111111111111` if SDK not initialized
+- Api `Affise.getRandomUserId` return `11111111-1111-1111-1111-111111111111` if SDK not initialized
+- Api `Affise.getRandomDeviceId` return `11111111-1111-1111-1111-111111111111` if SDK not initialized
 
 ## [1.6.69] - 2025-12-12
 
 ### Changed
 
-- Api `Affise.getRandomUserId` returns `AffiseError.NOT_INITIALIZED` if SDK not initialized
-- Api `Affise.getRandomDeviceId` returns `AffiseError.NOT_INITIALIZED` if SDK not initialized
+- Api `Affise.getRandomUserId` return `AffiseError.NOT_INITIALIZED` if SDK not initialized
+- Api `Affise.getRandomDeviceId` return `AffiseError.NOT_INITIALIZED` if SDK not initialized
 
 ## [1.6.68] - 2025-12-05
 
@@ -334,6 +350,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.6.71]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.70...v1.6.71
 [1.6.70]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.69...v1.6.70
 [1.6.69]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.68...v1.6.69
 [1.6.68]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.67...v1.6.68

@@ -34,7 +34,7 @@ class HttpClientImpl : HttpClient {
 
         try {
             //Create data bytes
-            val postDataBytes = data.toByteArray(charset("UTF-8"))
+            val postDataBytes = data.toByteArray(Charsets.UTF_8)
 
             //Create connection
             connection = httpsUrl.openConnection() as HttpsURLConnection

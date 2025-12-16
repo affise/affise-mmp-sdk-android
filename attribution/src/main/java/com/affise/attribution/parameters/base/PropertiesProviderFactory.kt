@@ -13,8 +13,10 @@ import com.affise.attribution.parameters.providers.EmptyStringProvider
 import com.affise.attribution.parameters.factory.PostBackModelFactory
 import com.affise.attribution.parameters.providers.*
 import com.affise.attribution.session.SessionManager
+import com.affise.attribution.usecase.AppUUIDs
 import com.affise.attribution.usecase.FirstAppOpenUseCase
 import com.affise.attribution.usecase.DeviceUseCase
+import com.affise.attribution.usecase.PackageInfoUseCase
 import com.affise.attribution.usecase.PushTokenUseCase
 import com.affise.attribution.usecase.RemarketingUseCase
 import com.affise.attribution.usecase.StoreInstallReferrerUseCase
@@ -39,6 +41,8 @@ internal class PropertiesProviderFactory(
     private val remarketingUseCase: RemarketingUseCase,
     private val storeUseCase: StoreUseCase,
     private val pushTokenUseCase: PushTokenUseCase,
+    private val packageInfoUseCase: PackageInfoUseCase,
+    private val appUUIDs: AppUUIDs,
 ) {
 
     fun create(): PostBackModelFactory {
@@ -50,12 +54,12 @@ internal class PropertiesProviderFactory(
                 UuidProvider(),
                 AffiseAppIdProvider(initPropertiesStorage),
                 AffisePackageAppNameProvider(app),
-                AppVersionProvider(app, logsManager),
-                AppVersionRawProvider(app, logsManager),
+                AppVersionProvider(packageInfoUseCase),
+                AppVersionRawProvider(packageInfoUseCase),
                 StoreProvider(storeUseCase),
-                InstalledTimeProvider(app, logsManager),
+                InstalledTimeProvider(packageInfoUseCase),
                 firstOpenTimeProvider,
-                InstalledHourProvider(app),
+                InstalledHourProvider(packageInfoUseCase),
                 FirstOpenHourProvider(firstAppOpenUseCase),
                 InstallFirstEventProvider(firstAppOpenUseCase),
                 InstallBeginTimeProvider(storeInstallReferrerUseCase),
@@ -78,8 +82,8 @@ internal class PropertiesProviderFactory(
                 DeviceManufacturerProvider(buildConfigPropertiesProvider),
                 DeeplinkClickPropertyProvider(deeplinkClickRepository),
                 EmptyStringProvider(ProviderType.DEVICE_ATLAS_ID, 26.0f),
-                AffiseDeviceIdProvider(firstAppOpenUseCase),
-                AffiseAltDeviceIdProvider(firstAppOpenUseCase),
+                AffiseDeviceIdProvider(appUUIDs),
+                AffiseAltDeviceIdProvider(appUUIDs),
                 RefTokenProvider(sharedPreferences),
                 RefTokensProvider(sharedPreferences),
                 InstallReferrerProvider(app, storeInstallReferrerUseCase),
@@ -97,7 +101,7 @@ internal class PropertiesProviderFactory(
                 ApiLevelOSProvider(buildConfigPropertiesProvider),
                 AffSDKVersionProvider(),
                 OSVersionProvider(buildConfigPropertiesProvider),
-                RandomUserIdProvider(firstAppOpenUseCase),
+                RandomUserIdProvider(appUUIDs),
                 IsEmulatorProvider(deviceUseCase),
                 IsProductionPropertyProvider(initPropertiesStorage),
                 IsRootedProvider(deviceUseCase),

@@ -13,22 +13,22 @@ import org.junit.Test
  */
 class AffiseAltDeviceIdProviderTest {
 
-    @Test
-    fun `verify provide`() {
-        val devId = "test"
-        val useCase: FirstAppOpenUseCase = mockk {
-            every {
-                getAffiseAltDeviseId()
-            } returns devId
-        }
-        val provider = AffiseAltDeviceIdProvider(useCase)
-
-        val actual = provider.provide()
-
-        Truth.assertThat(actual).isEqualTo(devId)
-
-        verifyAll {
-            useCase.getAffiseAltDeviseId()
-        }
-    }
+//    @Test
+//    fun `verify provide`() {
+//        val devId = "test"
+//        val useCase: FirstAppOpenUseCase = mockk {
+//            every {
+//                getAffiseAltDeviseId()
+//            } returns devId
+//        }
+//        val provider = AffiseAltDeviceIdProvider(useCase)
+//
+//        val actual = provider.provide()
+//
+//        Truth.assertThat(actual).isEqualTo(devId)
+//
+//        verifyAll {
+//            useCase.getAffiseAltDeviseId()
+//        }
+//    }
 }

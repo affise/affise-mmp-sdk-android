@@ -7,7 +7,7 @@ sealed class AffiseError(message: String) : Exception(message) {
         const val ALREADY_INITIALIZED = "Affise SDK is already initialized"
         internal const val NOT_INITIALIZED = "Affise SDK is not initialized"
         internal const val ERROR_READING_FROM_PREFERENCES = "error_reading_from_preferences"
-        internal const val ALL_ONE = "11111111-1111-1111-1111-111111111111"
-        internal const val ALL_TWO = "22222222-2222-2222-2222-222222222222"
+        const val UUID_NOT_INITIALIZED = "11111111-1111-1111-1111-111111111111"
+        const val UUID_NO_VALID_METHOD = "22222222-2222-2222-2222-222222222222"
     }
 }

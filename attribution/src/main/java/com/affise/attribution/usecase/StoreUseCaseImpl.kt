@@ -1,14 +1,10 @@
 package com.affise.attribution.usecase
 
-import android.app.Application
-import android.os.Build
-import com.affise.attribution.logs.LogsManager
 import com.affise.attribution.utils.SystemAppChecker
 
 class StoreUseCaseImpl(
-    private val app: Application,
-    private val logsManager: LogsManager,
     private val systemAppChecker: SystemAppChecker,
+    private val packageInfoUseCase: PackageInfoUseCase,
 ) : StoreUseCase {
 
     override fun getStore(): String {
@@ -24,7 +20,7 @@ class StoreUseCaseImpl(
                 .isNullOrEmpty() -> StoreUseCase.PREINSTALL
 
             systemAppChecker.isPreinstallApp() -> StoreUseCase.PREINSTALL
-            else -> getInitiatingPackageName().let {
+            else -> packageInfoUseCase.getInitiatingPackageName().let {
                 when (it) {
                     PACKAGE_GOOGLE -> StoreUseCase.GOOGLE
                     PACKAGE_HUAWEI -> StoreUseCase.HUAWEI
@@ -34,23 +30,6 @@ class StoreUseCaseImpl(
                 }
             }
         }
-    }
-
-    /**
-     * Get initiating app package name
-     */
-    @Suppress("DEPRECATION")
-    private fun getInitiatingPackageName() = try {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            app.packageManager.getInstallSourceInfo(app.packageName).initiatingPackageName
-        } else {
-            app.packageManager.getInstallerPackageName(app.packageName)
-        }
-    } catch (throwable: Throwable) {
-        //log error
-        logsManager.addDeviceError(throwable)
-
-        null
     }
 
     companion object {

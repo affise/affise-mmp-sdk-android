@@ -57,21 +57,23 @@ internal class AffiseComponent(
      */
     override val postBackModelFactory: PostBackModelFactory by lazy {
         PropertiesProviderFactory(
-            buildConfigPropertiesProvider,
-            app,
-            firstAppOpenUseCase,
-            storeInstallReferrerUseCase,
-            sessionManager,
-            sharedPreferences,
-            initPropertiesStorage,
-            stringToMD5Converter,
-            stringToSHA256Converter,
-            logsManager,
-            isDeeplinkClickRepository,
-            deviceUseCase,
-            remarketingUseCase,
-            storeUseCase,
-            pushTokenUseCase,
+            buildConfigPropertiesProvider = buildConfigPropertiesProvider,
+            app = app,
+            firstAppOpenUseCase = firstAppOpenUseCase,
+            storeInstallReferrerUseCase = storeInstallReferrerUseCase,
+            sessionManager = sessionManager,
+            sharedPreferences = sharedPreferences,
+            initPropertiesStorage = initPropertiesStorage,
+            stringToMd5Converter = stringToMD5Converter,
+            stringToSha256Converter = stringToSHA256Converter,
+            logsManager = logsManager,
+            deeplinkClickRepository = isDeeplinkClickRepository,
+            deviceUseCase = deviceUseCase,
+            remarketingUseCase = remarketingUseCase,
+            storeUseCase = storeUseCase,
+            pushTokenUseCase = pushTokenUseCase,
+            packageInfoUseCase = packageInfoUseCase,
+            appUUIDs = appUUIDs,
         ).create()
     }
 
@@ -296,6 +298,16 @@ internal class AffiseComponent(
     }
 
     /**
+     * Provides [PackageInfoUseCase]
+     */
+    private val packageInfoUseCase: PackageInfoUseCase by lazy {
+        PackageInfoUseCaseImpl(
+            app = app,
+            logsManager = logsManager,
+        )
+    }
+
+    /**
      * Provides [DeviceUseCase]
      */
     private val deviceUseCase: DeviceUseCase by lazy {
@@ -324,7 +336,10 @@ internal class AffiseComponent(
      * FirstAppOpenUseCase
      */
     override val firstAppOpenUseCase: FirstAppOpenUseCase by lazy {
-        FirstAppOpenUseCase(sharedPreferences, activityCountProvider, persistentUseCase)
+        FirstAppOpenUseCase(
+            preferences = sharedPreferences,
+            activityCountProvider = activityCountProvider,
+        )
     }
 
     /**
@@ -427,9 +442,8 @@ internal class AffiseComponent(
 
     private val storeUseCase: StoreUseCase by lazy {
         StoreUseCaseImpl(
-            app,
-            logsManager,
-            SystemAppChecker(app)
+            systemAppChecker = SystemAppChecker(app),
+            packageInfoUseCase = packageInfoUseCase,
         )
     }
 
@@ -526,6 +540,15 @@ internal class AffiseComponent(
         DebugNetworkUseCaseImpl(
             initProperties = initProperties,
             httpClient = httpClient,
+        )
+    }
+
+    val appUUIDs: AppUUIDs by lazy {
+        AppUUIDsImpl(
+            preferences = sharedPreferences,
+            packageInfoUseCase = packageInfoUseCase,
+            persistentUseCase = persistentUseCase,
+            md5Converter = stringToMD5Converter,
         )
     }
 

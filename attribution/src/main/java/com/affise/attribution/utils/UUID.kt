@@ -51,3 +51,14 @@ internal fun String.toFakeUUID(): String {
 
     return "$uuid1-$uuid2-$uuid3-$uuid4-$uuid5"
 }
+
+internal fun String.sing(type: SignType): String {
+    if (isEmpty()) return this
+    return dropLast(type.suffix.length) + type.suffix
+}
+
+internal enum class SignType(val suffix: String) {
+    RANDOM("00"),
+    INSTALL_TIME("01"),
+    ANDROID_ID("02");
+}
