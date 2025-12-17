@@ -47,11 +47,16 @@ internal class AppUUIDsImpl(
      */
     @Synchronized
     override fun getAffiseAltDeviseId(): String? {
-        return preferences
-            .getString(
-                AppUUIDs.AFF_ALT_DEVICE_ID,
-                AffiseError.UUID_NO_VALID_METHOD
-            )
+        val prefAltDeviseId = preferences.getString(AppUUIDs.AFF_ALT_DEVICE_ID, null)
+        if (!prefAltDeviseId.isNullOrBlank()) {
+            return prefAltDeviseId
+        }
+
+        val genUUID = generateUUID().toString()
+            .sing(SignType.RANDOM)
+
+        preferences.saveString(AppUUIDs.AFF_ALT_DEVICE_ID, genUUID)
+        return preferences.getString(AppUUIDs.AFF_ALT_DEVICE_ID, AffiseError.UUID_NO_VALID_METHOD)
     }
 
     /**
