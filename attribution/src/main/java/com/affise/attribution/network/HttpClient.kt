@@ -23,9 +23,9 @@ interface HttpClient {
      */
     fun executeRequest(
         httpsUrl: URL,
-        method: Method,
-        data: String,
-        headers: Map<String, String>,
+        method: Method = Method.GET,
+        data: String? = null,
+        headers: Map<String, String> = emptyMap(),
         redirect: Boolean = true
     ): HttpResponse
 }

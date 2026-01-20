@@ -45,8 +45,6 @@ internal class LinkResolveUseCaseImpl(
             return httpClient.executeRequest(
                 httpsUrl = URL(url),
                 method = HttpClient.Method.GET,
-                data = "",
-                headers = emptyMap(),
                 redirect = false
             )
         } catch (e: Exception) {

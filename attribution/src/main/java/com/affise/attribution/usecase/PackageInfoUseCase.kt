@@ -2,6 +2,8 @@ package com.affise.attribution.usecase
 
 interface PackageInfoUseCase {
 
+    fun getPackageAppName(): String?
+
     fun getFirstInstallTime(): Long?
 
     fun getAppVersion(): String?
@@ -12,4 +14,12 @@ interface PackageInfoUseCase {
      * Get initiating app package name
      */
     fun getInitiatingPackageName(): String?
+
+    fun getMCC(): String
+
+    fun getMNC(): String
+
+    fun getDeviceName(): String?
+
+    fun getDeviceType(): String?
 }

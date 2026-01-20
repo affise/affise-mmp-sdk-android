@@ -12,11 +12,11 @@ import com.affise.attribution.usecase.StoreUseCase
  * @property systemAppChecker to check system for preinstall
  */
 class StoreProvider(
-    private val storeUseCase: StoreUseCase,
+    private val useCase: StoreUseCase,
 ) : StringPropertyProvider() {
 
     override val order: Float = 5.0f
     override val key: ProviderType = ProviderType.STORE
 
-    override fun provide(): String = storeUseCase.getStore()
+    override fun provide(): String = useCase.getStore()
 }

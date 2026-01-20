@@ -21,7 +21,7 @@ class HttpClientImpl : HttpClient {
     override fun executeRequest(
         httpsUrl: URL,
         method: HttpClient.Method,
-        data: String,
+        data: String?,
         headers: Map<String, String>,
         redirect: Boolean
     ): HttpResponse {
@@ -33,13 +33,9 @@ class HttpClientImpl : HttpClient {
         var responseHeaders: Map<String,List<String>> = emptyMap()
 
         try {
-            //Create data bytes
-            val postDataBytes = data.toByteArray(Charsets.UTF_8)
-
             //Create connection
             connection = httpsUrl.openConnection() as HttpsURLConnection
             connection.instanceFollowRedirects = redirect
-            connection.doOutput = true
             connection.doInput = true
             connection.requestMethod = method.name
             connection.readTimeout = 15000
@@ -52,7 +48,12 @@ class HttpClientImpl : HttpClient {
             connection.useCaches = false
 
             //Send data
-            connection.outputStream.use { it.write(postDataBytes) }
+            data?.let { data ->
+                //Create data bytes
+                val postDataBytes = data.toByteArray(Charsets.UTF_8)
+                connection.doOutput = true
+                connection.outputStream.use { it.write(postDataBytes) }
+            }
 
             //Get response code
             responseCode = connection.responseCode

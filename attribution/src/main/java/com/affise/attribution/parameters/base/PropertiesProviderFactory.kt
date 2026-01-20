@@ -1,6 +1,5 @@
 package com.affise.attribution.parameters.base
 
-import android.app.Application
 import android.content.SharedPreferences
 import com.affise.attribution.build.BuildConfigPropertiesProvider
 import com.affise.attribution.converter.Converter
@@ -27,7 +26,6 @@ import com.affise.attribution.usecase.StoreUseCase
  */
 internal class PropertiesProviderFactory(
     private val buildConfigPropertiesProvider: BuildConfigPropertiesProvider,
-    private val app: Application,
     private val firstAppOpenUseCase: FirstAppOpenUseCase,
     private val storeInstallReferrerUseCase: StoreInstallReferrerUseCase,
     private val sessionManager: SessionManager,
@@ -53,7 +51,7 @@ internal class PropertiesProviderFactory(
             providers = listOf(
                 UuidProvider(),
                 AffiseAppIdProvider(initPropertiesStorage),
-                AffisePackageAppNameProvider(app),
+                AffisePackageAppNameProvider(packageInfoUseCase),
                 AppVersionProvider(packageInfoUseCase),
                 AppVersionRawProvider(packageInfoUseCase),
                 StoreProvider(storeUseCase),
@@ -86,15 +84,15 @@ internal class PropertiesProviderFactory(
                 AffiseAltDeviceIdProvider(appUUIDs),
                 RefTokenProvider(sharedPreferences),
                 RefTokensProvider(sharedPreferences),
-                InstallReferrerProvider(app, storeInstallReferrerUseCase),
+                InstallReferrerProvider(storeInstallReferrerUseCase),
                 UserAgentProvider(),
-                MCCProvider(app),
-                MNCProvider(app),
+                MCCProvider(packageInfoUseCase),
+                MNCProvider(packageInfoUseCase),
                 RegionProvider(),
                 CountryProvider(),
                 LanguageProvider(remarketingUseCase),
-                DeviceNameProvider(app),
-                DeviceTypeProvider(app),
+                DeviceNameProvider(packageInfoUseCase),
+                DeviceTypeProvider(packageInfoUseCase),
                 OsNameProvider(buildConfigPropertiesProvider),
                 PlatformNameProvider(),
                 SdkPlatformNameProvider(),

@@ -6,7 +6,7 @@ import com.affise.attribution.errors.AffiseError
 import com.affise.attribution.utils.SignType
 import com.affise.attribution.utils.generateUUID
 import com.affise.attribution.utils.saveString
-import com.affise.attribution.utils.sing
+import com.affise.attribution.utils.sign
 import com.affise.attribution.utils.toFakeUUID
 
 internal class AppUUIDsImpl(
@@ -28,14 +28,14 @@ internal class AppUUIDsImpl(
         }
 
         val affDeviceId = persistentUseCase.getAffDeviceId()
-            ?.sing(SignType.ANDROID_ID)
+            ?.sign(SignType.PERSISTENT)
 
         if (!affDeviceId.isNullOrBlank()) {
             return affDeviceId
         }
 
         val genUUID = generateUUID().toString()
-            .sing(SignType.RANDOM)
+            .sign(SignType.RANDOM)
 
         preferences.saveString(AppUUIDs.AFF_DEVICE_ID, genUUID)
         return preferences.getString(AppUUIDs.AFF_DEVICE_ID, AffiseError.UUID_NO_VALID_METHOD)
@@ -53,7 +53,7 @@ internal class AppUUIDsImpl(
         }
 
         val genUUID = generateUUID().toString()
-            .sing(SignType.RANDOM)
+            .sign(SignType.RANDOM)
 
         preferences.saveString(AppUUIDs.AFF_ALT_DEVICE_ID, genUUID)
         return preferences.getString(AppUUIDs.AFF_ALT_DEVICE_ID, AffiseError.UUID_NO_VALID_METHOD)
@@ -73,14 +73,14 @@ internal class AppUUIDsImpl(
         val affUserId = packageInfoUseCase.getFirstInstallTime()?.let { installTime ->
             md5Converter.convert(installTime.toString())
                 .toFakeUUID()
-                .sing(SignType.INSTALL_TIME)
+                .sign(SignType.INSTALL_TIME)
         }
 
         if (!affUserId.isNullOrBlank()) {
             return affUserId
         }
 
-        val genUUID = generateUUID().toString().sing(SignType.RANDOM)
+        val genUUID = generateUUID().toString().sign(SignType.RANDOM)
         preferences.saveString(AppUUIDs.RANDOM_USER_ID, genUUID)
         return preferences.getString(AppUUIDs.RANDOM_USER_ID, AffiseError.UUID_NO_VALID_METHOD)
     }

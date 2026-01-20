@@ -1,8 +1,8 @@
 package com.affise.attribution.parameters.providers
 
-import android.content.Context
 import com.affise.attribution.parameters.ProviderType
 import com.affise.attribution.parameters.base.StringPropertyProvider
+import com.affise.attribution.usecase.PackageInfoUseCase
 
 /**
  * Provider for parameter [ProviderType.AFFISE_PKG_APP_NAME]
@@ -10,11 +10,11 @@ import com.affise.attribution.parameters.base.StringPropertyProvider
  * @property context to retrieve package name from
  */
 class AffisePackageAppNameProvider(
-    private val context: Context
+    private val useCase: PackageInfoUseCase,
 ) : StringPropertyProvider() {
 
     override val order: Float = 2.0f
     override val key: ProviderType = ProviderType.AFFISE_PKG_APP_NAME
 
-    override fun provide(): String? = context.packageName
+    override fun provide(): String? = useCase.getPackageAppName()
 }

@@ -7,14 +7,14 @@ import com.affise.attribution.usecase.DeviceUseCase
 /**
  * Provider for property [ProviderType.IS_EMULATOR]
  *
- * @property deviceUseCase to retrieve devise state
+ * @property useCase to retrieve devise state
  */
 internal class IsEmulatorProvider(
-    private val deviceUseCase: DeviceUseCase
+    private val useCase: DeviceUseCase
 ): BooleanPropertyProvider() {
 
     override val order: Float = 67.0f
     override val key: ProviderType = ProviderType.IS_EMULATOR
 
-    override fun provide(): Boolean? = deviceUseCase.isEmulator()
+    override fun provide(): Boolean? = useCase.isEmulator()
 }

@@ -34,6 +34,8 @@ internal fun String.isValidUUID(): Boolean {
 }
 
 internal fun String.toFakeUUID(): String {
+    if (isEmpty()) return this
+
     var baseString = this
     val uuidLength = 4*8
 
@@ -52,13 +54,13 @@ internal fun String.toFakeUUID(): String {
     return "$uuid1-$uuid2-$uuid3-$uuid4-$uuid5"
 }
 
-internal fun String.sing(type: SignType): String {
-    if (isEmpty()) return this
+internal fun String.sign(type: SignType): String {
+    if (length < type.suffix.length) return this
     return dropLast(type.suffix.length) + type.suffix
 }
 
 internal enum class SignType(val suffix: String) {
     RANDOM("00"),
     INSTALL_TIME("01"),
-    ANDROID_ID("02");
+    PERSISTENT("02");
 }

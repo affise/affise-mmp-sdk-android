@@ -58,7 +58,6 @@ internal class AffiseComponent(
     override val postBackModelFactory: PostBackModelFactory by lazy {
         PropertiesProviderFactory(
             buildConfigPropertiesProvider = buildConfigPropertiesProvider,
-            app = app,
             firstAppOpenUseCase = firstAppOpenUseCase,
             storeInstallReferrerUseCase = storeInstallReferrerUseCase,
             sessionManager = sessionManager,
