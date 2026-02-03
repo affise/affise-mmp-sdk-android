@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.6.74] - 2026-02-03
+
+### Added
+
+- Provider `REFERRER_UPDATED`
+
+### Fixed
+
+- InstallReferrer reconnect on service disconnected
+
 ## [1.6.73] - 2026-01-20
 
 ### Fixed
@@ -362,6 +372,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.6.74]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.73...v1.6.74
 [1.6.73]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.72...v1.6.73
 [1.6.72]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.71...v1.6.72
 [1.6.71]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.70...v1.6.71

@@ -6,7 +6,6 @@ import com.affise.attribution.logs.LogsManager
 import com.affise.attribution.modules.store.StoreApi
 import com.affise.attribution.referrer.AffiseReferrerData
 import com.huawei.hms.ads.installreferrer.api.InstallReferrerClient
-import com.huawei.hms.ads.installreferrer.api.InstallReferrerClient.InstallReferrerResponse.OK
 import com.huawei.hms.ads.installreferrer.api.InstallReferrerStateListener
 import com.huawei.hms.ads.installreferrer.api.ReferrerDetails
 
@@ -34,25 +33,24 @@ internal class HuaweiReferrerUseCase(
         client?.startConnection(object : InstallReferrerStateListener {
             override fun onInstallReferrerSetupFinished(responseCode: Int) {
                 when (responseCode) {
-                    OK -> {
+                    InstallReferrerClient.InstallReferrerResponse.OK -> {
                         client?.let {
                             try {
                                 processReferrerDetails(it.installReferrer)
                             } catch (_: Exception) {
-                            } finally {
-                                client?.endConnection()
-                                onFinished?.invoke()
                             }
                         }
                     }
 
-                    else -> {
-                        onFinished?.invoke()
-                    }
+                    InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED,
+                    InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE -> client?.endConnection()
                 }
+
+                onFinished?.invoke()
             }
 
             override fun onInstallReferrerServiceDisconnected() {
+                client?.startConnection(this)
             }
         }) ?: onFinished?.invoke()
     }

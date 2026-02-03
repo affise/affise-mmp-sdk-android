@@ -85,6 +85,7 @@ internal class PropertiesProviderFactory(
                 RefTokenProvider(sharedPreferences),
                 RefTokensProvider(sharedPreferences),
                 InstallReferrerProvider(storeInstallReferrerUseCase),
+                InstallReferrerUpdatedProvider(storeInstallReferrerUseCase),
                 UserAgentProvider(),
                 MCCProvider(packageInfoUseCase),
                 MNCProvider(packageInfoUseCase),

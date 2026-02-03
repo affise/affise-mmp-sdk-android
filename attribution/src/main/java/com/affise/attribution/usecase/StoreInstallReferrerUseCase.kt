@@ -59,6 +59,10 @@ class StoreInstallReferrerUseCase(
         return storeModule?.getInstallReferrerData()
     }
 
+    fun isInstallReferrerUpdated(): Boolean {
+        return storeModule?.isInstallReferrerUpdated() ?: false
+    }
+
     private fun getStoreInstallReferrer(): String? {
         return getInstallReferrerData()?.installReferrer
     }

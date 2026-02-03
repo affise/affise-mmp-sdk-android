@@ -30,6 +30,8 @@ class GoogleInstallReferrerUseCase(
      */
     private var referrerClient: InstallReferrerClient? = null
 
+    private var installReferrerUpdated: String? = null
+
     override fun startInstallReferrerRetrieve(onFinished: (() -> Unit)?) {
         //Create referrer client
         referrerClient = InstallReferrerClient.newBuilder(app)
@@ -46,6 +48,7 @@ class GoogleInstallReferrerUseCase(
 
                             //Processing referrer details
                             processReferrerDetails(data)
+                            setReferrerUpdated(data)
                         } catch (throwable: Throwable) {
                             logsManager.addSdkError(
                                 RuntimeException("Error read ReferrerClient")
@@ -55,10 +58,12 @@ class GoogleInstallReferrerUseCase(
 
                     InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
                         // API not available on the current Play Store app.
+                        referrerClient?.endConnection()
                     }
 
                     InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
                         // Connection couldn't be established.
+                        referrerClient?.endConnection()
                     }
                 }
                 onFinished?.invoke()
@@ -67,6 +72,7 @@ class GoogleInstallReferrerUseCase(
             override fun onInstallReferrerServiceDisconnected() {
                 // Try to restart the connection on the next request to
                 // Google Play by calling the startConnection() method.
+                referrerClient?.startConnection(this)
             }
         })
     }
@@ -78,6 +84,15 @@ class GoogleInstallReferrerUseCase(
     override fun getInstallReferrerData(): AffiseReferrerData? = preferences
         .getString(REFERRER_KEY, null)
         ?.let(toAffiseReferrerDataConverter::convert)
+
+    @Synchronized
+    override fun isInstallReferrerUpdated(): Boolean {
+        val result = isReferrerDataUpdated()
+        if (result) {
+            setReferrerDataUpdated(false)
+        }
+        return result
+    }
 
     /**
      * Processing referrer details
@@ -104,8 +119,17 @@ class GoogleInstallReferrerUseCase(
         )
             .let(toStringConverter::convert)
             .let(::storeToSharedPreferences)
+    }
 
-        referrerClient?.endConnection()
+    private fun setReferrerUpdated(data: ReferrerDetails) {
+        if (
+            installReferrerUpdated != null &&
+            installReferrerUpdated != data.installReferrer
+        ) {
+            setReferrerDataUpdated(true)
+        }
+
+        installReferrerUpdated = data.installReferrer
     }
 
     /**
@@ -130,8 +154,22 @@ class GoogleInstallReferrerUseCase(
             .commit()
     }
 
+    @SuppressLint("ApplySharedPref")
+    private fun setReferrerDataUpdated(value: Boolean) {
+        preferences.edit()
+            .apply {
+                putBoolean(REFERRER_UPDATED_KEY, value)
+            }
+            .commit()
+    }
+
+    private fun isReferrerDataUpdated(): Boolean {
+        return preferences.getBoolean(REFERRER_UPDATED_KEY, false)
+    }
+
     companion object {
         private const val REFERRER_KEY = "referrer_data"
+        private const val REFERRER_UPDATED_KEY = "referrer_updated_data"
         private const val DELAYED_DEEPLINK_PROCESSED_KEY = "DELAYED_DEEPLINK_PROCESSED_KEY"
     }
 }

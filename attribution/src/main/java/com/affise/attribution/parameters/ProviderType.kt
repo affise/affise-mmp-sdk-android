@@ -44,6 +44,7 @@ enum class ProviderType(val provider: String) {
     REFTOKEN("reftoken"),
     REFTOKENS("reftokens"),
     REFERRER("referrer"),
+    REFERRER_UPDATED("referrer_updated"),
     USER_AGENT("user_agent"),
     MCCODE("mccode"),
     MNCODE("mncode"),
