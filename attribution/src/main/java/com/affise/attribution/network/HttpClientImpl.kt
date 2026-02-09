@@ -23,7 +23,8 @@ class HttpClientImpl : HttpClient {
         method: HttpClient.Method,
         data: String?,
         headers: Map<String, String>,
-        redirect: Boolean
+        redirect: Boolean,
+        skipBody: Boolean,
     ): HttpResponse {
 
         var connection: HttpsURLConnection? = null
@@ -61,10 +62,12 @@ class HttpClientImpl : HttpClient {
             responseHeaders = connection.headerFields
 
             //Get response body
-            responseBody = if (isHttpValid(responseCode)) {
-                getResponseBody(connection.inputStream)
-            } else {
-                getResponseBody(connection.errorStream)
+            if (!skipBody) {
+                responseBody = if (isHttpValid(responseCode)) {
+                    getResponseBody(connection.inputStream)
+                } else {
+                    getResponseBody(connection.errorStream)
+                }
             }
         } catch (_: Exception) {
         } finally {

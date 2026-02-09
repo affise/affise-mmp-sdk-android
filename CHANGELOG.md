@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.6.75] - 2026-02-09
+
+### Fixed
+
+- Fix `Affise.Module.Link.resolve` Fatal Exception `OutOfMemoryError`
+
 ## [1.6.74] - 2026-02-03
 
 ### Added
@@ -372,6 +378,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.6.75]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.74...v1.6.75
 [1.6.74]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.73...v1.6.74
 [1.6.73]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.72...v1.6.73
 [1.6.72]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.71...v1.6.72

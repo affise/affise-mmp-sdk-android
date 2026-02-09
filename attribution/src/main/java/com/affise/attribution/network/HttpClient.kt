@@ -26,6 +26,7 @@ interface HttpClient {
         method: Method = Method.GET,
         data: String? = null,
         headers: Map<String, String> = emptyMap(),
-        redirect: Boolean = true
+        redirect: Boolean = true,
+        skipBody: Boolean = true,
     ): HttpResponse
 }
