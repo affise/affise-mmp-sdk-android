@@ -1,10 +1,17 @@
 # Changelog
 
+## [1.6.76] - 2026-02-18
+
+### Changed
+
+- Provider `REFERRER_UPDATED` for modules `Huawei`, `RuStore`
+
 ## [1.6.75] - 2026-02-09
 
 ### Fixed
 
 - Fix `Affise.Module.Link.resolve` Fatal Exception `OutOfMemoryError`
+- Fix `Affise.module.link.resolve` content downloading will be skipped
 
 ## [1.6.74] - 2026-02-03
 
@@ -378,6 +385,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.6.76]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.75...v1.6.76
 [1.6.75]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.74...v1.6.75
 [1.6.74]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.73...v1.6.74
 [1.6.73]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.72...v1.6.73

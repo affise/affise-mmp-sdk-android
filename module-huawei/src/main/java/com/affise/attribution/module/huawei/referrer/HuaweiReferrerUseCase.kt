@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.affise.attribution.logs.LogsManager
 import com.affise.attribution.modules.store.StoreApi
 import com.affise.attribution.referrer.AffiseReferrerData
+import com.affise.attribution.usecase.StoreUseCase
 import com.huawei.hms.ads.installreferrer.api.InstallReferrerClient
 import com.huawei.hms.ads.installreferrer.api.InstallReferrerStateListener
 import com.huawei.hms.ads.installreferrer.api.ReferrerDetails
@@ -19,6 +20,8 @@ internal class HuaweiReferrerUseCase(
 ) : StoreApi {
 
     private var client: InstallReferrerClient? = null
+
+    private var installReferrerUpdated: String? = null
 
     init {
         app?.let {
@@ -37,13 +40,16 @@ internal class HuaweiReferrerUseCase(
                         client?.let {
                             try {
                                 processReferrerDetails(it.installReferrer)
+                                setReferrerUpdated(it.installReferrer)
                             } catch (_: Exception) {
                             }
                         }
                     }
 
                     InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED,
-                    InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE -> client?.endConnection()
+                    InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
+                        client?.endConnection()
+                    }
                 }
 
                 onFinished?.invoke()
@@ -87,11 +93,42 @@ internal class HuaweiReferrerUseCase(
         )
     }
 
+    private fun setReferrerUpdated(data: ReferrerDetails) {
+        if (
+            installReferrerUpdated != null &&
+            installReferrerUpdated != data.installReferrer
+        ) {
+            setReferrerDataUpdated(true)
+        }
+
+        installReferrerUpdated = data.installReferrer
+    }
+
+    @Synchronized
+    override fun isInstallReferrerUpdated(): Boolean {
+        val result = isReferrerDataUpdated()
+        if (result) {
+            setReferrerDataUpdated(false)
+        }
+        return result
+    }
+
     private fun storeToSharedPreferences(s: String) {
         preferences?.edit()?.let {
             it.putString(HUAWEI_REFERRER_KEY, s)
             it.commit()
         }
+    }
+
+    private fun setReferrerDataUpdated(value: Boolean) {
+        preferences?.edit()?.let {
+            it.putBoolean(StoreUseCase.REFERRER_UPDATED_KEY, value)
+            it.commit()
+        }
+    }
+
+    private fun isReferrerDataUpdated(): Boolean {
+        return preferences?.getBoolean(StoreUseCase.REFERRER_UPDATED_KEY, false) ?: false
     }
 
     companion object {

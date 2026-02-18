@@ -64,6 +64,10 @@ internal class HuaweiModule : AffiseModule(), AffiseHuaweiApi {
         return huaweiReferrerUseCase?.getInstallReferrerData()
     }
 
+    override fun isInstallReferrerUpdated(): Boolean {
+        return huaweiReferrerUseCase?.isInstallReferrerUpdated() ?: false
+    }
+
     override fun startInstallReferrerRetrieve(onFinished: (() -> Unit)?) {
         huaweiReferrerUseCase?.startInstallReferrerRetrieve(onFinished)
     }

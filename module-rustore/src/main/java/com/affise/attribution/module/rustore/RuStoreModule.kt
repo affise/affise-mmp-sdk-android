@@ -29,6 +29,10 @@ internal class RuStoreModule : AffiseModule(), AffiseRuStoreApi {
         return ruStoreReferrerUseCase?.getInstallReferrerData()
     }
 
+    override fun isInstallReferrerUpdated(): Boolean {
+        return ruStoreReferrerUseCase?.isInstallReferrerUpdated() ?: false
+    }
+
     override fun startInstallReferrerRetrieve(onFinished: (() -> Unit)?) {
         ruStoreReferrerUseCase?.startInstallReferrerRetrieve(onFinished)
     }

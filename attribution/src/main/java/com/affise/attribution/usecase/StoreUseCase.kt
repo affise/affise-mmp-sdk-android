@@ -11,5 +11,7 @@ interface StoreUseCase {
         const val HUAWEI = "AppGallery"
         const val AMAZON = "Amazon"
         const val RUSTORE = "RuStore"
+
+        const val REFERRER_UPDATED_KEY = "referrer_updated_data"
     }
 }

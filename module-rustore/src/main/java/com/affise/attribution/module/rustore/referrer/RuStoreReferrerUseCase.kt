@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.affise.attribution.logs.LogsManager
 import com.affise.attribution.modules.store.StoreApi
 import com.affise.attribution.referrer.AffiseReferrerData
+import com.affise.attribution.usecase.StoreUseCase
 import ru.rustore.sdk.install.referrer.InstallReferrerClient
 import ru.rustore.sdk.install.referrer.model.InstallReferrer
 
@@ -16,7 +17,10 @@ internal class RuStoreReferrerUseCase(
     private val toStringConverter: RuStoreReferrerDataToStringConverter,
     private val toRuStoreReferrerDataConverter: StringToRuStoreReferrerDataConverter,
 ): StoreApi {
+
     private var client: InstallReferrerClient? = null
+
+    private var installReferrerUpdated: String? = null
 
     init {
         app?.let {
@@ -27,7 +31,10 @@ internal class RuStoreReferrerUseCase(
     override fun startInstallReferrerRetrieve(onFinished: (() -> Unit)?) {
         client?.getInstallReferrer()?.let {
             it.addOnSuccessListener { result ->
-                processReferrerDetails(result)
+                result?.let { data ->
+                    processReferrerDetails(data)
+                    setReferrerUpdated(data)
+                }
                 onFinished?.invoke()
             }
             it.addOnFailureListener { throwable ->
@@ -37,9 +44,7 @@ internal class RuStoreReferrerUseCase(
         } ?: onFinished?.invoke()
     }
 
-    private fun processReferrerDetails(data: InstallReferrer?) {
-        data ?: return
-
+    private fun processReferrerDetails(data: InstallReferrer) {
         //Generate referrer data
         RuStoreReferrerData(
             installAppTimestamp = data.installAppTimestamp,
@@ -71,11 +76,42 @@ internal class RuStoreReferrerUseCase(
         )
     }
 
+    @Synchronized
+    override fun isInstallReferrerUpdated(): Boolean {
+        val result = isReferrerDataUpdated()
+        if (result) {
+            setReferrerDataUpdated(false)
+        }
+        return result
+    }
+
     private fun storeToSharedPreferences(s: String) {
         preferences?.edit()?.let {
             it.putString(RUSTORE_REFERRER_KEY, s)
             it.commit()
         }
+    }
+
+    private fun setReferrerUpdated(data: InstallReferrer) {
+        if (
+            installReferrerUpdated != null &&
+            installReferrerUpdated != data.referrerId
+        ) {
+            setReferrerDataUpdated(true)
+        }
+
+        installReferrerUpdated = data.referrerId
+    }
+
+    private fun setReferrerDataUpdated(value: Boolean) {
+        preferences?.edit()?.let {
+            it.putBoolean(StoreUseCase.REFERRER_UPDATED_KEY, value)
+            it.commit()
+        }
+    }
+
+    private fun isReferrerDataUpdated(): Boolean {
+        return preferences?.getBoolean(StoreUseCase.REFERRER_UPDATED_KEY, false) ?: false
     }
 
     companion object {

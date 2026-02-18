@@ -158,18 +158,17 @@ class GoogleInstallReferrerUseCase(
     private fun setReferrerDataUpdated(value: Boolean) {
         preferences.edit()
             .apply {
-                putBoolean(REFERRER_UPDATED_KEY, value)
+                putBoolean(StoreUseCase.REFERRER_UPDATED_KEY, value)
             }
             .commit()
     }
 
     private fun isReferrerDataUpdated(): Boolean {
-        return preferences.getBoolean(REFERRER_UPDATED_KEY, false)
+        return preferences.getBoolean(StoreUseCase.REFERRER_UPDATED_KEY, false)
     }
 
     companion object {
         private const val REFERRER_KEY = "referrer_data"
-        private const val REFERRER_UPDATED_KEY = "referrer_updated_data"
         private const val DELAYED_DEEPLINK_PROCESSED_KEY = "DELAYED_DEEPLINK_PROCESSED_KEY"
     }
 }
