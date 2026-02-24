@@ -75,9 +75,6 @@ class AffiseApiWrapper(
             AffiseApiMethod.INIT ->
                 callInit(api, map, result)
 
-            AffiseApiMethod.IS_INITIALIZED ->
-                callIsInitialized(api, map, result)
-
             AffiseApiMethod.SEND_EVENT ->
                 callSendEvent(api, map, result)
 
@@ -244,16 +241,6 @@ class AffiseApiWrapper(
 
         InternalCrossPlatform.start()
         result.success(null)
-    }
-
-    private fun callIsInitialized(
-        api: AffiseApiMethod,
-        map: Map<String, *>,
-        result: InternalResult
-    ) {
-        Affise.isInitialized().let {
-            result.success(it)
-        }
     }
 
     private fun callSendEvent(

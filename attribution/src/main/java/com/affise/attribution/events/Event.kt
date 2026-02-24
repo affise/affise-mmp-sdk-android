@@ -1,6 +1,5 @@
 package com.affise.attribution.events
 
-import com.affise.attribution.Affise
 import com.affise.attribution.events.parameters.Predefined
 import com.affise.attribution.events.parameters.PredefinedCustom
 import com.affise.attribution.events.parameters.PredefinedFloat
@@ -10,6 +9,7 @@ import com.affise.attribution.events.parameters.PredefinedLong
 import com.affise.attribution.events.parameters.PredefinedObject
 import com.affise.attribution.events.parameters.PredefinedParameter
 import com.affise.attribution.events.parameters.PredefinedString
+import com.affise.attribution.AffiseInternal
 import org.json.JSONObject
 
 /**
@@ -134,14 +134,14 @@ abstract class Event: PredefinedParameter {
      * Store and send this event
      */
     fun send() {
-        Affise.sendEvent(this)
+        AffiseInternal.sendEvent(this)
     }
 
     /**
      * Send this event now
      */
     fun sendNow(success: OnSendSuccessCallback, failed: OnSendFailedCallback) {
-        Affise.sendEventNow(this, success, failed)
+        AffiseInternal.sendEventNow(this, success, failed)
     }
 
     /**

@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.7.0] - 2026-02-24
+
+### Removed
+
+- Deprecated Api `Affise.isInitialized`
+- Deprecated Api `Affise.getReferrer`
+- Deprecated Api `Affise.getReferrerValue`
+- Deprecated Api `Affise.getReferrerOnServer`
+- Deprecated Api `Affise.getReferrerOnServerValue`
+- Deprecated Api `Affise.getStatus`
+- Deprecated Api `Affise.getModulesInstalled`
+- Deprecated Api `Affise.Module.linkResolve`
+- Deprecated Api `Affise.Module.hasSubscriptionModule`
+- Deprecated Api `Affise.Module.fetchProducts`
+- Deprecated Api `Affise.Module.purchase`
+- Deprecated Api `Affise.hasSubscriptionModule`
+- Deprecated Api `Affise.fetchProducts`
+- Deprecated Api `Affise.purchase`
+
 ## [1.6.76] - 2026-02-18
 
 ### Changed
@@ -385,6 +404,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.7.0]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.76...v1.7.0
 [1.6.76]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.75...v1.6.76
 [1.6.75]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.74...v1.6.75
 [1.6.74]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.73...v1.6.74

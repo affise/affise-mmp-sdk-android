@@ -7,15 +7,9 @@ import com.affise.attribution.debug.AffiseDebug
 import com.affise.attribution.debug.AffiseDebugApi
 import com.affise.attribution.deeplink.OnDeeplinkCallback
 import com.affise.attribution.errors.AffiseError
-import com.affise.attribution.events.Event
-import com.affise.attribution.events.OnSendFailedCallback
-import com.affise.attribution.events.OnSendSuccessCallback
 import com.affise.attribution.referrer.ReferrerKey
 import com.affise.attribution.events.predefined.GDPREvent
 import com.affise.attribution.init.AffiseInitProperties
-import com.affise.attribution.internal.InternalEvent
-import com.affise.attribution.modules.AffiseModules
-import com.affise.attribution.modules.OnKeyValueCallback
 import com.affise.attribution.modules.attribution.AffiseAttributionModule
 import com.affise.attribution.parameters.providers.AffiseDeviceIdProvider
 import com.affise.attribution.parameters.ProviderType
@@ -54,7 +48,6 @@ object Affise {
     /**
      * Init [AffiseComponent]
      */
-    @JvmStatic
     @Synchronized
     internal fun start(initProperties: AffiseInitProperties, app: Application) {
         //Check creating AffiseComponent
@@ -65,37 +58,6 @@ object Affise {
             api?.initProperties?.onInitErrorHandler?.handle(AffiseError.AlreadyInitialized())
             Log.w(this.javaClass.simpleName,AffiseError.ALREADY_INITIALIZED)
         }
-    }
-
-    @Deprecated("Use Affise.settings().setOnInitSuccess()")
-    @JvmStatic
-    fun isInitialized(): Boolean {
-        return api?.isInitialized() ?: false
-    }
-
-    /**
-     * Send events
-     */
-    @Deprecated("This method will be removed")
-    @JvmStatic
-    internal fun sendEvents() {
-        api?.eventsManager?.sendEvents()
-    }
-
-    /**
-     * Store and send [event]
-     */
-    @JvmStatic
-    internal fun sendEvent(event: Event) {
-        api?.storeEventUseCase?.storeEvent(event)
-    }
-
-    /**
-     * Send now [event]
-     */
-    @JvmStatic
-    internal fun sendEventNow(event: Event, success: OnSendSuccessCallback, failed: OnSendFailedCallback) {
-        api?.immediateSendToServerUseCase?.sendNow(event, success, failed)
     }
 
     /**
@@ -224,30 +186,6 @@ object Affise {
     /**
      * Get referrer
      */
-    @Deprecated(
-        message = "This method will be removed",
-        replaceWith = ReplaceWith("Affise.getDeferredDeeplink(callback)")
-    )
-    @JvmStatic
-    fun getReferrer(callback: OnReferrerCallback?) {
-        getDeferredDeeplink(callback)
-    }
-
-    /**
-     * Get referrer Value
-     */
-    @Deprecated(
-        message = "This method will be removed",
-        replaceWith = ReplaceWith("Affise.getDeferredDeeplinkValue(key,callback)")
-    )
-    @JvmStatic
-    fun getReferrerValue(key: ReferrerKey, callback: OnReferrerCallback?) {
-        getDeferredDeeplinkValue(key, callback)
-    }
-
-    /**
-     * Get referrer
-     */
     @JvmStatic
     fun getReferrerUrl(callback: OnReferrerCallback?) {
         api?.storeInstallReferrerUseCase?.getReferrer(callback)
@@ -259,30 +197,6 @@ object Affise {
     @JvmStatic
     fun getReferrerUrlValue(key: ReferrerKey, callback: OnReferrerCallback?) {
         api?.storeInstallReferrerUseCase?.getReferrerValue(key, callback)
-    }
-
-    /**
-     * Get referrer on server
-     */
-    @Deprecated(
-        message = "This method will be removed",
-        replaceWith = ReplaceWith("Affise.getDeferredDeeplink(callback)")
-    )
-    @JvmStatic
-    fun getReferrerOnServer(callback: OnReferrerCallback?) {
-        getDeferredDeeplink(callback)
-    }
-
-    /**
-     * Get referrer on server value
-     */
-    @Deprecated(
-        message = "This method will be removed",
-        replaceWith = ReplaceWith("Affise.getDeferredDeeplinkValue(key,callback)")
-    )
-    @JvmStatic
-    fun getReferrerOnServerValue(key: ReferrerKey, callback: OnReferrerCallback?) {
-        getDeferredDeeplinkValue(key, callback)
     }
 
     /**
@@ -299,30 +213,6 @@ object Affise {
     @JvmStatic
     fun getDeferredDeeplinkValue(key: ReferrerKey, callback: OnReferrerCallback?) {
         api?.retrieveReferrerOnServerUseCase?.getReferrerOnServerValue(key, callback)
-    }
-
-    /**
-     * Get module status
-     */
-    @Deprecated(
-        message = "Method moved to Affise.Module",
-        replaceWith = ReplaceWith("Affise.Module.getStatus(module, onComplete)")
-    )
-    @JvmStatic
-    fun getStatus(module: AffiseModules, onComplete: OnKeyValueCallback) {
-        Module.getStatus(module, onComplete)
-    }
-
-    /**
-     * Get installed modules
-     */
-    @Deprecated(
-        message = "Method moved to Affise.Module",
-        replaceWith = ReplaceWith("Affise.Module.getModulesInstalled()")
-    )
-    @JvmStatic
-    fun getModulesInstalled(): List<AffiseModules> {
-        return Module.getModulesInstalled()
     }
 
     /**
@@ -361,14 +251,6 @@ object Affise {
     @JvmStatic
     fun isFirstRun(): Boolean {
         return api?.firstAppOpenUseCase?.isFirstRun() ?: true
-    }
-
-    /**
-     * Send internal event
-     */
-    @JvmStatic
-    internal fun sendInternalEvent(event: InternalEvent) {
-        api?.storeInternalEventUseCase?.storeInternalEvent(event)
     }
 
     @JvmField
