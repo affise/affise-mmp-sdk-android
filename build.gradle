@@ -59,7 +59,7 @@ tasks.register('clean', Delete) {
 }
 
 ext {
-    affiseVersion = "1.7.0"
+    affiseVersion = "1.7.1"
 
     compose_compiler_version = "1.4.8"
     compose_bom = "2024.06.00"

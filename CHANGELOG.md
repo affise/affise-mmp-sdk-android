@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.7.1] - 2026-02-24
+
+### Fixed
+
+- Fix `InstallReferrer` reconnect for `Google`
+
 ## [1.7.0] - 2026-02-24
 
 ### Removed
@@ -404,6 +410,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.7.1]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.76...v1.7.0
 [1.6.76]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.75...v1.6.76
 [1.6.75]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.6.74...v1.6.75

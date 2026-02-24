@@ -587,8 +587,10 @@ internal class AffiseComponent(
             persistentUseCase.init(moduleManager)
             firstAppOpenUseCase.onAppCreated()
 
+            eventsManager.init()
+
             storeInstallReferrerUseCase.onReferrerSetupFinished {
-                eventsManager.init()
+                sendDataToServerUseCase.send(withDelay = false)
             }
                 .init(moduleManager)
 

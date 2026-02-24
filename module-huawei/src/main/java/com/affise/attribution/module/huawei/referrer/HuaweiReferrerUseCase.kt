@@ -48,7 +48,6 @@ internal class HuaweiReferrerUseCase(
 
                     InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED,
                     InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
-                        client?.endConnection()
                     }
                 }
 
@@ -56,7 +55,6 @@ internal class HuaweiReferrerUseCase(
             }
 
             override fun onInstallReferrerServiceDisconnected() {
-                client?.startConnection(this)
             }
         }) ?: onFinished?.invoke()
     }

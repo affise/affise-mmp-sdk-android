@@ -130,6 +130,6 @@ internal class SendDataToServerUseCaseImpl(
     }
 
     companion object {
-        private const val TIME_DELAY_SENDING: Long = 15000L
+        private const val TIME_DELAY_SENDING: Long = 3000L
     }
 }

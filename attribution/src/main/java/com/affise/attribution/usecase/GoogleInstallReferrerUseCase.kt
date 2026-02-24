@@ -58,12 +58,10 @@ class GoogleInstallReferrerUseCase(
 
                     InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
                         // API not available on the current Play Store app.
-                        referrerClient?.endConnection()
                     }
 
                     InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
                         // Connection couldn't be established.
-                        referrerClient?.endConnection()
                     }
                 }
                 onFinished?.invoke()
@@ -72,7 +70,6 @@ class GoogleInstallReferrerUseCase(
             override fun onInstallReferrerServiceDisconnected() {
                 // Try to restart the connection on the next request to
                 // Google Play by calling the startConnection() method.
-                referrerClient?.startConnection(this)
             }
         })
     }
