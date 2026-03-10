@@ -1,22 +1,24 @@
 # Affise Attribution Android Library
 
+[![telegram](https://badges.ws/badge/Releases%20channel-08c?icon=telegram)](https://t.me/AffiseChangelog)
+
 [Change Log](CHANGELOG.md)
 
 | Artifact                         | Version                                                                                                                                                                         |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `com.affise:attribution`         | [![attribution](https://img.shields.io/maven-central/v/com.affise/attribution?label=latest)](https://mvnrepository.com/artifact/com.affise/attribution)                         |
-| `com.affise:module-advertising`  | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising)    |
-| `com.affise:module-androidid`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://mvnrepository.com/artifact/com.affise/module-androidid)          |
-| `com.affise:module-appsflyer`    | [![module-appsflyer](https://img.shields.io/maven-central/v/com.affise/module-appsflyer?label=latest)](https://mvnrepository.com/artifact/com.affise/module-appsflyer)          |
-| `com.affise:module-link`         | [![module-link](https://img.shields.io/maven-central/v/com.affise/module-link?label=latest)](https://mvnrepository.com/artifact/com.affise/module-link)                         |
-| `com.affise:module-network`      | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)                |
-| `com.affise:module-phone`        | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                      |
-| `com.affise:module-status`       | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                   |
-| `com.affise:module-subscription` | [![module-subscription](https://img.shields.io/maven-central/v/com.affise/module-subscription?label=latest)](https://mvnrepository.com/artifact/com.affise/module-subscription) |
-| `com.affise:module-rustore`      | [![module-rustore](https://img.shields.io/maven-central/v/com.affise/module-rustore?label=latest)](https://mvnrepository.com/artifact/com.affise/module-rustore)                |
-| `com.affise:module-huawei`       | [![module-huawei](https://img.shields.io/maven-central/v/com.affise/module-huawei?label=latest)](https://mvnrepository.com/artifact/com.affise/module-huawei)                   |
-| `com.affise:module-meta`         | [![module-meta](https://img.shields.io/maven-central/v/com.affise/module-meta?label=latest)](https://mvnrepository.com/artifact/com.affise/module-meta)                         |
-| `com.affise:module-tiktok`       | [![module-tiktok](https://img.shields.io/maven-central/v/com.affise/module-tiktok?label=latest)](https://mvnrepository.com/artifact/com.affise/module-tiktok)                   |
+| `com.affise:attribution`         | [![attribution](https://img.shields.io/maven-central/v/com.affise/attribution?label=latest)](https://central.sonatype.com/artifact/com.affise/attribution)                         |
+| `com.affise:module-advertising`  | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://central.sonatype.com/artifact/com.affise/module-advertising)    |
+| `com.affise:module-androidid`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://central.sonatype.com/artifact/com.affise/module-androidid)          |
+| `com.affise:module-appsflyer`    | [![module-appsflyer](https://img.shields.io/maven-central/v/com.affise/module-appsflyer?label=latest)](https://central.sonatype.com/artifact/com.affise/module-appsflyer)          |
+| `com.affise:module-link`         | [![module-link](https://img.shields.io/maven-central/v/com.affise/module-link?label=latest)](https://central.sonatype.com/artifact/com.affise/module-link)                         |
+| `com.affise:module-network`      | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://central.sonatype.com/artifact/com.affise/module-network)                |
+| `com.affise:module-phone`        | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://central.sonatype.com/artifact/com.affise/module-phone)                      |
+| `com.affise:module-status`       | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://central.sonatype.com/artifact/com.affise/module-status)                   |
+| `com.affise:module-subscription` | [![module-subscription](https://img.shields.io/maven-central/v/com.affise/module-subscription?label=latest)](https://central.sonatype.com/artifact/com.affise/module-subscription) |
+| `com.affise:module-rustore`      | [![module-rustore](https://img.shields.io/maven-central/v/com.affise/module-rustore?label=latest)](https://central.sonatype.com/artifact/com.affise/module-rustore)                |
+| `com.affise:module-huawei`       | [![module-huawei](https://img.shields.io/maven-central/v/com.affise/module-huawei?label=latest)](https://central.sonatype.com/artifact/com.affise/module-huawei)                   |
+| `com.affise:module-meta`         | [![module-meta](https://img.shields.io/maven-central/v/com.affise/module-meta?label=latest)](https://central.sonatype.com/artifact/com.affise/module-meta)                         |
+| `com.affise:module-tiktok`       | [![module-tiktok](https://img.shields.io/maven-central/v/com.affise/module-tiktok?label=latest)](https://central.sonatype.com/artifact/com.affise/module-tiktok)                   |
 
 - [Affise Attribution Android Library](#affise-attribution-android-library)
 - [Description](#description)
@@ -340,18 +342,18 @@ class App : Application() {
 
 | Module         | Version                                                                                                                                                                         |
 |:---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Advertising`  | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://mvnrepository.com/artifact/com.affise/module-advertising)    |
-| `AndroidId`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://mvnrepository.com/artifact/com.affise/module-androidid)          |
-| `AppsFlyer`    | [![module-appsflyer ](https://img.shields.io/maven-central/v/com.affise/module-appsflyer?label=latest)](https://mvnrepository.com/artifact/com.affise/module-appsflyer)         |
-| `Link`         | [![module-link](https://img.shields.io/maven-central/v/com.affise/module-link?label=latest)](https://mvnrepository.com/artifact/com.affise/module-link)                         |
-| `Network`      | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://mvnrepository.com/artifact/com.affise/module-network)                |
-| `Phone`        | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://mvnrepository.com/artifact/com.affise/module-phone)                      |
-| `Status`       | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://mvnrepository.com/artifact/com.affise/module-status)                   |
-| `Subscription` | [![module-subscription](https://img.shields.io/maven-central/v/com.affise/module-subscription?label=latest)](https://mvnrepository.com/artifact/com.affise/module-subscription) |
-| `RuStore`      | [![module-rustore](https://img.shields.io/maven-central/v/com.affise/module-rustore?label=latest)](https://mvnrepository.com/artifact/com.affise/module-rustore)                |
-| `Huawei`       | [![module-huawei](https://img.shields.io/maven-central/v/com.affise/module-huawei?label=latest)](https://mvnrepository.com/artifact/com.affise/module-huawei)                   |
-| `Meta`         | [![module-meta](https://img.shields.io/maven-central/v/com.affise/module-meta?label=latest)](https://mvnrepository.com/artifact/com.affise/module-meta)                         |
-| `TikTok`       | [![module-tiktok](https://img.shields.io/maven-central/v/com.affise/module-tiktok?label=latest)](https://mvnrepository.com/artifact/com.affise/module-tiktok)                   |
+| `Advertising`  | [![module-advertising](https://img.shields.io/maven-central/v/com.affise/module-advertising?label=latest)](https://central.sonatype.com/artifact/com.affise/module-advertising)    |
+| `AndroidId`    | [![module-androidid](https://img.shields.io/maven-central/v/com.affise/module-androidid?label=latest)](https://central.sonatype.com/artifact/com.affise/module-androidid)          |
+| `AppsFlyer`    | [![module-appsflyer ](https://img.shields.io/maven-central/v/com.affise/module-appsflyer?label=latest)](https://central.sonatype.com/artifact/com.affise/module-appsflyer)         |
+| `Link`         | [![module-link](https://img.shields.io/maven-central/v/com.affise/module-link?label=latest)](https://central.sonatype.com/artifact/com.affise/module-link)                         |
+| `Network`      | [![module-network](https://img.shields.io/maven-central/v/com.affise/module-network?label=latest)](https://central.sonatype.com/artifact/com.affise/module-network)                |
+| `Phone`        | [![module-phone](https://img.shields.io/maven-central/v/com.affise/module-phone?label=latest)](https://central.sonatype.com/artifact/com.affise/module-phone)                      |
+| `Status`       | [![module-status](https://img.shields.io/maven-central/v/com.affise/module-status?label=latest)](https://central.sonatype.com/artifact/com.affise/module-status)                   |
+| `Subscription` | [![module-subscription](https://img.shields.io/maven-central/v/com.affise/module-subscription?label=latest)](https://central.sonatype.com/artifact/com.affise/module-subscription) |
+| `RuStore`      | [![module-rustore](https://img.shields.io/maven-central/v/com.affise/module-rustore?label=latest)](https://central.sonatype.com/artifact/com.affise/module-rustore)                |
+| `Huawei`       | [![module-huawei](https://img.shields.io/maven-central/v/com.affise/module-huawei?label=latest)](https://central.sonatype.com/artifact/com.affise/module-huawei)                   |
+| `Meta`         | [![module-meta](https://img.shields.io/maven-central/v/com.affise/module-meta?label=latest)](https://central.sonatype.com/artifact/com.affise/module-meta)                         |
+| `TikTok`       | [![module-tiktok](https://img.shields.io/maven-central/v/com.affise/module-tiktok?label=latest)](https://central.sonatype.com/artifact/com.affise/module-tiktok)                   |
 
 #### Installed active modules
 
