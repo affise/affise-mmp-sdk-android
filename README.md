@@ -1,6 +1,6 @@
 # Affise Attribution Android Library
 
-[![telegram](https://badges.ws/badge/Releases%20channel-08c?icon=telegram)](https://t.me/AffiseChangelog)
+[![telegram](https://badges.ws/badge/Affise%20channel-08c?icon=telegram)](https://t.me/AffiseChangelog)
 [![latest release](https://badges.ws/github/release/affise/affise-mmp-sdk-android)](https://github.com/affise/affise-mmp-sdk-android/releases/latest)
 ![license](https://badges.ws/github/l/affise/affise-mmp-sdk-android)
 ![lang size](https://badges.ws/github/lang-size/affise/affise-mmp-sdk-android)
