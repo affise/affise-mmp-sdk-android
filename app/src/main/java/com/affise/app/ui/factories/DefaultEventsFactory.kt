@@ -1,9 +1,8 @@
-package com.affise.app.ui.screen.buttons.factories
+package com.affise.app.ui.factories
 
 import com.affise.attribution.ad.AffiseAdSource
 import com.affise.attribution.events.Event
 import com.affise.attribution.events.parameters.PredefinedFloat
-import com.affise.attribution.events.parameters.PredefinedGroup
 import com.affise.attribution.events.parameters.PredefinedListObject
 import com.affise.attribution.events.parameters.PredefinedLong
 import com.affise.attribution.events.parameters.PredefinedObject

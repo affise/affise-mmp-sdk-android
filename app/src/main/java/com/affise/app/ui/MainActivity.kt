@@ -4,36 +4,39 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.affise.app.App
 import com.affise.app.Prefs
-import com.affise.app.R
+import com.affise.app.ui.MainActivity.Companion.CUSTOM_PREDEFINED_DATA
 import com.affise.app.ui.components.AffiseDialogsComponent
-import com.affise.app.ui.components.AffiseTabPagerComponent
+import com.affise.app.ui.components.AffiseFab
 import com.affise.app.ui.components.DialogState
-import com.affise.app.ui.screen.api.ApiScreen
-import com.affise.app.ui.screen.buttons.ButtonsScreen
+import com.affise.app.ui.screen.TabsView
+import com.affise.app.ui.screen.predefined.PredefinedScreen
+import com.affise.app.ui.screen.predefined.stringToDataList
+import com.affise.app.ui.screen.predefined.toJsonString
 import com.affise.app.ui.screen.settings.AffiseSettings
 import com.affise.app.ui.screen.settings.SettingsScreen
-import com.affise.app.ui.screen.store.StoreScreen
-import com.affise.app.ui.screen.web.WebScreen
 import com.affise.app.ui.theme.AffiseAttributionLibTheme
 import com.affise.attribution.Affise
 import com.google.firebase.messaging.FirebaseMessaging
@@ -80,12 +83,22 @@ class MainActivity : ComponentActivity() {
         affiseSettings.metrics.value = Prefs.boolean(App.ENABLED_METRICS_KEY)
         affiseSettings.debugRequest.value = Prefs.boolean(App.DEBUG_REQUEST_KEY)
         affiseSettings.debugResponse.value = Prefs.boolean(App.DEBUG_RESPONSE_KEY)
+        affiseSettings.useCustomPredefined.value = Prefs.boolean(USE_CUSTOM_PREDEFINED)
+        affiseSettings.predefinedData =
+            stringToDataList(Prefs.string(CUSTOM_PREDEFINED_DATA)).toMutableStateList()
+    }
+
+    companion object {
+        const val USE_CUSTOM_PREDEFINED = "USE_CUSTOM_PREDEFINED"
+        const val CUSTOM_PREDEFINED_DATA = "CUSTOM_PREDEFINED_DATA"
     }
 }
 
 val dialogs = mutableStateListOf<DialogState>()
 val affiseSettings = AffiseSettings()
 val settingsScreen = mutableStateOf(false)
+val predefinedScreen = mutableStateOf(false)
+val selectedTabState = mutableIntStateOf(0)
 
 @Composable
 fun MainView(modifier: Modifier = Modifier) {
@@ -96,9 +109,49 @@ fun MainView(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .safeDrawingPadding(),
         floatingActionButton = {
-            FloatingActionButton(
-                shape = CircleShape,
-                containerColor = MaterialTheme.colorScheme.secondary,
+            FloatingActionButtons()
+        }
+    ) { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            when {
+                settingsScreen.value -> SettingsScreen(modifier)
+                predefinedScreen.value -> PredefinedScreen(modifier)
+                else -> TabsView(modifier)
+            }
+        }
+    }
+}
+
+@Composable
+fun FloatingActionButtons() {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        val usePredefinedColor = if (affiseSettings.useCustomPredefined.value) {
+            MaterialTheme.colorScheme.error
+        } else {
+            MaterialTheme.colorScheme.secondary
+        }
+
+        if (selectedTabState.value == 1 && !settingsScreen.value) {
+            AffiseFab(
+                containerColor = usePredefinedColor,
+                onClick = {
+                    predefinedScreen.value = !predefinedScreen.value
+                    if (predefinedScreen.value == false) {
+                        val customData = affiseSettings.predefinedData.toJsonString()
+                        Prefs.applyString(MainActivity.CUSTOM_PREDEFINED_DATA, customData)
+                    }
+                }
+            ) {
+                if (predefinedScreen.value) {
+                    Icon(Icons.Default.Check, contentDescription = "Done")
+                } else {
+                    Icon(Icons.Default.Edit, contentDescription = "Add")
+                }
+            }
+        }
+
+        if (!predefinedScreen.value) {
+            AffiseFab(
                 onClick = {
                     settingsScreen.value = !settingsScreen.value
                 }
@@ -110,42 +163,7 @@ fun MainView(modifier: Modifier = Modifier) {
                 }
             }
         }
-    ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
-            if (settingsScreen.value) {
-                SettingsScreen(modifier)
-            } else {
-                TabsView(modifier)
-            }
-        }
     }
-}
-
-@Composable
-private fun TabsView(modifier: Modifier = Modifier) {
-    AffiseTabPagerComponent(
-        modifier = modifier,
-        titles = listOf(
-            stringResource(R.string.api),
-            stringResource(R.string.events),
-            stringResource(R.string.web_events),
-            stringResource(R.string.store),
-        ),
-        content = listOfNotNull(
-            {
-                ApiScreen()
-            },
-            {
-                ButtonsScreen()
-            },
-            {
-                WebScreen()
-            },
-            {
-                StoreScreen()
-            },
-        )
-    )
 }
 
 @Preview(

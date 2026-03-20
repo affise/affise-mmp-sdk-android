@@ -24,7 +24,7 @@ data class DialogState(
 @Composable
 fun AffiseDialogsComponent(dialogs: SnapshotStateList<DialogState>) {
     LazyColumn {
-        itemsIndexed(dialogs) { idx, dialog ->
+        itemsIndexed(items = dialogs) { idx, dialog ->
             Dialog(dialog) {
                 dialogs.removeAt(idx)
             }

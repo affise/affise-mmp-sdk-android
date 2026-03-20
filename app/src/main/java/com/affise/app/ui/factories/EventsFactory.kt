@@ -1,4 +1,4 @@
-package com.affise.app.ui.screen.buttons.factories
+package com.affise.app.ui.factories
 
 import com.affise.attribution.events.Event
 

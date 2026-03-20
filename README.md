@@ -816,7 +816,7 @@ AddToCartEvent()
 
 ## Events tracking
 
-> Demo app [DefaultEventsFactory.kt](app/src/main/java/com/affise/app/ui/screen/buttons/factories/DefaultEventsFactory.kt)
+> Demo app [DefaultEventsFactory.kt](app/src/main/java/com/affise/app/ui/factories/DefaultEventsFactory.kt)
 
 For example, we want to track what items usually user adds to shopping cart. To send event first create it with
 following code

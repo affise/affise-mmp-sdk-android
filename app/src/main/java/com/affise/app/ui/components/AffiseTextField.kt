@@ -3,6 +3,7 @@ package com.affise.app.ui.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
@@ -30,6 +31,8 @@ fun AffiseTextField(
     label: String = "",
     maxLines: Int = 4,
     copyAction: Boolean = false,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    trailingIcon: @Composable (() -> Unit)? = null,
 ) {
     TextField(
         value = value.value,
@@ -42,6 +45,7 @@ fun AffiseTextField(
         maxLines = maxLines,
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(10.dp),
+        keyboardOptions = keyboardOptions,
         colors = TextFieldDefaults.textFieldColors(
             unfocusedIndicatorColor = Color(0x00ffffff),
             focusedIndicatorColor = Color(0x00ffffff),
@@ -52,6 +56,8 @@ fun AffiseTextField(
             }
         },
         trailingIcon = {
+            trailingIcon?.invoke()
+
             if (value.value.isNotEmpty()) {
                 if (copyAction) {
                     val clipboardManager: ClipboardManager = LocalClipboardManager.current

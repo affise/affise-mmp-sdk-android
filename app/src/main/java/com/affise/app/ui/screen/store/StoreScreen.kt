@@ -165,7 +165,7 @@ fun Products() {
                     }
                     fetchProductsResult.value?.let {
                         val products = it.products
-                        itemsIndexed(products) { idx, product ->
+                        itemsIndexed(items = products) { idx, product ->
                             ProductItem(
                                 product,
                                 activity,
@@ -214,7 +214,10 @@ fun ProductItem(
                 .weight(1f)
         ) {
             Text(product.title, color = MaterialTheme.colorScheme.onPrimary)
-            Text(product.productDescription, color = MaterialTheme.colorScheme.onBackground.copy(0.6f))
+            Text(
+                product.productDescription,
+                color = MaterialTheme.colorScheme.onBackground.copy(0.6f)
+            )
             product.subscription?.let {
                 Text("id: ${it.offerId}", color = MaterialTheme.colorScheme.onBackground.copy(0.6f))
                 Text("${it.numberOfUnits} ${it.timeUnit?.value}", color = Color.Blue.copy(0.6f))

@@ -4,13 +4,15 @@
 <!--    Meta-->
     <string name="facebook_app_id">1111111111111111</string>
 
-<!--    Min Screen-->
+<!--    Main Screen-->
     <string name="api">API</string>
     <string name="events">Events</string>
     <string name="web_events">Web events</string>
     <string name="store">Store</string>
 
     <string name="api_output">API Output</string>
+    <string name="resolve_url">Resolve URL</string>
+    <string name="module_link_resolve">Module.Link resolve</string>
 
 <!--    Dialog-->
     <string name="ok">OK</string>
@@ -42,6 +44,10 @@
     <string name="push_token">Push token</string>
     <string name="forget_all">GDPR forget all</string>
     <string name="crash_application">CRASH Application</string>
+    <string name="use_custom_predefined">Use custom Predefined</string>
+    <string name="add_predefined">Add Predefined</string>
+    <string name="predefined">Predefined</string>
+    <string name="predefined_value">Predefined value</string>
 
 
 <!--    test-->

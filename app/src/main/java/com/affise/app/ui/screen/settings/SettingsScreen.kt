@@ -12,13 +12,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -32,6 +34,7 @@ import com.affise.app.ui.components.AffiseButton
 import com.affise.app.ui.components.AffiseSwitch
 import com.affise.app.ui.components.AffiseTextField
 import com.affise.app.ui.popDialog
+import com.affise.app.ui.screen.predefined.PredefinedData
 import com.affise.app.ui.theme.AffiseAttributionLibTheme
 import com.affise.attribution.Affise
 import com.affise.attribution.BuildConfig
@@ -48,6 +51,8 @@ data class AffiseSettings(
     val appId: MutableState<String> = mutableStateOf(""),
     val secretKey: MutableState<String> = mutableStateOf(""),
     val pushToken: MutableState<String> = mutableStateOf(""),
+    val useCustomPredefined: MutableState<Boolean> = mutableStateOf(false),
+    var predefinedData: SnapshotStateList<PredefinedData> = mutableStateListOf(),
 )
 
 @Composable
