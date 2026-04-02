@@ -15,6 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Version Tag
+        id: version_tag
+        run: |
+          echo Version: ${GITHUB_REF_NAME#v}
+          echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
@@ -207,13 +213,8 @@ jobs:
           SNAPSHOT: ${{ secrets.SNAPSHOT }}
         run: ./gradlew :internal:publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon --no-parallel
 
-      - name: Version Tag
-        id: version_tag
-        run: |
-          echo Version: ${GITHUB_REF_NAME#v}
-          echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
-
       - name: Tg Release failed
+        continue-on-error: true
         id: tg_failed
         if: ${{ failure() }}
         uses: appleboy/telegram-action@master
@@ -223,11 +224,12 @@ jobs:
           format: markdown
           disable_web_page_preview: true
           message: |
-            🔴 Android ${{ steps.version_tag.outputs.VERSION }} release failed
+            🔴 Android `${{ steps.version_tag.outputs.VERSION }}` release failed
 
             [Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
 
       - name: Tg Release
+        continue-on-error: true
         id: tg_success
         if: ${{ success() }}
         uses: appleboy/telegram-action@master
@@ -237,7 +239,7 @@ jobs:
           format: markdown
           disable_web_page_preview: true
           message: |
-            🟢 Android ${{ steps.version_tag.outputs.VERSION }} release
+            🟢 Android `${{ steps.version_tag.outputs.VERSION }}` release
 
             [Changelog](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md)
 
@@ -255,6 +257,7 @@ jobs:
 
       # Release Upload Attribution library
       - name: Upload Release Attribution AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-attribution-asset
         uses: actions/upload-release-asset@v1
@@ -268,6 +271,7 @@ jobs:
 
       # Release Upload Module Advertising
       - name: Upload Release Module Advertising AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-advertising-asset
         uses: actions/upload-release-asset@v1
@@ -281,6 +285,7 @@ jobs:
 
       # Release Upload Module AndroidId
       - name: Upload Release Module AndroidId AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-androidid-asset
         uses: actions/upload-release-asset@v1
@@ -294,6 +299,7 @@ jobs:
 
       # Release Upload Module Link
       - name: Upload Release Module Link AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-link-asset
         uses: actions/upload-release-asset@v1
@@ -307,6 +313,7 @@ jobs:
 
       # Release Upload Module Network
       - name: Upload Release Module Network AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-network-asset
         uses: actions/upload-release-asset@v1
@@ -320,6 +327,7 @@ jobs:
 
       # Release Upload Module Phone
       - name: Upload Release Module Phone AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-phone-asset
         uses: actions/upload-release-asset@v1
@@ -333,6 +341,7 @@ jobs:
 
       # Release Upload Module Status
       - name: Upload Release Module Status AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-status-asset
         uses: actions/upload-release-asset@v1
@@ -346,6 +355,7 @@ jobs:
 
       # Release Upload Module Subscription
       - name: Upload Release Module Subscription AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-subscription-asset
         uses: actions/upload-release-asset@v1
@@ -359,6 +369,7 @@ jobs:
 
       # Release Upload Module RuStore
       - name: Upload Release Module RuStore AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-rustore-asset
         uses: actions/upload-release-asset@v1
@@ -372,6 +383,7 @@ jobs:
 
       # Release Upload Module Huawei
       - name: Upload Release Module Huawei AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-huawei-asset
         uses: actions/upload-release-asset@v1
@@ -385,6 +397,7 @@ jobs:
 
       # Release Upload Module Meta
       - name: Upload Release Module Meta AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-meta-asset
         uses: actions/upload-release-asset@v1
@@ -398,6 +411,7 @@ jobs:
 
       # Release Upload Module AppsFlyer
       - name: Upload Release Module AppsFlyer AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-appsflyer-asset
         uses: actions/upload-release-asset@v1
@@ -411,6 +425,7 @@ jobs:
 
       # Release Upload Module TikTok
       - name: Upload Release Module TikTok AAR 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-module-tiktok-asset
         uses: actions/upload-release-asset@v1
