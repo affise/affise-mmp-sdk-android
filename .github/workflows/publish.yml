@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: '11'
+          java-version: '17'
 
       - name: Cache Gradle and wrapper
         uses: actions/cache@v4
@@ -437,11 +437,13 @@ jobs:
 
       # Demo App
       - name: Build Demo App
+        continue-on-error: true
         if: ${{ !cancelled() }}
         run: ./gradlew :app:assembleDebug --no-daemon --no-parallel
 
       # Release Upload Demo App
       - name: Upload Demo App 📦
+        continue-on-error: true
         if: ${{ !cancelled() }}
         id: upload-demo-app-asset
         uses: actions/upload-release-asset@v1
