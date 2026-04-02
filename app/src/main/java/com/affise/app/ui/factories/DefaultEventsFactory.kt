@@ -1,5 +1,6 @@
 package com.affise.app.ui.factories
 
+import com.affise.app.ui.utils.toTimestamp
 import com.affise.attribution.ad.AffiseAdSource
 import com.affise.attribution.events.Event
 import com.affise.attribution.events.parameters.PredefinedFloat
@@ -92,8 +93,6 @@ import com.affise.attribution.events.subscription.SubscriptionInRetryEvent
 import com.affise.attribution.events.subscription.TrialInRetryEvent
 import com.affise.attribution.events.subscription.UnsubscriptionEvent
 import org.json.JSONObject
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 class DefaultEventsFactory : EventsFactory {
     override fun createEvents(): List<Event> {
@@ -211,6 +210,7 @@ class DefaultEventsFactory : EventsFactory {
             .addPredefinedParameter(PredefinedFloat.LAT, 42.0f)
             .addPredefinedParameter(PredefinedFloat.LONG, 24.0f)
     }
+
     private fun createAdRevenueEvent(): Event {
         return AdRevenueEvent("next year")
             .addPredefinedParameter(PredefinedString.SOURCE, AffiseAdSource.ADMOB.type)
@@ -268,7 +268,8 @@ class DefaultEventsFactory : EventsFactory {
                 put("collection", "Greatest Hits")
             })
             .addPredefinedParameter(PredefinedString.CONTENT_ID, "2561")
-            .addPredefinedParameter(PredefinedListObject.CONTENT_LIST, listOf(
+            .addPredefinedParameter(
+                PredefinedListObject.CONTENT_LIST, listOf(
                 JSONObject().apply {
                     put("content", "songs, videos")
                 }
@@ -841,8 +842,4 @@ class DefaultEventsFactory : EventsFactory {
         "Subscription Plus"
     )
         .addPredefinedParameter(PredefinedFloat.REVENUE, 225522.0f)
-}
-
-internal fun String.toTimestamp(format: String = "dd.MM.yyyy"): Long? {
-    return SimpleDateFormat(format, Locale.getDefault()).parse(this)?.time
 }

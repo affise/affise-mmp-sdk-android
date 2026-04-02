@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
@@ -24,12 +25,13 @@ fun AffiseTabPagerComponent(
     titles: List<String>,
     content: List<@Composable () -> Unit>,
     modifier: Modifier = Modifier,
-    selectedTabState: MutableIntState = mutableIntStateOf(0),
+    selectedTabState: MutableIntState? = null,
 ) {
+    val currentSelectedTabState = selectedTabState ?: remember { mutableIntStateOf(0) }
     val pagerState = rememberPagerState { titles.size }
 
-    LaunchedEffect(selectedTabState.intValue) {
-        pagerState.animateScrollToPage(selectedTabState.intValue)
+    LaunchedEffect(currentSelectedTabState.intValue) {
+        pagerState.animateScrollToPage(currentSelectedTabState.intValue)
     }
 
     Column(modifier) {
@@ -42,7 +44,7 @@ fun AffiseTabPagerComponent(
                 Tab(
                     modifier = modifier,
                     selected = pagerState.currentPage == index,
-                    onClick = { selectedTabState.intValue = index },
+                    onClick = { currentSelectedTabState.intValue = index },
                     text = {
                         Text(
                             text = title,

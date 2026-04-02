@@ -33,9 +33,11 @@ class App : Application() {
             // Custom domain example
             // Url trailing slash is irrelevant
             .setDomain(Prefs.string(DOMAIN_KEY, DEMO_DOMAIN))
-            .setDisableModules(listOf(
-                AffiseModules.Advertising
-            ))
+            .setDisableModules(
+                listOf(
+                    AffiseModules.Advertising
+                )
+            )
             .setOnInitSuccess {
                 // Initialize success callback https://github.com/affise/affise-mmp-sdk-android#initialization-callbacks
                 println("Affise: init success")

@@ -10,6 +10,10 @@ android {
     namespace 'com.affise.app'
     compileSdk 34
 
+    lint {
+        disable 'GradleDependency', 'OldTargetApi'
+    }
+
     defaultConfig {
         applicationId "com.affise.app"
         minSdk 23
@@ -68,7 +72,6 @@ dependencies {
     implementation "androidx.compose.ui:ui"
     implementation "androidx.compose.material:material"
     implementation "androidx.compose.ui:ui-tooling-preview"
-    implementation "androidx.activity:activity-compose"
     implementation "androidx.compose.material3:material3-android"
     implementation "androidx.activity:activity-compose:$activityCompose"
 

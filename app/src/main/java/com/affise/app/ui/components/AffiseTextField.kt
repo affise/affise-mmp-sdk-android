@@ -46,7 +46,7 @@ fun AffiseTextField(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(10.dp),
         keyboardOptions = keyboardOptions,
-        colors = TextFieldDefaults.textFieldColors(
+        colors = TextFieldDefaults.colors(
             unfocusedIndicatorColor = Color(0x00ffffff),
             focusedIndicatorColor = Color(0x00ffffff),
         ),

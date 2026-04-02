@@ -141,12 +141,11 @@ val predefineSelected = mutableStateOf<Predefined>(PredefinedFloat.REVENUE)
 @Composable
 fun NewPredefined() {
     val context = LocalContext.current
+    val predefineValue = remember { mutableStateOf("") }
 
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        val predefineValue = mutableStateOf("")
-
         PredefinedSelect(predefineSelected = predefineSelected)
 
         AffiseTextField(

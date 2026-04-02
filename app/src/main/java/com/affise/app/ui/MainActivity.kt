@@ -131,7 +131,7 @@ fun FloatingActionButtons() {
             MaterialTheme.colorScheme.secondary
         }
 
-        if (selectedTabState.value == 1 && !settingsScreen.value) {
+        if (selectedTabState.intValue == 1 && !settingsScreen.value) {
             AffiseFab(
                 containerColor = usePredefinedColor,
                 onClick = {

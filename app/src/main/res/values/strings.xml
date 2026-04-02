@@ -46,13 +46,5 @@
     <string name="crash_application">CRASH Application</string>
     <string name="use_custom_predefined">Use custom Predefined</string>
     <string name="add_predefined">Add Predefined</string>
-    <string name="predefined">Predefined</string>
     <string name="predefined_value">Predefined value</string>
-
-
-<!--    test-->
-    <string name="test_data">Subs</string>
-    <string name="test_send_now">sendNow()</string>
-    <string name="order_id">order id</string>
-    <string name="original_order_id">original order id</string>
 </resources>
