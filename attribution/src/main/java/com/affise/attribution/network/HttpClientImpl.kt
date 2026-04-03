@@ -49,7 +49,7 @@ class HttpClientImpl : HttpClient {
             connection.useCaches = false
 
             //Send data
-            data?.let { data ->
+            if (data != null) {
                 //Create data bytes
                 val postDataBytes = data.toByteArray(Charsets.UTF_8)
                 connection.doOutput = true
