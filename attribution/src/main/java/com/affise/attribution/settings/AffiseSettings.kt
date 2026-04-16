@@ -2,8 +2,7 @@ package com.affise.attribution.settings
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
-import com.affise.attribution.Affise
+import com.affise.attribution.AffiseInternal
 import com.affise.attribution.init.AffiseInitProperties
 import com.affise.attribution.modules.AffiseModules
 
@@ -135,13 +134,9 @@ class AffiseSettings internal constructor(
      * Starts Affise SDK using [context]
      */
     fun start(context: Context) {
-        try {
-            Affise.start(
-                initProperties = getInitProperties(),
-                app = context.applicationContext as Application
-            )
-        } catch (e: Exception) {
-            Log.w(this.javaClass.simpleName, "Affise SDK start error: $e")
-        }
+        AffiseInternal.start(
+            initProperties = getInitProperties(),
+            app = context.applicationContext as Application
+        )
     }
 }

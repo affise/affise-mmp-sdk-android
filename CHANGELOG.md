@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.7.4] - 2026-04-16
+
+### Added
+
+- BroadcastReceiver data send
+
+### Fixed
+
+- Fix `Affise.settings.setOnInitSuccess`
+- Fix `Affise.settings.setOnInitError`
+
 ## [1.7.3] - 2026-04-03
 
 ### Fixed
@@ -422,6 +433,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.7.4]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.3...v1.7.4
 [1.7.3]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.2...v1.7.3
 [1.7.2]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.1...v1.7.2
 [1.7.1]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.0...v1.7.1

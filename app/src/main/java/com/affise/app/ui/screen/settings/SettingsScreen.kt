@@ -26,7 +26,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.affise.app.App
+import com.affise.app.AffiseDemo
 import com.affise.app.Prefs
 import com.affise.app.R
 import com.affise.app.ui.affiseSettings
@@ -82,7 +82,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 readOnly = false,
                 maxLines = 4,
                 onValueChange = {
-                    Prefs.applyString(App.DOMAIN_KEY, it)
+                    Prefs.applyString(AffiseDemo.DOMAIN_KEY, it)
                 }
             )
 
@@ -90,7 +90,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 affiseSettings.isProduction,
                 label = stringResource(R.string.production),
             ) {
-                Prefs.applyBoolean(App.PRODUCTION_KEY, it)
+                Prefs.applyBoolean(AffiseDemo.PRODUCTION_KEY, it)
                 popDialog("Warning", "Restart needed")
             }
 
@@ -119,23 +119,23 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 affiseSettings.metrics,
                 label = stringResource(R.string.metrics),
             ) {
-                Prefs.applyBoolean(App.ENABLED_METRICS_KEY, it)
+                Prefs.applyBoolean(AffiseDemo.ENABLED_METRICS_KEY, it)
             }
 
             AffiseSwitch(
                 affiseSettings.debugRequest,
                 label = stringResource(R.string.debug_request),
             ) {
-                App.debugRequest = it
-                Prefs.applyBoolean(App.DEBUG_REQUEST_KEY, it)
+                AffiseDemo.debugRequest = it
+                Prefs.applyBoolean(AffiseDemo.DEBUG_REQUEST_KEY, it)
             }
 
             AffiseSwitch(
                 affiseSettings.debugResponse,
                 label = stringResource(R.string.debug_response),
             ) {
-                App.debugResponse = it
-                Prefs.applyBoolean(App.DEBUG_RESPONSE_KEY, it)
+                AffiseDemo.debugResponse = it
+                Prefs.applyBoolean(AffiseDemo.DEBUG_RESPONSE_KEY, it)
             }
 
             AffiseTextField(

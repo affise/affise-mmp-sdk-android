@@ -24,9 +24,8 @@ class StoreInstallReferrerUseCase(
 
     private var storeModule: StoreApi? = null
 
-    fun onReferrerSetupFinished(onFinished: (() -> Unit)?): StoreInstallReferrerUseCase {
+    fun onReferrerSetupFinished(onFinished: (() -> Unit)?) {
         this.onFinished = onFinished
-        return this
     }
 
     fun init(moduleManager: AffiseModuleManager) {

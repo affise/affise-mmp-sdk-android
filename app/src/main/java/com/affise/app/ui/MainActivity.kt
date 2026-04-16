@@ -25,9 +25,8 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.affise.app.App
+import com.affise.app.AffiseDemo
 import com.affise.app.Prefs
-import com.affise.app.ui.MainActivity.Companion.CUSTOM_PREDEFINED_DATA
 import com.affise.app.ui.components.AffiseDialogsComponent
 import com.affise.app.ui.components.AffiseFab
 import com.affise.app.ui.components.DialogState
@@ -46,6 +45,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         firebase()
         prefs()
+
         enableEdgeToEdge()
         setContent {
             AffiseAttributionLibTheme {
@@ -76,13 +76,16 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun prefs() {
-        affiseSettings.appId.value = Prefs.string(App.AFFISE_APP_ID_KEY, App.DEMO_APP_ID)
-        affiseSettings.secretKey.value = Prefs.string(App.SECRET_ID_KEY, App.DEMO_SECRET_KEY)
-        affiseSettings.domain.value = Prefs.string(App.DOMAIN_KEY, App.DEMO_DOMAIN)
-        affiseSettings.isProduction.value = Prefs.boolean(App.PRODUCTION_KEY)
-        affiseSettings.metrics.value = Prefs.boolean(App.ENABLED_METRICS_KEY)
-        affiseSettings.debugRequest.value = Prefs.boolean(App.DEBUG_REQUEST_KEY)
-        affiseSettings.debugResponse.value = Prefs.boolean(App.DEBUG_RESPONSE_KEY)
+        affiseSettings.appId.value =
+            Prefs.string(AffiseDemo.AFFISE_APP_ID_KEY, AffiseDemo.DEMO_APP_ID)
+        affiseSettings.secretKey.value =
+            Prefs.string(AffiseDemo.SECRET_ID_KEY, AffiseDemo.DEMO_SECRET_KEY)
+        affiseSettings.domain.value =
+            Prefs.string(AffiseDemo.DOMAIN_KEY, AffiseDemo.DEMO_DOMAIN)
+        affiseSettings.isProduction.value = Prefs.boolean(AffiseDemo.PRODUCTION_KEY)
+        affiseSettings.metrics.value = Prefs.boolean(AffiseDemo.ENABLED_METRICS_KEY)
+        affiseSettings.debugRequest.value = Prefs.boolean(AffiseDemo.DEBUG_REQUEST_KEY)
+        affiseSettings.debugResponse.value = Prefs.boolean(AffiseDemo.DEBUG_RESPONSE_KEY)
         affiseSettings.useCustomPredefined.value = Prefs.boolean(USE_CUSTOM_PREDEFINED)
         affiseSettings.predefinedData =
             stringToDataList(Prefs.string(CUSTOM_PREDEFINED_DATA)).toMutableStateList()

@@ -1,7 +1,7 @@
 package com.affise.attribution.events.autoCatchingClick
 
 
-enum class AutoCatchingType(private val type: String) {
+enum class AutoCatchingType(val type: String) {
     BUTTON("BUTTON"),
     TEXT("TEXT"),
 

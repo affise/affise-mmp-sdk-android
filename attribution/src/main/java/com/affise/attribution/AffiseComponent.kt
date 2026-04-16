@@ -3,6 +3,8 @@ package com.affise.attribution
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.affise.attribution.background.BackgroundWork
+import com.affise.attribution.background.BackgroundWorkImpl
 import com.affise.attribution.build.BuildConfigPropertiesProviderImpl
 import com.affise.attribution.converter.*
 import com.affise.attribution.converter.JsonObjectToMetricsEventConverter
@@ -47,7 +49,7 @@ import com.affise.attribution.utils.ActivityActionsManagerImpl
 import com.affise.attribution.utils.SystemAppChecker
 import com.affise.attribution.webBridge.WebBridgeManager
 
-internal class AffiseComponent(
+internal open class AffiseComponent(
     private val app: Application,
     override val initProperties: AffiseInitProperties,
 ) : AffiseApi {
@@ -76,11 +78,11 @@ internal class AffiseComponent(
         ).create()
     }
 
-    private val stringToMD5Converter: StringToMD5Converter by lazy {
+    protected val stringToMD5Converter: StringToMD5Converter by lazy {
         StringToMD5Converter(logsManager)
     }
 
-    private val stringToSHA1Converter: StringToSHA1Converter by lazy {
+    protected val stringToSHA1Converter: StringToSHA1Converter by lazy {
         StringToSHA1Converter()
     }
 
@@ -92,15 +94,15 @@ internal class AffiseComponent(
         ConverterToBase64()
     }
 
-    private val providersToJsonStringConverter: ProvidersToJsonStringConverter by lazy {
+    protected val providersToJsonStringConverter: ProvidersToJsonStringConverter by lazy {
         ProvidersToJsonStringConverter()
     }
 
-    private val postBackModelToJsonStringConverter: PostBackModelToJsonStringConverter by lazy {
+    protected val postBackModelToJsonStringConverter: PostBackModelToJsonStringConverter by lazy {
         PostBackModelToJsonStringConverter(indexUseCase)
     }
 
-    private val buildConfigPropertiesProvider: BuildConfigPropertiesProvider by lazy {
+    protected val buildConfigPropertiesProvider: BuildConfigPropertiesProvider by lazy {
         BuildConfigPropertiesProviderImpl()
     }
 
@@ -146,7 +148,7 @@ internal class AffiseComponent(
     /**
      * EventsRepository
      */
-    private val eventsRepository: EventsRepository by lazy {
+    protected val eventsRepository: EventsRepository by lazy {
         EventsRepositoryImpl(
             converterToBase64,
             eventToSerializedEventConverter,
@@ -158,7 +160,7 @@ internal class AffiseComponent(
     /**
      * InternalEventsRepository
      */
-    private val internalEventsRepository: InternalEventsRepository by lazy {
+    protected val internalEventsRepository: InternalEventsRepository by lazy {
         InternalEventsRepositoryImpl(
             converterToBase64,
             internalEventToSerializedEventConverter,
@@ -174,7 +176,7 @@ internal class AffiseComponent(
     /**
      * LogsRepository
      */
-    private val logsRepository: LogsRepository by lazy {
+    protected val logsRepository: LogsRepository by lazy {
         LogsRepositoryImpl(converterToBase64, LogToSerializedLogConverter(), logStorage)
     }
 
@@ -185,7 +187,7 @@ internal class AffiseComponent(
     /**
      * MetricsRepository
      */
-    private val metricsRepository: MetricsRepository by lazy {
+    protected val metricsRepository: MetricsRepository by lazy {
         MetricsRepositoryImpl(
             converterToBase64,
             eventToSerializedEventConverter,
@@ -217,7 +219,7 @@ internal class AffiseComponent(
     /**
      * HttpClient
      */
-    private val httpClient: HttpClient by lazy {
+    protected val httpClient: HttpClient by lazy {
         HttpClientImpl()
     }
 
@@ -228,7 +230,7 @@ internal class AffiseComponent(
     /**
      * CloudRepository
      */
-    private val cloudRepository: CloudRepository by lazy {
+    protected val cloudRepository: CloudRepository by lazy {
         CloudRepositoryImpl(
             httpClient,
             userAgentProvider,
@@ -243,20 +245,22 @@ internal class AffiseComponent(
     /**
      * SendDataToServerUseCase
      */
-    private val sendDataToServerUseCase: SendDataToServerUseCase by lazy {
-        SendDataToServerUseCaseImpl(
-            postBackModelFactory,
-            cloudRepository,
-            eventsRepository,
-            internalEventsRepository,
-            ExecutorServiceProviderImpl("Sending Worker"),
-            logsRepository,
-            metricsRepository,
-            logsManager,
-            preferencesUseCase,
-            firstAppOpenUseCase
-        )
+    override val sendDataToServerUseCase: SendDataToServerUseCase by lazy {
+        initSendDataToServerUseCase()
     }
+
+    protected open fun initSendDataToServerUseCase(): SendDataToServerUseCase = SendDataToServerUseCaseImpl(
+        postBackModelFactory,
+        cloudRepository,
+        eventsRepository,
+        internalEventsRepository,
+        ExecutorServiceProviderImpl("Sending Worker"),
+        logsRepository,
+        metricsRepository,
+        logsManager,
+        preferencesUseCase,
+        firstAppOpenUseCase
+    )
 
     override val immediateSendToServerUseCase: ImmediateSendToServerUseCase by lazy {
         ImmediateSendToServerUseCaseImpl(
@@ -320,7 +324,7 @@ internal class AffiseComponent(
         RemarketingUseCaseImpl()
     }
 
-    private val persistentUseCase: PersistentUseCase by lazy {
+    protected val persistentUseCase: PersistentUseCase by lazy {
         PersistentUseCaseImpl()
     }
 
@@ -551,57 +555,58 @@ internal class AffiseComponent(
         )
     }
 
-    private var isReady: Boolean = false
+    val backgroundWork: BackgroundWork by lazy {
+        BackgroundWorkImpl(
+            context = app,
+            activityCountProvider = activityCountProvider,
+        )
+    }
 
     /**
      * Init properties
      */
     init {
-        try {
-            sendGDPREventUseCase.sendForgetMeEvent()
-            sessionManager.init()
-            setPropertiesWhenInitUseCase.init(initProperties)
-            deeplinkManager.init()
-    //        autoCatchingClickProvider.init(initProperties.autoCatchingClickEvents)
-    //        metricsManager.setEnabledMetrics(initProperties.enabledMetrics)
-
-            AffiseThreadUncaughtExceptionHandlerImpl(
-                Thread.getDefaultUncaughtExceptionHandler(),
-                logsManager
-            )
-                .also(Thread::setDefaultUncaughtExceptionHandler)
-
-            moduleManager.init(
-                dependencies = listOf(
-                    buildConfigPropertiesProvider,
-                    stringToMD5Converter,
-                    stringToSHA1Converter,
-                    providersToJsonStringConverter,
-                    httpClient,
-                    postBackModelFactory,
-                    postBackModelToJsonStringConverter,
-                    sharedPreferences,
-                    initProperties
-                )
-            )
-            persistentUseCase.init(moduleManager)
-            firstAppOpenUseCase.onAppCreated()
-
-            eventsManager.init()
-
-            storeInstallReferrerUseCase.onReferrerSetupFinished {
-                sendDataToServerUseCase.send(withDelay = false)
-            }
-                .init(moduleManager)
-
-            isReady = true
-            initProperties.onInitSuccessHandler?.handle()
-        } catch (e: Exception) {
-            initProperties.onInitErrorHandler?.handle(e)
-        }
+        init()
     }
 
-    override fun isInitialized(): Boolean = isReady
+    protected open fun init() {
+        sendGDPREventUseCase.sendForgetMeEvent()
+        sessionManager.init()
+        setPropertiesWhenInitUseCase.init(initProperties)
+        deeplinkManager.init()
+//        autoCatchingClickProvider.init(initProperties.autoCatchingClickEvents)
+//        metricsManager.setEnabledMetrics(initProperties.enabledMetrics)
+
+        AffiseThreadUncaughtExceptionHandlerImpl(
+            Thread.getDefaultUncaughtExceptionHandler(),
+            logsManager
+        )
+            .also(Thread::setDefaultUncaughtExceptionHandler)
+
+        moduleManager.init(
+            dependencies = listOf(
+                buildConfigPropertiesProvider,
+                stringToMD5Converter,
+                stringToSHA1Converter,
+                providersToJsonStringConverter,
+                httpClient,
+                postBackModelFactory,
+                postBackModelToJsonStringConverter,
+                sharedPreferences,
+                initProperties
+            )
+        )
+        persistentUseCase.init(moduleManager)
+        firstAppOpenUseCase.onAppCreated()
+
+        eventsManager.init()
+        backgroundWork.init(initProperties)
+
+        storeInstallReferrerUseCase.onReferrerSetupFinished {
+            sendDataToServerUseCase.send(withDelay = false)
+        }
+        storeInstallReferrerUseCase.init(moduleManager)
+    }
 
     companion object {
         private const val PREFERENCES_FILE_NAME = "com.affise.attribution"

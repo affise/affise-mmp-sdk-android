@@ -1,7 +1,5 @@
 package com.affise.attribution
 
-import android.app.Application
-import android.util.Log
 import android.webkit.WebView
 import com.affise.attribution.debug.AffiseDebug
 import com.affise.attribution.debug.AffiseDebugApi
@@ -9,7 +7,6 @@ import com.affise.attribution.deeplink.OnDeeplinkCallback
 import com.affise.attribution.errors.AffiseError
 import com.affise.attribution.referrer.ReferrerKey
 import com.affise.attribution.events.predefined.GDPREvent
-import com.affise.attribution.init.AffiseInitProperties
 import com.affise.attribution.modules.attribution.AffiseAttributionModule
 import com.affise.attribution.parameters.providers.AffiseDeviceIdProvider
 import com.affise.attribution.parameters.ProviderType
@@ -27,7 +24,6 @@ object Affise {
      * Api to communication with Affise
      */
     internal var api: AffiseApi? = null
-        private set
 
     /**
      * Affise SDK settings builder
@@ -43,21 +39,6 @@ object Affise {
             affiseAppId = affiseAppId,
             secretKey = secretKey
         )
-    }
-
-    /**
-     * Init [AffiseComponent]
-     */
-    @Synchronized
-    internal fun start(initProperties: AffiseInitProperties, app: Application) {
-        //Check creating AffiseComponent
-        if (api == null) {
-            //Create AffiseComponent
-            api = AffiseComponent(app, initProperties)
-        } else {
-            api?.initProperties?.onInitErrorHandler?.handle(AffiseError.AlreadyInitialized())
-            Log.w(this.javaClass.simpleName,AffiseError.ALREADY_INITIALIZED)
-        }
     }
 
     /**

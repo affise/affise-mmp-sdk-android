@@ -13,7 +13,7 @@ import com.affise.attribution.preferences.models.OfflineModeEnabledException
 import com.affise.attribution.internal.InternalEventsRepository
 import com.affise.attribution.network.entity.asFirstOpen
 
-internal class SendDataToServerUseCaseImpl(
+internal open class SendDataToServerUseCaseImpl(
     private val postBackModelFactory: PostBackModelFactory,
     private val cloudRepository: CloudRepository,
     private val eventsRepository: EventsRepository,
@@ -72,7 +72,7 @@ internal class SendDataToServerUseCaseImpl(
     /**
      * Sending for url
      */
-    private fun send(url: String, sendEmpty: Boolean) {
+    protected open fun send(url: String, sendEmpty: Boolean) {
         do {
             //Get events
             val events = eventsRepository.getEvents(url)
