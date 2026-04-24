@@ -4,7 +4,11 @@
 
 ### Removed
 
-- AlarmManager
+- Remove AlarmManager
+
+### Changed
+
+- minSdk 24
 
 ## [1.7.4] - 2026-04-16
 
