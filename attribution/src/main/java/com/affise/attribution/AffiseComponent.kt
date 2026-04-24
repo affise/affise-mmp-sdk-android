@@ -555,12 +555,12 @@ internal open class AffiseComponent(
         )
     }
 
-    val backgroundWork: BackgroundWork by lazy {
-        BackgroundWorkImpl(
-            context = app,
-            activityCountProvider = activityCountProvider,
-        )
-    }
+//    val backgroundWork: BackgroundWork by lazy {
+//        BackgroundWorkImpl(
+//            context = app,
+//            activityCountProvider = activityCountProvider,
+//        )
+//    }
 
     /**
      * Init properties
@@ -600,7 +600,7 @@ internal open class AffiseComponent(
         firstAppOpenUseCase.onAppCreated()
 
         eventsManager.init()
-        backgroundWork.init(initProperties)
+//        backgroundWork.init(initProperties)
 
         storeInstallReferrerUseCase.onReferrerSetupFinished {
             sendDataToServerUseCase.send(withDelay = false)
