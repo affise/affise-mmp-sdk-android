@@ -9,7 +9,7 @@ import com.affise.attribution.events.parameters.PredefinedLong
 import com.affise.attribution.events.parameters.PredefinedObject
 import com.affise.attribution.events.parameters.PredefinedParameter
 import com.affise.attribution.events.parameters.PredefinedString
-import com.affise.attribution.AffiseInternal
+import com.affise.attribution.InternalApi
 import org.json.JSONObject
 
 /**
@@ -134,14 +134,14 @@ abstract class Event: PredefinedParameter {
      * Store and send this event
      */
     fun send() {
-        AffiseInternal.sendEvent(this)
+        InternalApi.sendEvent(this)
     }
 
     /**
      * Send this event now
      */
     fun sendNow(success: OnSendSuccessCallback, failed: OnSendFailedCallback) {
-        AffiseInternal.sendEventNow(this, success, failed)
+        InternalApi.sendEventNow(this, success, failed)
     }
 
     /**

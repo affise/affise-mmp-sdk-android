@@ -9,7 +9,7 @@ import com.affise.attribution.events.OnSendSuccessCallback
 import com.affise.attribution.init.AffiseInitProperties
 import com.affise.attribution.internal.InternalEvent
 
-internal object AffiseInternal {
+internal object InternalApi {
 
     /**
      * Init [AffiseComponent]

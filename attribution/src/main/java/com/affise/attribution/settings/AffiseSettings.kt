@@ -2,7 +2,7 @@ package com.affise.attribution.settings
 
 import android.app.Application
 import android.content.Context
-import com.affise.attribution.AffiseInternal
+import com.affise.attribution.InternalApi
 import com.affise.attribution.init.AffiseInitProperties
 import com.affise.attribution.modules.AffiseModules
 
@@ -134,7 +134,7 @@ class AffiseSettings internal constructor(
      * Starts Affise SDK using [context]
      */
     fun start(context: Context) {
-        AffiseInternal.start(
+        InternalApi.start(
             initProperties = getInitProperties(),
             app = context.applicationContext as Application
         )

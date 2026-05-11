@@ -1,6 +1,6 @@
 package com.affise.attribution.internal
 
-import com.affise.attribution.AffiseInternal
+import com.affise.attribution.InternalApi
 import com.affise.attribution.events.property.AffisePropertyBuilder
 import com.affise.attribution.internal.property.InternalProperty
 import com.affise.attribution.utils.timestamp
@@ -49,6 +49,6 @@ internal abstract class InternalEvent {
     }
 
     fun send() {
-        AffiseInternal.sendInternalEvent(this)
+        InternalApi.sendInternalEvent(this)
     }
 }

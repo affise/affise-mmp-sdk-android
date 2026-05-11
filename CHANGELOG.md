@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.7.6] - 2026-05-11
+
+### Changed
+
+- Sync versions
+
 ## [1.7.5] - 2026-04-24
 
 ### Removed
@@ -443,6 +449,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.7.6]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.5...v1.7.6
 [1.7.5]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.4...v1.7.5
 [1.7.4]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.3...v1.7.4
 [1.7.3]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.2...v1.7.3
