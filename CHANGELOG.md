@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.7.8] - 2026-06-10
+
+### Changed
+
+- Initial data send
+
 ## [1.7.7] - 2026-05-18
 
 ### Changed
@@ -455,6 +461,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.7.8]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.7...v1.7.8
 [1.7.7]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.6...v1.7.7
 [1.7.6]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.5...v1.7.6
 [1.7.5]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.4...v1.7.5

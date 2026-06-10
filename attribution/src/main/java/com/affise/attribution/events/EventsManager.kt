@@ -25,6 +25,7 @@ class EventsManager(
      * Timer fo repeat send events
      */
     private var timer: Timer? = null
+    private var timerSecond: Timer? = null
 
     private var isAllowed: Boolean = false
 
@@ -44,8 +45,11 @@ class EventsManager(
         //Send events on activity started
         sendEvents(withDelay = false)
 
+        //Send events with delay
+        sendEventsDelay(TIME_SEND_SECOND)
+
         //Start timer fo repeat send events
-        startTimer()
+        startEventsSchedule()
     }
 
     private fun sendEventsOnStop() {
@@ -76,10 +80,23 @@ class EventsManager(
         sendDataToServerUseCase.send(withDelay, sendEmpty)
     }
 
+    private fun sendEventsDelay(delay: Long) {
+        //Create timer
+        timerSecond = Timer()
+
+        //Start timer
+        timerSecond?.schedule(object : TimerTask() {
+            override fun run() {
+                //Send events
+                sendEvents()
+            }
+        }, delay)
+    }
+
     /**
      * Start timer fo repeat send events
      */
-    private fun startTimer() {
+    private fun startEventsSchedule() {
         //Stop timer if running
         timer?.let {
             stopTimer()
@@ -107,9 +124,14 @@ class EventsManager(
         //Stop timer
         timer?.cancel()
         timer = null
+
+        //Stop timer
+        timerSecond?.cancel()
+        timerSecond = null
     }
 
     companion object {
         const val TIME_SEND_REPEAT = 15 * 1000L
+        const val TIME_SEND_SECOND = 3 * 1000L
     }
 }
