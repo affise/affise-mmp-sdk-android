@@ -4,14 +4,17 @@ import com.affise.attribution.converter.StringToMD5Converter
 import com.affise.attribution.executors.ExecutorServiceProviderImpl
 import com.affise.attribution.module.advertising.advertising.AdvertisingIdManager
 import com.affise.attribution.module.advertising.advertising.AdvertisingIdManagerImpl
+import com.affise.attribution.module.advertising.parameters.AdvertiserTrackingEnabledProvider
 import com.affise.attribution.module.advertising.parameters.GoogleAdvertisingIdMd5Provider
 import com.affise.attribution.module.advertising.parameters.GoogleAdvertisingIdProvider
 import com.affise.attribution.module.advertising.parameters.GoogleAdvertisingPersonalizationProvider
+import com.affise.attribution.module.advertising.parameters.ApplicationTrackingEnabledProvider
 import com.affise.attribution.modules.AffiseModule
 import com.affise.attribution.modules.advertising.AdvertisingApi
 import com.affise.attribution.parameters.ProviderType
 import com.affise.attribution.parameters.base.PropertyProvider
 import com.affise.attribution.parameters.providers.EmptyStringProvider
+
 
 class AdvertisingModule : AffiseModule(), AdvertisingApi {
 
@@ -33,6 +36,14 @@ class AdvertisingModule : AffiseModule(), AdvertisingApi {
         GoogleAdvertisingPersonalizationProvider(advManager)
     }
 
+    private val advertiserTrackingEnabledProvider: PropertyProvider<*> by lazy {
+        AdvertiserTrackingEnabledProvider(advManager)
+    }
+
+    private val applicationTrackingEnabledProvider: PropertyProvider<*>? by lazy {
+        ApplicationTrackingEnabledProvider(advManager)
+    }
+
     private val advManager: AdvertisingIdManager by lazy {
         AdvertisingIdManagerImpl(
             ExecutorServiceProviderImpl("GAID Worker"),
@@ -49,6 +60,8 @@ class AdvertisingModule : AffiseModule(), AdvertisingApi {
             googleAdvertisingIdProvider,
             googleAdvertisingIdMd5Provider,
             googleAdvertisingPersonalizationProvider,
+            advertiserTrackingEnabledProvider,
+            applicationTrackingEnabledProvider,
             EmptyStringProvider(ProviderType.ADID, 29.0f),
             EmptyStringProvider(ProviderType.ALTSTR_ADID, 31.7f),
             EmptyStringProvider(ProviderType.FIREOS_ADID, 31.8f),

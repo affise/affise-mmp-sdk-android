@@ -57,6 +57,10 @@ internal class AdvertisingIdManagerImpl(
      */
     override fun getAdPersonalization() = adPersonalization
 
+    override fun isAdvertiserTrackingEnabled(): Boolean {
+        return advertisingIdInfo?.isLimitAdTrackingEnabled?.not() ?: false
+    }
+
     private fun getAdvertisingIdInfo(context: Context) = try {
         AdvertisingIdClient.getAdvertisingIdInfo(context)
     } catch (throwable: Throwable) {

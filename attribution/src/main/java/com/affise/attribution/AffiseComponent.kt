@@ -70,6 +70,9 @@ internal open class AffiseComponent(
             logsManager = logsManager,
             deeplinkClickRepository = isDeeplinkClickRepository,
             deviceUseCase = deviceUseCase,
+            screenUseCase = screenUseCase,
+            processInfoUseCase = processInfoUseCase,
+            diskUseCase = diskUseCase,
             remarketingUseCase = remarketingUseCase,
             storeUseCase = storeUseCase,
             pushTokenUseCase = pushTokenUseCase,
@@ -315,6 +318,18 @@ internal open class AffiseComponent(
      */
     private val deviceUseCase: DeviceUseCase by lazy {
         DeviceUseCaseImpl()
+    }
+
+    private val screenUseCase: ScreenUseCase by lazy {
+        ScreenUseCaseImpl(app)
+    }
+
+    private val processInfoUseCase: ProcessInfoUseCase by lazy {
+        ProcessInfoUseCaseImpl()
+    }
+
+    private val diskUseCase: DiskUseCase by lazy {
+        DiskUseCaseImpl(app)
     }
 
     /**
@@ -589,13 +604,14 @@ internal open class AffiseComponent(
                 stringToMD5Converter,
                 stringToSHA1Converter,
                 providersToJsonStringConverter,
-                httpClient,
-                postBackModelFactory,
-                postBackModelToJsonStringConverter,
-                sharedPreferences,
-                initProperties
+                    httpClient,
+                    postBackModelFactory,
+                    postBackModelToJsonStringConverter,
+                    sharedPreferences,
+                    initProperties,
+                    preferencesUseCase,
+                )
             )
-        )
         persistentUseCase.init(moduleManager)
         firstAppOpenUseCase.onAppCreated()
 

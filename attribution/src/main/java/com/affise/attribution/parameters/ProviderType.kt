@@ -53,6 +53,12 @@ enum class ProviderType(val provider: String) {
     LANGUAGE("language"),
     DEVICE_NAME("device_name"),
     DEVICE_TYPE("device_type"),
+    SCREEN_WIDTH("screen_width"),
+    SCREEN_HEIGHT("screen_height"),
+    DENSITY("density"),
+    CPU_CORES("cpu_cores"),
+    TOTAL_DISK("total_disk"),
+    FREE_DISK("free_disk"),
     OS_NAME("os_name"),
     PLATFORM("platform"),
     SDK_PLATFORM("sdk_platform"),
@@ -100,6 +106,8 @@ enum class ProviderType(val provider: String) {
     FIREOS_ADID("fireos_adid"),
     COLOROS_ADID("coloros_adid"),
     AD_PERSONALIZATION("ad_personalization"),
+    ADVERTISER_TRACKING_ENABLED("advertiser_tracking_enabled"),
+    APPLICATION_TRACKING_ENABLED("application_tracking_enabled"),
 
     // meta
     META("meta"),

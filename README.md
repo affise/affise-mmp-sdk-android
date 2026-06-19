@@ -129,7 +129,7 @@ referrer.
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.7.8"
+val affise_version = "1.7.9"
 
 dependencies {
   // Add Affise library 
@@ -155,7 +155,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.7.8'
+final affise_version = '1.7.9'
 
 dependencies {
     // Add Affise library 
@@ -180,9 +180,9 @@ dependencies {
 
 ### Integrate as file dependency
 
-Download latest Affise SDK (`attribution-1.7.8.aar`)
+Download latest Affise SDK (`attribution-1.7.9.aar`)
 from [releases page](https://github.com/affise/affise-mmp-sdk-android/releases) and place this binary to gradle application
-module lib directory `app/libs/attribution-1.7.8.aar`
+module lib directory `app/libs/attribution-1.7.9.aar`
 
 Add library as gradle file dependency to application module build script
 Add install referrer library
@@ -190,12 +190,12 @@ Add install referrer library
 For kotlin build script build.gradle.kts use:
 
 ```kotlin
-val affise_version = "1.7.8"
+val affise_version = "1.7.9"
 
 dependencies {
     // ...
     // Add Affise library 
-    implementation(files("libs/attribution-1.7.8.aar"))
+    implementation(files("libs/attribution-1.7.9.aar"))
     // Add Affise modules 
     implementation(files("libs/module-advertising-$affise_version.aar"))
     implementation(files("libs/module-androidid-$affise_version.aar"))
@@ -217,7 +217,7 @@ dependencies {
 For groovy build script build.gradle use:
 
 ```groovy
-final affise_version = '1.7.8'
+final affise_version = '1.7.9'
 
 dependencies {
   // ...  
@@ -724,6 +724,12 @@ To match users with events and data library is sending, these `ProviderType` ide
 - `LANGUAGE`
 - `DEVICE_NAME`
 - `DEVICE_TYPE`
+- `SCREEN_WIDTH`
+- `SCREEN_HEIGHT`
+- `DENSITY`
+- `CPU_CORES`
+- `TOTAL_DISK`
+- `FREE_DISK`
 - `OS_NAME`
 - `PLATFORM`
 - `SDK_PLATFORM`
@@ -765,6 +771,8 @@ To match users with events and data library is sending, these `ProviderType` ide
 - `FIREOS_ADID`
 - `COLOROS_ADID`
 - `AD_PERSONALIZATION`
+- `ADVERTISER_TRACKING_ENABLED`
+- `APPLICATION_TRACKING_ENABLED`
 
 ### AndroidId
 

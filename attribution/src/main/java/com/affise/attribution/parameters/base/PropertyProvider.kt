@@ -55,6 +55,17 @@ abstract class LongPropertyProvider : PropertyProvider<Long>() {
 }
 
 /**
+ * Base float property provider
+ */
+abstract class FloatPropertyProvider : PropertyProvider<Float>() {
+
+    /**
+     * Default value of provider
+     */
+    override val defaultValue = 0f
+}
+
+/**
  * Base list property provider
  */
 abstract class ListPropertyProvider : PropertyProvider<List<Any>>() {

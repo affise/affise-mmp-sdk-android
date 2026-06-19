@@ -15,9 +15,12 @@ import com.affise.attribution.session.SessionManager
 import com.affise.attribution.usecase.AppUUIDs
 import com.affise.attribution.usecase.FirstAppOpenUseCase
 import com.affise.attribution.usecase.DeviceUseCase
+import com.affise.attribution.usecase.DiskUseCase
 import com.affise.attribution.usecase.PackageInfoUseCase
+import com.affise.attribution.usecase.ProcessInfoUseCase
 import com.affise.attribution.usecase.PushTokenUseCase
 import com.affise.attribution.usecase.RemarketingUseCase
+import com.affise.attribution.usecase.ScreenUseCase
 import com.affise.attribution.usecase.StoreInstallReferrerUseCase
 import com.affise.attribution.usecase.StoreUseCase
 
@@ -36,6 +39,9 @@ internal class PropertiesProviderFactory(
     private val logsManager: LogsManager,
     private val deeplinkClickRepository: DeeplinkClickRepository,
     private val deviceUseCase: DeviceUseCase,
+    private val screenUseCase: ScreenUseCase,
+    private val processInfoUseCase: ProcessInfoUseCase,
+    private val diskUseCase: DiskUseCase,
     private val remarketingUseCase: RemarketingUseCase,
     private val storeUseCase: StoreUseCase,
     private val pushTokenUseCase: PushTokenUseCase,
@@ -94,6 +100,12 @@ internal class PropertiesProviderFactory(
                 LanguageProvider(remarketingUseCase),
                 DeviceNameProvider(packageInfoUseCase),
                 DeviceTypeProvider(packageInfoUseCase),
+                ScreenWidthProvider(screenUseCase),
+                ScreenHeightProvider(screenUseCase),
+                DensityProvider(screenUseCase),
+                CpuCoresProvider(processInfoUseCase),
+                TotalDiskProvider(diskUseCase),
+                FreeDiskProvider(diskUseCase),
                 OsNameProvider(buildConfigPropertiesProvider),
                 PlatformNameProvider(),
                 SdkPlatformNameProvider(),

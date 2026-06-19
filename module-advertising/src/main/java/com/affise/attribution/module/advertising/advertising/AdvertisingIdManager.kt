@@ -20,4 +20,9 @@ interface AdvertisingIdManager {
      * Returns true if advertising id is set
      */
     fun getAdPersonalization(): Boolean
+
+    /**
+     * Returns true if advertiser tracking is enabled for google advertising id.
+     */
+    fun isAdvertiserTrackingEnabled(): Boolean
 }

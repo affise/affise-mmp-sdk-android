@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.7.9] - 2026-06-19
+
+### Added
+
+- Provider `ADVERTISER_TRACKING_ENABLED`
+- Provider `APPLICATION_TRACKING_ENABLED`
+- Provider `CPU_CORES`
+- Provider `SCREEN_WIDTH`
+- Provider `SCREEN_HEIGHT`
+- Provider `DENSITY`
+- Provider `TOTAL_DISK`
+- Provider `FREE_DISK`
+
 ## [1.7.8] - 2026-06-10
 
 ### Changed
@@ -461,6 +474,7 @@
 - Improve `AffiseModuleManager`
 - Update gradle for demo app
 
+[1.7.9]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.8...v1.7.9
 [1.7.8]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.7...v1.7.8
 [1.7.7]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.6...v1.7.7
 [1.7.6]: https://github.com/affise/affise-mmp-sdk-android/compare/v1.7.5...v1.7.6
